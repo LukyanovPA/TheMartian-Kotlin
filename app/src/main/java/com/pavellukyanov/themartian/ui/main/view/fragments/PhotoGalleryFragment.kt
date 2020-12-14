@@ -29,7 +29,7 @@ class PhotoGalleryFragment : Fragment(R.layout.fragment_photo_gallery) {
     private lateinit var viewModel: MainVewModel
     private lateinit var adapter: MainAdapter
     private val roverName = "curiosity"
-    private val sol = 1600L
+    private val sol = 1650L
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

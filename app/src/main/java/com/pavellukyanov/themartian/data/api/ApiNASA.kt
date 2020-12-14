@@ -15,14 +15,14 @@ interface ApiNASA {
     suspend fun getPhoto(
         @Path("rover") roverName: String,
         @Query("sol") sol: Long,
-        @Query("api_key") apiKey: String
+//        @Query("api_key") apiKey: String
     ): Mars
 
     @GET("{rover}/photos?")
     suspend fun getPhotoEarthData(
         @Path("rover") roverName: String,
         @Query("earth_date") earthDate: String,
-        @Query("api_key") apiKey: String
+//        @Query("api_key") apiKey: String
     ): Mars
 
 }
