@@ -7,6 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object GoRetrofit {
     private const val BASE_URL = "https://api.nasa.gov/mars-photos/api/v1/rovers/"
+    private const val MANIFESTS_URL = "https://api.nasa.gov/mars-photos/api/v1/manifests/"
     private const val API_KEY = "f8FYngXOCFmWPVOgmcugDO5JwAsPB238oee4wh6V"
 
     private val authInterceptor = Interceptor { chain ->
@@ -35,5 +36,14 @@ object GoRetrofit {
             .build()
     }
 
+    private fun getManifest(): Retrofit {
+        return Retrofit.Builder()
+            .client(nasaClient)
+            .baseUrl(MANIFESTS_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
     val apiService: ApiNASA = getRetrofit().create(ApiNASA::class.java)
+    val apiManifestService: ApiNASA = getManifest().create(ApiNASA::class.java)
 }
