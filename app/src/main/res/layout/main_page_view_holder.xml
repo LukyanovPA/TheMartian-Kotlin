@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/roverPicture"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginEnd="237dp"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/mainLine"
+        android:layout_width="1dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="18dp"
+        android:background="@drawable/vector_vertical_line"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/roverPicture"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/roverNameMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gotham_pro_medium"
+        android:textColor="@color/slogan"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/mainLine"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/launchDateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/gotham_pro_light"
+        android:text="@string/launch_date_title"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@id/mainLine"
+        app:layout_constraintTop_toBottomOf="@id/roverNameMain" />
+
+    <TextView
+        android:id="@+id/launchDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/gotham_pro_medium"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@id/launchDateTitle"
+        app:layout_constraintTop_toBottomOf="@id/roverNameMain" />
+
+    <TextView
+        android:id="@+id/latestPhotoDateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/gotham_pro_light"
+        android:text="@string/latest_photo_title"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@id/mainLine"
+        app:layout_constraintTop_toBottomOf="@id/launchDateTitle" />
+
+    <TextView
+        android:id="@+id/latestPhotoDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/gotham_pro_medium"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@id/latestPhotoDateTitle"
+        app:layout_constraintTop_toBottomOf="@id/launchDate" />
+
+    <TextView
+        android:id="@+id/totalPhotosTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/gotham_pro_light"
+        android:text="@string/total_photos_title"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@id/mainLine"
+        app:layout_constraintTop_toBottomOf="@id/latestPhotoDateTitle" />
+
+    <TextView
+        android:id="@+id/totalPhotos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/gotham_pro_medium"
+        android:textColor="@color/slogan"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@id/totalPhotosTitle"
+        app:layout_constraintTop_toBottomOf="@id/latestPhotoDate" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

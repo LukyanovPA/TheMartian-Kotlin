@@ -3,6 +3,8 @@ package com.pavellukyanov.themartian.ui.main.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.pavellukyanov.themartian.R
+import com.pavellukyanov.themartian.data.model.RoverInfo
+import com.pavellukyanov.themartian.ui.main.buisneslogics.RoversInfoList
 import com.pavellukyanov.themartian.ui.main.view.fragments.MainFragment
 
 class MainActivity : AppCompatActivity() {
