@@ -2,11 +2,8 @@ package com.pavellukyanov.themartian.ui.main.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.ui.main.adapter.MainAdapter
-import com.pavellukyanov.themartian.ui.main.view.fragments.PhotoGalleryFragment
-import com.pavellukyanov.themartian.ui.main.viewmodel.MainVewModel
+import com.pavellukyanov.themartian.ui.main.view.fragments.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .add(R.id.flMainFragmetn, PhotoGalleryFragment())
+                .add(R.id.flMainFragmetn, MainFragment())
                 .commit()
         }
     }

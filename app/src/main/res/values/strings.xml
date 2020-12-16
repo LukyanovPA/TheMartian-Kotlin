@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">The Martian</string>
+    <string name="the_martian">The Martian</string>
+    <string name="slogan">THE ENTRY TO THE RED PLANET</string>
+    <string name="hoose_a_rover">Сhoose a Rover</string>
+    <string name="rover_name">Curiosity</string>
+    <string name="launch_date_title">Launch date:</string>
+    <string name="launch_date">2011-11-26</string>
+    <string name="latest_photo_title">Latest photo:</string>
+    <string name="latest_photo">2020-12-12</string>
+    <string name="total_photos">3702</string>
+    <string name="total_photos_title">Total photos:</string>
 </resources>

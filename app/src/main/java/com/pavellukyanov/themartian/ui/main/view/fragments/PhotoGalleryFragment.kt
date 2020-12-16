@@ -4,21 +4,16 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.api.ApiHelper
-import com.pavellukyanov.themartian.data.api.ApiNASA
 import com.pavellukyanov.themartian.data.api.GoRetrofit
-import com.pavellukyanov.themartian.data.model.Mars
 import com.pavellukyanov.themartian.data.model.Photo
 import com.pavellukyanov.themartian.ui.base.ViewModelFactory
-import com.pavellukyanov.themartian.ui.main.adapter.MainAdapter
+import com.pavellukyanov.themartian.ui.main.adapter.GalleryAdapter
 import com.pavellukyanov.themartian.ui.main.viewmodel.MainVewModel
 import com.pavellukyanov.themartian.utils.Status
 import kotlinx.android.synthetic.main.fragment_photo_gallery.*
@@ -27,7 +22,7 @@ import java.util.EnumSet.of
 class PhotoGalleryFragment : Fragment(R.layout.fragment_photo_gallery) {
 
     private lateinit var viewModel: MainVewModel
-    private lateinit var adapter: MainAdapter
+    private lateinit var adapter: GalleryAdapter
     private val roverName = "curiosity"
     private val sol = 1650L
 
@@ -45,7 +40,7 @@ class PhotoGalleryFragment : Fragment(R.layout.fragment_photo_gallery) {
 
     private fun setupUI() {
         rvPhotoGallery.layoutManager = GridLayoutManager(context, 2)
-        adapter = MainAdapter(arrayListOf())
+        adapter = GalleryAdapter(arrayListOf())
         rvPhotoGallery.adapter = adapter
     }
 

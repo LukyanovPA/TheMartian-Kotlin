@@ -6,6 +6,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class RoverInfo(
+    var picture: Int,
     @SerializedName("name")
     val name: String,
     @SerializedName("landing_date")
