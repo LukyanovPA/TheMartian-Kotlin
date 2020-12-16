@@ -34,7 +34,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private fun setupUI() {
         mainRecycler.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        Log.d(LOG_TAG, "setupUI list - ${resultList.size}")
         adapter = MainAdapter(resultList)
         mainRecycler.adapter = adapter
         mainRecycler.visibility = View.VISIBLE
