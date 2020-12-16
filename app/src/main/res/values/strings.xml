@@ -10,4 +10,6 @@
     <string name="latest_photo">2020-12-12</string>
     <string name="total_photos">3702</string>
     <string name="total_photos_title">Total photos:</string>
+    <string name="background_picture">Background picture</string>
+    <string name="main_line">Main line</string>
 </resources>
