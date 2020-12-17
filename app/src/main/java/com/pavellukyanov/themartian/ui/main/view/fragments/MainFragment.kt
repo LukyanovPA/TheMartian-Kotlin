@@ -74,7 +74,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                         progressBar2.visibility = View.GONE
                         resource.data?.let { roverInfo ->
                             setListRovInfo(roverInfo.photoManifest)
-//                            scope.launch { getOppo() }
                             if(resultList.size == 3) {
                                 retrieveList(resultList)
                             }
@@ -106,7 +105,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                         progressBar2.visibility = View.GONE
                         resource.data?.let { roverInfo ->
                             setListRovInfo(roverInfo.photoManifest)
-//                            scope.launch{ getSpirit() }
                             if(resultList.size == 3) {
                                 retrieveList(resultList)
                             }
@@ -138,7 +136,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                         progressBar2.visibility = View.GONE
                         resource.data?.let { roverInfo ->
                             setListRovInfo(roverInfo.photoManifest)
-//                            scope.cancel()
                             if(resultList.size == 3) {
                                 retrieveList(resultList)
                             }
@@ -174,6 +171,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun retrieveList(roversInfo: MutableList<RoverInfo>) {
+        scope.cancel()
         roversInfo.forEach {
             when (it.name) {
                 "Curiosity" -> it.picture = R.drawable.curiosity
