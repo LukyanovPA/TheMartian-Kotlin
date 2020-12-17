@@ -9,19 +9,19 @@ class RoverInfo(
     var roverPicture: Int,
     var picture: Int,
     @SerializedName("name")
-    val name: String,
+    var name: String?,
     @SerializedName("landing_date")
-    val landingDate: String,
+    var landingDate: String?,
     @SerializedName("launch_date")
-    val launchData: String,
+    var launchData: String?,
     @SerializedName("status")
-    val status: String,
+    var status: String?,
     @SerializedName("max_sol")
-    val maxSol: Long,
+    var maxSol: Long?,
     @SerializedName("max_date")
-    val maxDate: String,
+    var maxDate: String?,
     @SerializedName("total_photos")
-    val totalPhotos: Long,
+    var totalPhotos: Long?,
     @SerializedName("photos")
-    val photos: List<PhotosInfo>
+    var photos: List<PhotosInfo>?
 ) : Parcelable

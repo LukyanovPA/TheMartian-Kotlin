@@ -29,6 +29,42 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private lateinit var resultList: MutableList<RoverInfo>
     private lateinit var adapter: MainAdapter
 
+    var tCuriosity = RoverInfo(R.drawable.curiosity_rover,
+        R.drawable.curiosity,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+    )
+
+    var tOpp = RoverInfo(R.drawable.opportunity_rover,
+        R.drawable.opportunity,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+    )
+
+    var tSpirit = RoverInfo(R.drawable.spirit_rover,
+        R.drawable.spirit,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+    )
+
     private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, exception ->
         println("CoroutineExceptionHandler got $exception in $coroutineContext")
     }
@@ -55,25 +91,24 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private suspend fun setupData() {
         resultList = mutableListOf()
-        scope.async { getCuriosity() }.await()
-        scope.async { getOppo() }.await()
-        scope.async { getSpirit() }.await()
-
+        scope.async { getCuriosity(tCuriosity) }.await()
+        scope.async { getOppo(tOpp) }.await()
+        scope.async { getSpirit(tSpirit) }.await()
     }
 
     private fun setListRovInfo(rovInfo: RoverInfo) {
         resultList.add(rovInfo)
     }
 
-    private fun getCuriosity() {
+    private fun getCuriosity(rovInfo: RoverInfo) {
         vmCuriosity.getRoverManifest(CURIOSITY).observe(this, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
                         mainRecycler.visibility = View.VISIBLE
                         progressBar2.visibility = View.GONE
-                        resource.data?.let { roverInfo ->
-                            setListRovInfo(roverInfo.photoManifest)
+                        resource.data?.let { roverInfo -> addRovInfo(rovInfo, roverInfo.photoManifest)
+                            setListRovInfo(rovInfo)
                             if(resultList.size == 3) {
                                 retrieveList(resultList)
                             }
@@ -96,15 +131,15 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         })
     }
 
-    private fun getOppo() {
+    private fun getOppo(rovInfo: RoverInfo) {
         vmOpportunity.getRoverManifest(OPPORTUNITY).observe(this, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
                         mainRecycler.visibility = View.VISIBLE
                         progressBar2.visibility = View.GONE
-                        resource.data?.let { roverInfo ->
-                            setListRovInfo(roverInfo.photoManifest)
+                        resource.data?.let { roverInfo -> addRovInfo(rovInfo, roverInfo.photoManifest)
+                            setListRovInfo(rovInfo)
                             if(resultList.size == 3) {
                                 retrieveList(resultList)
                             }
@@ -127,15 +162,15 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         })
     }
 
-    private fun getSpirit() {
+    private fun getSpirit(rovInfo: RoverInfo) {
         vmSpirit.getRoverManifest(SPIRIT).observe(this, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
                         mainRecycler.visibility = View.VISIBLE
                         progressBar2.visibility = View.GONE
-                        resource.data?.let { roverInfo ->
-                            setListRovInfo(roverInfo.photoManifest)
+                        resource.data?.let { roverInfo -> addRovInfo(rovInfo, roverInfo.photoManifest)
+                            setListRovInfo(rovInfo)
                             if(resultList.size == 3) {
                                 retrieveList(resultList)
                             }
@@ -156,6 +191,17 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 }
             }
         })
+    }
+
+    private fun addRovInfo(rovIn: RoverInfo, rovOut: RoverInfo) {
+        rovIn.name = rovOut.name
+        rovIn.landingDate = rovOut.landingDate
+        rovIn.launchData = rovOut.launchData
+        rovIn.status = rovOut.status
+        rovIn.maxSol = rovOut.maxSol
+        rovIn.maxDate = rovOut.maxDate
+        rovIn.totalPhotos = rovOut.totalPhotos
+        rovIn.photos = rovOut.photos
     }
 
     private fun setupUI() {
