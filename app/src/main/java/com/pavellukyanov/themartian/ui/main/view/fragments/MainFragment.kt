@@ -236,19 +236,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private fun retrieveList(roversInfo: MutableList<RoverInfo>) {
         scope.cancel()
-        roversInfo.forEach {
-            when (it.name) {
-                "Curiosity" -> it.picture = R.drawable.curiosity
-                "Opportunity" -> it.picture = R.drawable.opportunity
-                "Spirit" -> it.picture = R.drawable.spirit
-            }
-
-            when (it.name) {
-                "Curiosity" -> it.roverPicture = R.drawable.curiosity_rover
-                "Opportunity" -> it.roverPicture = R.drawable.opportunity_rover
-                "Spirit" -> it.roverPicture = R.drawable.spirit_rover
-            }
-        }
         adapter.apply {
             addRoversInfo(roversInfo)
             notifyDataSetChanged()
