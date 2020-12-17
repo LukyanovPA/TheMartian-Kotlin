@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Photo(
+class Photo(
     @SerializedName("id")
     val id: Long,
     @SerializedName("sol")

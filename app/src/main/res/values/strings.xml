@@ -5,6 +5,7 @@
     <string name="hoose_a_rover">Сhoose a Rover</string>
     <string name="rover_name">Curiosity</string>
     <string name="launch_date_title">Launch date:</string>
+    <string name="details_launch_date_title">LAUNCH DATE</string>
     <string name="launch_date">2011-11-26</string>
     <string name="latest_photo_title">Latest photo:</string>
     <string name="latest_photo">2020-12-12</string>
@@ -12,4 +13,9 @@
     <string name="total_photos_title">Total photos:</string>
     <string name="background_picture">Background picture</string>
     <string name="main_line">Main line</string>
+    <string name="back">Back</string>
+    <string name="rover_photo">Rover photo</string>
+    <string name="details_total_photo_title">TOTAL PHOTOS</string>
+    <string name="details_latest_photo_title">LATEST PHOTO</string>
+    <string name="button_back">Button back</string>
 </resources>

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class RoverInfo(
+class RoverInfo(
     var picture: Int,
     @SerializedName("name")
     val name: String,

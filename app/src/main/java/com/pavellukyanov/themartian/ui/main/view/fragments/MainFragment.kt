@@ -2,7 +2,6 @@ package com.pavellukyanov.themartian.ui.main.view.fragments
 
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -10,16 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.api.ApiManifestHelper
 import com.pavellukyanov.themartian.data.api.GoRetrofit
-import com.pavellukyanov.themartian.data.model.Photo
 import com.pavellukyanov.themartian.data.model.RoverInfo
 import com.pavellukyanov.themartian.ui.base.ManifestViewModFactory
+import com.pavellukyanov.themartian.ui.main.adapter.ItemClickListener
 import com.pavellukyanov.themartian.ui.main.adapter.LinePagerIndicatorDecoration
 import com.pavellukyanov.themartian.ui.main.adapter.MainAdapter
-import com.pavellukyanov.themartian.ui.main.buisneslogics.RoversInfoList
 import com.pavellukyanov.themartian.ui.main.viewmodel.ManifestViewModel
 import com.pavellukyanov.themartian.utils.Status
 import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.android.synthetic.main.fragment_photo_gallery.*
 import kotlinx.coroutines.*
 
 class MainFragment : Fragment(R.layout.fragment_main) {
@@ -156,7 +153,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 false
             )
         mainRecycler.addItemDecoration(LinePagerIndicatorDecoration())
-        adapter = MainAdapter(arrayListOf())
+        adapter = MainAdapter(arrayListOf(), clickListener)
         mainRecycler.adapter = adapter
     }
 
@@ -172,6 +169,19 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             addRoversInfo(roversInfo)
             notifyDataSetChanged()
         }
+    }
+
+    val clickListener = object : ItemClickListener {
+        override fun onItemClicked(roverInfo: RoverInfo) {
+            showRoverDetailsFragment(roverInfo)
+        }
+    }
+
+    private fun showRoverDetailsFragment(roverInfo: RoverInfo) {
+        requireFragmentManager().beginTransaction()
+            .replace(R.id.flMainFragmetn, FragmentRoverDetails.newInstance(roverInfo))
+            .addToBackStack("FragmentRoverDetails")
+            .commit()
     }
 
     companion object {

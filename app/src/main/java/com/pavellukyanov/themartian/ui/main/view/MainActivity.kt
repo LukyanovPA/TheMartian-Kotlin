@@ -3,8 +3,7 @@ package com.pavellukyanov.themartian.ui.main.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.data.model.RoverInfo
-import com.pavellukyanov.themartian.ui.main.buisneslogics.RoversInfoList
+import com.pavellukyanov.themartian.ui.main.view.fragments.FragmentRoverDetails
 import com.pavellukyanov.themartian.ui.main.view.fragments.MainFragment
 
 class MainActivity : AppCompatActivity() {
@@ -15,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .add(R.id.flMainFragmetn, MainFragment())
+                .add(R.id.flMainFragmetn, FragmentRoverDetails())
                 .commit()
         }
     }

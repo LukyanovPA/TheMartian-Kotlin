@@ -8,14 +8,16 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.model.RoverInfo
+import com.pavellukyanov.themartian.ui.main.view.fragments.MainFragment
+import com.pavellukyanov.themartian.ui.main.viewmodel.ManifestViewModel
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.main_page_view_holder.view.*
 import kotlinx.android.synthetic.main.rv_gallery_item.view.*
 
-class MainAdapter(private val roverInfo: MutableList<RoverInfo>) :
-    RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
-
-    private lateinit var roversPictures: MutableMap<String, Int>
+class MainAdapter(
+    private val roverInfo: MutableList<RoverInfo>,
+    private val clickListener: ItemClickListener
+) : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         val inflater =
@@ -26,6 +28,9 @@ class MainAdapter(private val roverInfo: MutableList<RoverInfo>) :
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         holder.bind(getItem(position))
+        holder.itemView.setOnClickListener {
+            clickListener.onItemClicked(getItem(position))
+        }
     }
 
     private fun getItem(position: Int): RoverInfo = roverInfo[position]
@@ -59,4 +64,8 @@ class MainAdapter(private val roverInfo: MutableList<RoverInfo>) :
         }
 
     }
+}
+
+interface ItemClickListener {
+    fun onItemClicked(roverInfo: RoverInfo)
 }
