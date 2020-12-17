@@ -1,5 +1,6 @@
 package com.pavellukyanov.themartian.ui.main.view.fragments
 
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -37,8 +38,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 exceptionHandler
     )
 
-    override fun onStart() {
-        super.onStart()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initViewModels()
         setupUI()
         scope.launch { setupData() }
@@ -70,7 +71,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                         progressBar2.visibility = View.GONE
                         resource.data?.let { roverInfo ->
                             setListRovInfo(roverInfo.photoManifest)
-                            getOppo()
+                            scope.launch { getOppo() }
                         }
                     }
                     Status.ERROR -> {
@@ -98,7 +99,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                         progressBar2.visibility = View.GONE
                         resource.data?.let { roverInfo ->
                             setListRovInfo(roverInfo.photoManifest)
-                            getSpirit()
+                            scope.launch{ getSpirit() }
                         }
                     }
                     Status.ERROR -> {
@@ -126,6 +127,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                         progressBar2.visibility = View.GONE
                         resource.data?.let { roverInfo ->
                             setListRovInfo(roverInfo.photoManifest)
+                            scope.cancel()
                             retrieveList(resultList)
                         }
                     }

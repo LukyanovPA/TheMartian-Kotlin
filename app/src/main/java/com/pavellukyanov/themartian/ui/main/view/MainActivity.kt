@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .add(R.id.flMainFragmetn, FragmentRoverDetails())
+                .add(R.id.flMainFragmetn, MainFragment())
                 .commit()
         }
     }
