@@ -3,6 +3,7 @@ package com.pavellukyanov.themartian.ui.main.view.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -77,6 +78,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                     Status.ERROR -> {
                         mainRecycler.visibility = View.VISIBLE
                         progressBar2.visibility = View.GONE
+                        Toast.makeText(context, getString(R.string.toast_error_message), Toast.LENGTH_LONG).show()
 
                         //Log
                         Log.d(LOG_TAG, it.message.toString())
@@ -105,6 +107,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                     Status.ERROR -> {
                         mainRecycler.visibility = View.VISIBLE
                         progressBar2.visibility = View.GONE
+                        Toast.makeText(context, getString(R.string.toast_error_message), Toast.LENGTH_LONG).show()
 
                         //Log
                         Log.d(LOG_TAG, it.message.toString())
@@ -134,6 +137,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                     Status.ERROR -> {
                         mainRecycler.visibility = View.VISIBLE
                         progressBar2.visibility = View.GONE
+                        Toast.makeText(context, getString(R.string.toast_error_message), Toast.LENGTH_LONG).show()
 
                         //Log
                         Log.d(LOG_TAG, it.message.toString())

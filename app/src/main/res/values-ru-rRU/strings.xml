@@ -19,4 +19,5 @@
     <string name="details_total_photo_title">ВСЕГО ФОТО</string>
     <string name="details_latest_photo_title">ПОСЛЕДНЕЕ ФОТО</string>
     <string name="button_back">Кнопка назад</string>
+    <string name="toast_error_message">Нет соединения с интернетом! :(</string>
 </resources>

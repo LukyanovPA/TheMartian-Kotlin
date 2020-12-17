@@ -18,4 +18,5 @@
     <string name="details_total_photo_title">TOTAL PHOTOS</string>
     <string name="details_latest_photo_title">LATEST PHOTO</string>
     <string name="button_back">Button back</string>
+    <string name="toast_error_message">No internet connection! :(</string>
 </resources>
