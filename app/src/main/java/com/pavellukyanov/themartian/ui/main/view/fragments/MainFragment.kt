@@ -56,6 +56,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private suspend fun setupData() {
         resultList = mutableListOf()
         scope.async { getCuriosity() }.await()
+        scope.async { getOppo() }.await()
+        scope.async { getSpirit() }.await()
 
     }
 
@@ -72,7 +74,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                         progressBar2.visibility = View.GONE
                         resource.data?.let { roverInfo ->
                             setListRovInfo(roverInfo.photoManifest)
-                            scope.launch { getOppo() }
+//                            scope.launch { getOppo() }
+                            if(resultList.size == 3) {
+                                retrieveList(resultList)
+                            }
                         }
                     }
                     Status.ERROR -> {
@@ -101,7 +106,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                         progressBar2.visibility = View.GONE
                         resource.data?.let { roverInfo ->
                             setListRovInfo(roverInfo.photoManifest)
-                            scope.launch{ getSpirit() }
+//                            scope.launch{ getSpirit() }
+                            if(resultList.size == 3) {
+                                retrieveList(resultList)
+                            }
                         }
                     }
                     Status.ERROR -> {
@@ -130,8 +138,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                         progressBar2.visibility = View.GONE
                         resource.data?.let { roverInfo ->
                             setListRovInfo(roverInfo.photoManifest)
-                            scope.cancel()
-                            retrieveList(resultList)
+//                            scope.cancel()
+                            if(resultList.size == 3) {
+                                retrieveList(resultList)
+                            }
                         }
                     }
                     Status.ERROR -> {
