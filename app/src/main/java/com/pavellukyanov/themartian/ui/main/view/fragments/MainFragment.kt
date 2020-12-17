@@ -29,7 +29,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private lateinit var resultList: MutableList<RoverInfo>
     private lateinit var adapter: MainAdapter
 
-    var tCuriosity = RoverInfo(R.drawable.curiosity_rover,
+    private var tCuriosity = RoverInfo(R.drawable.curiosity_rover,
         R.drawable.curiosity,
         null,
         null,
@@ -41,7 +41,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         null
     )
 
-    var tOpp = RoverInfo(R.drawable.opportunity_rover,
+    private var tOpp = RoverInfo(R.drawable.opportunity_rover,
         R.drawable.opportunity,
         null,
         null,
@@ -53,7 +53,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         null
     )
 
-    var tSpirit = RoverInfo(R.drawable.spirit_rover,
+    private var tSpirit = RoverInfo(R.drawable.spirit_rover,
         R.drawable.spirit,
         null,
         null,
