@@ -29,7 +29,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private lateinit var resultList: MutableList<RoverInfo>
     private lateinit var adapter: MainAdapter
 
-    private var tCuriosity = RoverInfo(R.drawable.curiosity_rover,
+    private var tCuriosity = RoverInfo(
+        R.drawable.curiosity_rover,
         R.drawable.curiosity,
         null,
         null,
@@ -41,7 +42,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         null
     )
 
-    private var tOpp = RoverInfo(R.drawable.opportunity_rover,
+    private var tOpp = RoverInfo(
+        R.drawable.opportunity_rover,
         R.drawable.opportunity,
         null,
         null,
@@ -53,7 +55,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         null
     )
 
-    private var tSpirit = RoverInfo(R.drawable.spirit_rover,
+    private var tSpirit = RoverInfo(
+        R.drawable.spirit_rover,
         R.drawable.spirit,
         null,
         null,
@@ -107,9 +110,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                     Status.SUCCESS -> {
                         mainRecycler.visibility = View.VISIBLE
                         progressBar2.visibility = View.GONE
-                        resource.data?.let { roverInfo -> addRovInfo(rovInfo, roverInfo.photoManifest)
+                        resource.data?.let { roverInfo ->
+                            addRovInfo(rovInfo, roverInfo.photoManifest)
                             setListRovInfo(rovInfo)
-                            if(resultList.size == 3) {
+                            if (resultList.size == 3) {
                                 retrieveList(resultList)
                             }
                         }
@@ -117,7 +121,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                     Status.ERROR -> {
                         mainRecycler.visibility = View.VISIBLE
                         progressBar2.visibility = View.GONE
-                        Toast.makeText(context, getString(R.string.toast_error_message), Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            context,
+                            getString(R.string.toast_error_message),
+                            Toast.LENGTH_LONG
+                        ).show()
 
                         //Log
                         Log.d(LOG_TAG, it.message.toString())
@@ -138,9 +146,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                     Status.SUCCESS -> {
                         mainRecycler.visibility = View.VISIBLE
                         progressBar2.visibility = View.GONE
-                        resource.data?.let { roverInfo -> addRovInfo(rovInfo, roverInfo.photoManifest)
+                        resource.data?.let { roverInfo ->
+                            addRovInfo(rovInfo, roverInfo.photoManifest)
                             setListRovInfo(rovInfo)
-                            if(resultList.size == 3) {
+                            if (resultList.size == 3) {
                                 retrieveList(resultList)
                             }
                         }
@@ -148,7 +157,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                     Status.ERROR -> {
                         mainRecycler.visibility = View.VISIBLE
                         progressBar2.visibility = View.GONE
-                        Toast.makeText(context, getString(R.string.toast_error_message), Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            context,
+                            getString(R.string.toast_error_message),
+                            Toast.LENGTH_LONG
+                        ).show()
 
                         //Log
                         Log.d(LOG_TAG, it.message.toString())
@@ -169,9 +182,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                     Status.SUCCESS -> {
                         mainRecycler.visibility = View.VISIBLE
                         progressBar2.visibility = View.GONE
-                        resource.data?.let { roverInfo -> addRovInfo(rovInfo, roverInfo.photoManifest)
+                        resource.data?.let { roverInfo ->
+                            addRovInfo(rovInfo, roverInfo.photoManifest)
                             setListRovInfo(rovInfo)
-                            if(resultList.size == 3) {
+                            if (resultList.size == 3) {
                                 retrieveList(resultList)
                             }
                         }
@@ -179,7 +193,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                     Status.ERROR -> {
                         mainRecycler.visibility = View.VISIBLE
                         progressBar2.visibility = View.GONE
-                        Toast.makeText(context, getString(R.string.toast_error_message), Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            context,
+                            getString(R.string.toast_error_message),
+                            Toast.LENGTH_LONG
+                        ).show()
 
                         //Log
                         Log.d(LOG_TAG, it.message.toString())
