@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">The Martian</string>
+    <string name="the_martian">The Martian</string>
+    <string name="slogan">Путешествие по красной планете</string>
+    <string name="hoose_a_rover">Выберите ровер</string>
+    <string name="rover_name">Curiosity</string>
+    <string name="launch_date_title">Дата запуска:</string>
+    <string name="latest_photo_title">Последнее фото:</string>
+    <string name="total_photos_title">Всего фото:</string>
+    <string name="background_picture">Фоновое изображение</string>
+    <string name="main_line">Линия</string>
+    <string name="launch_date">2011-11-26</string>
+    <string name="latest_photo">2020-12-12</string>
+    <string name="total_photos">3702</string>
+</resources>

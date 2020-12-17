@@ -13,6 +13,7 @@ import com.pavellukyanov.themartian.data.api.GoRetrofit
 import com.pavellukyanov.themartian.data.model.Photo
 import com.pavellukyanov.themartian.data.model.RoverInfo
 import com.pavellukyanov.themartian.ui.base.ManifestViewModFactory
+import com.pavellukyanov.themartian.ui.main.adapter.LinePagerIndicatorDecoration
 import com.pavellukyanov.themartian.ui.main.adapter.MainAdapter
 import com.pavellukyanov.themartian.ui.main.buisneslogics.RoversInfoList
 import com.pavellukyanov.themartian.ui.main.viewmodel.ManifestViewModel
@@ -154,6 +155,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 LinearLayoutManager.HORIZONTAL,
                 false
             )
+        mainRecycler.addItemDecoration(LinePagerIndicatorDecoration())
         adapter = MainAdapter(arrayListOf())
         mainRecycler.adapter = adapter
     }

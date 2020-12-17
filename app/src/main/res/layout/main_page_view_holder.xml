@@ -48,7 +48,7 @@
         android:fontFamily="@font/gotham_pro_light"
         android:text="@string/launch_date_title"
         android:textColor="@color/white"
-        android:textSize="15sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/mainLine"
         app:layout_constraintTop_toBottomOf="@id/roverNameMain" />
 
@@ -60,7 +60,7 @@
         android:layout_marginTop="6dp"
         android:fontFamily="@font/gotham_pro_medium"
         android:textColor="@color/white"
-        android:textSize="15sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/launchDateTitle"
         app:layout_constraintTop_toBottomOf="@id/roverNameMain" />
 
@@ -73,7 +73,7 @@
         android:fontFamily="@font/gotham_pro_light"
         android:text="@string/latest_photo_title"
         android:textColor="@color/white"
-        android:textSize="15sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/mainLine"
         app:layout_constraintTop_toBottomOf="@id/launchDateTitle" />
 
@@ -85,7 +85,7 @@
         android:layout_marginTop="6dp"
         android:fontFamily="@font/gotham_pro_medium"
         android:textColor="@color/white"
-        android:textSize="15sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/latestPhotoDateTitle"
         app:layout_constraintTop_toBottomOf="@id/launchDate" />
 
@@ -98,7 +98,7 @@
         android:fontFamily="@font/gotham_pro_light"
         android:text="@string/total_photos_title"
         android:textColor="@color/white"
-        android:textSize="15sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/mainLine"
         app:layout_constraintTop_toBottomOf="@id/latestPhotoDateTitle" />
 
@@ -110,7 +110,7 @@
         android:layout_marginTop="6dp"
         android:fontFamily="@font/gotham_pro_medium"
         android:textColor="@color/slogan"
-        android:textSize="15sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/totalPhotosTitle"
         app:layout_constraintTop_toBottomOf="@id/latestPhotoDate" />
 
