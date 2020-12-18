@@ -68,21 +68,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         null
     )
 
-    private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, exception ->
-        println("CoroutineExceptionHandler got $exception in $coroutineContext")
-    }
-
-    private var scope = CoroutineScope(
-        SupervisorJob() +
-                Dispatchers.Main +
-                exceptionHandler
-    )
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewModels()
         setupUI()
-        scope.launch { setupData() }
+        setupData()
     }
 
     private fun initViewModels() {
@@ -92,11 +82,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         vmSpirit = ViewModelProvider(this, factory).get(ManifestViewModel::class.java)
     }
 
-    private suspend fun setupData() {
+    private fun setupData() {
         resultList = mutableListOf()
-        scope.async { getCuriosity(tCuriosity) }.await()
-        scope.async { getOppo(tOpp) }.await()
-        scope.async { getSpirit(tSpirit) }.await()
+        getCuriosity(tCuriosity)
+        getOppo(tOpp)
+        getSpirit(tSpirit)
     }
 
     private fun setListRovInfo(rovInfo: RoverInfo) {
@@ -235,7 +225,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun retrieveList(roversInfo: MutableList<RoverInfo>) {
-        scope.cancel()
         adapter.apply {
             addRoversInfo(roversInfo)
             notifyDataSetChanged()

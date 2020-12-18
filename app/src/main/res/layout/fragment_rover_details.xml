@@ -1,128 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
-
-    <ImageView
-        android:id="@+id/detailsFon"
-        android:layout_width="wrap_content"
+    android:background="@color/black"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:foreground="@drawable/vector_mask"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/mars_view"
-        android:contentDescription="@string/background_picture" />
+        android:background="@color/black">
+
+        <ImageView
+            android:id="@+id/detailsFon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:foreground="@drawable/vector_mask"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/mars_view"
+            android:contentDescription="@string/background_picture" />
 
 
-    <TextView
-        android:id="@+id/roverDetailsName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
-        android:fontFamily="@font/gotham_pro_light"
-        android:text="@string/rover_name"
-        android:textColor="@color/white"
-        android:textSize="48sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/roverDetailsName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:fontFamily="@font/gotham_pro_light"
+            android:text="@string/rover_name"
+            android:textColor="@color/white"
+            android:textSize="48sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/buttonBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="72dp"
-        android:contentDescription="@string/button_back"
-        android:background="@drawable/vector_button_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/abc_vector_test" />
+        <ImageButton
+            android:id="@+id/buttonBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:contentDescription="@string/button_back"
+            android:background="@drawable/vector_button_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/abc_vector_test" />
 
-    <TextView
-        android:id="@+id/detailsLaunchDateTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="70dp"
-        android:fontFamily="@font/gotham_pro_light"
-        android:text="@string/details_launch_date_title"
-        android:textColor="@color/white"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/detailsFon"
-        app:layout_constraintEnd_toEndOf="@+id/detailsLaunchDate"
-        app:layout_constraintStart_toStartOf="@id/detailsLaunchDate"
-        tools:ignore="SmallSp" />
+        <TextView
+            android:id="@+id/detailsLaunchDateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="90dp"
+            android:fontFamily="@font/gotham_pro_light"
+            android:text="@string/details_launch_date_title"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/detailsFon"
+            app:layout_constraintEnd_toEndOf="@+id/detailsLaunchDate"
+            app:layout_constraintStart_toStartOf="@id/detailsLaunchDate"
+            tools:ignore="SmallSp" />
 
-    <TextView
-        android:id="@+id/detailsTotalPhotoTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/gotham_pro_light"
-        android:text="@string/details_total_photo_title"
-        android:textColor="@color/white"
-        android:textSize="10sp"
-        android:layout_marginBottom="70dp"
-        app:layout_constraintBottom_toBottomOf="@+id/detailsFon"
-        app:layout_constraintEnd_toEndOf="@+id/detailsTotalPhoto"
-        app:layout_constraintStart_toStartOf="@id/detailsTotalPhoto"
-        tools:ignore="SmallSp" />
+        <TextView
+            android:id="@+id/detailsTotalPhotoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gotham_pro_light"
+            android:text="@string/details_total_photo_title"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toBottomOf="@+id/detailsFon"
+            app:layout_constraintEnd_toEndOf="@+id/detailsTotalPhoto"
+            app:layout_constraintStart_toStartOf="@id/detailsTotalPhoto"
+            tools:ignore="SmallSp" />
 
-    <TextView
-        android:id="@+id/detailsLatestPhotoTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/gotham_pro_light"
-        android:text="@string/details_latest_photo_title"
-        android:textColor="@color/white"
-        android:textSize="10sp"
-        android:layout_marginBottom="70dp"
-        app:layout_constraintBottom_toBottomOf="@+id/detailsFon"
-        app:layout_constraintEnd_toEndOf="@id/detailsLatestPhoto"
-        app:layout_constraintStart_toStartOf="@id/detailsLatestPhoto"
-        tools:ignore="SmallSp" />
+        <TextView
+            android:id="@+id/detailsLatestPhotoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gotham_pro_light"
+            android:text="@string/details_latest_photo_title"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:layout_marginBottom="90dp"
+            app:layout_constraintBottom_toBottomOf="@+id/detailsFon"
+            app:layout_constraintEnd_toEndOf="@id/detailsLatestPhoto"
+            app:layout_constraintStart_toStartOf="@id/detailsLatestPhoto"
+            tools:ignore="SmallSp" />
 
-    <TextView
-        android:id="@+id/detailsLaunchDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/gotham_pro_light"
-        android:text="@string/launch_date"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/detailsLaunchDateTitle"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/detailsLaunchDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gotham_pro_light"
+            android:text="@string/launch_date"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:layout_marginStart="6dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/detailsTotalPhoto"
+            app:layout_constraintBottom_toTopOf="@+id/detailsLaunchDateTitle"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/detailsTotalPhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/gotham_pro_light"
-        android:text="@string/total_photos"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/detailsTotalPhotoTitle"
-        app:layout_constraintEnd_toStartOf="@+id/detailsLatestPhoto"
-        app:layout_constraintStart_toEndOf="@id/detailsLaunchDate" />
+        <TextView
+            android:id="@+id/detailsTotalPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gotham_pro_light"
+            android:text="@string/total_photos"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/detailsTotalPhotoTitle"
+            app:layout_constraintEnd_toEndOf="@+id/detailRoverPicture"
+            app:layout_constraintStart_toStartOf="@id/detailRoverPicture" />
 
-    <TextView
-        android:id="@+id/detailsLatestPhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/gotham_pro_light"
-        android:text="@string/latest_photo"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/detailsLatestPhotoTitle"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:id="@+id/detailsLatestPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gotham_pro_light"
+            android:text="@string/latest_photo"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintStart_toEndOf="@+id/detailsTotalPhoto"
+            app:layout_constraintBottom_toTopOf="@+id/detailsLatestPhotoTitle"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/detailRoverPicture"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="2dp"
+            android:src="@drawable/curiosity_rover"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/roverDetailsName" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detailsFon" />
+
+        <ProgressBar
+            android:id="@+id/progressBar3"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/slogan"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detailsFon" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
