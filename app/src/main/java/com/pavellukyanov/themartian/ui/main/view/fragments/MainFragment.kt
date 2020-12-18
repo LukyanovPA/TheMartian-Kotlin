@@ -22,7 +22,6 @@ import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.coroutines.*
 
 class MainFragment : Fragment(R.layout.fragment_main) {
-
     private lateinit var vmCuriosity: ManifestViewModel
     private lateinit var vmOpportunity: ManifestViewModel
     private lateinit var vmSpirit: ManifestViewModel
