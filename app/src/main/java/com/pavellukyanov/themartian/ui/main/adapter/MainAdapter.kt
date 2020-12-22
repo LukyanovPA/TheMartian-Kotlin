@@ -1,18 +1,12 @@
 package com.pavellukyanov.themartian.ui.main.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.model.RoverInfo
-import com.pavellukyanov.themartian.ui.main.view.fragments.MainFragment
-import com.pavellukyanov.themartian.ui.main.viewmodel.ManifestViewModel
-import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.main_page_view_holder.view.*
-import kotlinx.android.synthetic.main.rv_gallery_item.view.*
+import com.pavellukyanov.themartian.databinding.MainPageViewHolderBinding
 
 class MainAdapter(
     private val roverInfo: MutableList<RoverInfo>,
@@ -20,10 +14,9 @@ class MainAdapter(
 ) : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        val inflater =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.main_page_view_holder, parent, false)
-        return MainViewHolder(inflater)
+        val binding =
+            MainPageViewHolderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MainViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
@@ -44,12 +37,12 @@ class MainAdapter(
         }
     }
 
-    class MainViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
-        LayoutContainer {
+    class MainViewHolder(private val binding: MainPageViewHolderBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(roverInfo: RoverInfo) {
-            with(containerView) {
-                Glide.with(context)
+            with(binding) {
+                Glide.with(itemView.context)
                     .asBitmap()
                     .load(roverInfo.picture)
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
@@ -58,7 +51,7 @@ class MainAdapter(
 
                 roverNameMain.append(roverInfo.name)
                 launchDate.append(roverInfo.launchData)
-                latestPhotoDate.append(roverInfo.maxDate)
+                latestPhotoDate.append(roverInfo.maxDate.toString())
                 totalPhotos.append(roverInfo.totalPhotos.toString())
             }
         }

@@ -12,14 +12,14 @@ import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.api.ApiManifestHelper
 import com.pavellukyanov.themartian.data.api.GoRetrofit
 import com.pavellukyanov.themartian.data.model.RoverInfo
+import com.pavellukyanov.themartian.databinding.FragmentMainBinding
 import com.pavellukyanov.themartian.ui.base.ManifestViewModFactory
 import com.pavellukyanov.themartian.ui.main.adapter.ItemClickListener
 import com.pavellukyanov.themartian.ui.main.adapter.LinePagerIndicatorDecoration
 import com.pavellukyanov.themartian.ui.main.adapter.MainAdapter
+import com.pavellukyanov.themartian.ui.main.helpers.GetRoverInfos
 import com.pavellukyanov.themartian.ui.main.viewmodel.ManifestViewModel
 import com.pavellukyanov.themartian.utils.Status
-import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.coroutines.*
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
@@ -29,47 +29,16 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private lateinit var resultList: MutableList<RoverInfo>
     private lateinit var adapter: MainAdapter
 
-    private var tCuriosity = RoverInfo(
-        R.drawable.curiosity_rover,
-        R.drawable.curiosity,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-    )
+    private lateinit var binding: FragmentMainBinding
 
-    private var tOpp = RoverInfo(
-        R.drawable.opportunity_rover,
-        R.drawable.opportunity,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-    )
-
-    private var tSpirit = RoverInfo(
-        R.drawable.spirit_rover,
-        R.drawable.spirit,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-    )
+    private val riSpirit = GetRoverInfos().getSpirit()
+    private val riOpportunity = GetRoverInfos().getOpportunity()
+    private val riCuriosity = GetRoverInfos().getCuriosity()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentMainBinding.bind(view)
+
         initViewModels()
         setupUI()
         setupData()
@@ -84,22 +53,26 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private fun setupData() {
         resultList = mutableListOf()
-        getCuriosity(tCuriosity)
-        getOppo(tOpp)
-        getSpirit(tSpirit)
+        getRoverManifest(riCuriosity, vmCuriosity, CURIOSITY)
+        getRoverManifest(riOpportunity, vmOpportunity, OPPORTUNITY)
+        getRoverManifest(riSpirit, vmSpirit, SPIRIT)
     }
 
     private fun setListRovInfo(rovInfo: RoverInfo) {
         resultList.add(rovInfo)
     }
 
-    private fun getCuriosity(rovInfo: RoverInfo) {
-        vmCuriosity.getRoverManifest(CURIOSITY).observe(this, Observer {
+    private fun getRoverManifest(
+        rovInfo: RoverInfo,
+        vmRover: ManifestViewModel,
+        roverName: String
+    ) {
+        vmRover.getRoverManifest(roverName).observe(this, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
-                        mainRecycler.visibility = View.VISIBLE
-                        progressBar2.visibility = View.GONE
+                        binding.mainRecycler.visibility = View.VISIBLE
+                        binding.progressBar2.visibility = View.GONE
                         resource.data?.let { roverInfo ->
                             addRovInfo(rovInfo, roverInfo.photoManifest)
                             setListRovInfo(rovInfo)
@@ -109,8 +82,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                         }
                     }
                     Status.ERROR -> {
-                        mainRecycler.visibility = View.VISIBLE
-                        progressBar2.visibility = View.GONE
+                        binding.mainRecycler.visibility = View.VISIBLE
+                        binding.progressBar2.visibility = View.GONE
                         Toast.makeText(
                             context,
                             getString(R.string.toast_error_message),
@@ -121,80 +94,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                         Log.d(LOG_TAG, it.message.toString())
                     }
                     Status.LOADING -> {
-                        progressBar2.visibility = View.VISIBLE
-                        mainRecycler.visibility = View.GONE
-                    }
-                }
-            }
-        })
-    }
-
-    private fun getOppo(rovInfo: RoverInfo) {
-        vmOpportunity.getRoverManifest(OPPORTUNITY).observe(this, Observer {
-            it?.let { resource ->
-                when (resource.status) {
-                    Status.SUCCESS -> {
-                        mainRecycler.visibility = View.VISIBLE
-                        progressBar2.visibility = View.GONE
-                        resource.data?.let { roverInfo ->
-                            addRovInfo(rovInfo, roverInfo.photoManifest)
-                            setListRovInfo(rovInfo)
-                            if (resultList.size == 3) {
-                                retrieveList(resultList)
-                            }
-                        }
-                    }
-                    Status.ERROR -> {
-                        mainRecycler.visibility = View.VISIBLE
-                        progressBar2.visibility = View.GONE
-                        Toast.makeText(
-                            context,
-                            getString(R.string.toast_error_message),
-                            Toast.LENGTH_LONG
-                        ).show()
-
-                        //Log
-                        Log.d(LOG_TAG, it.message.toString())
-                    }
-                    Status.LOADING -> {
-                        progressBar2.visibility = View.VISIBLE
-                        mainRecycler.visibility = View.GONE
-                    }
-                }
-            }
-        })
-    }
-
-    private fun getSpirit(rovInfo: RoverInfo) {
-        vmSpirit.getRoverManifest(SPIRIT).observe(this, Observer {
-            it?.let { resource ->
-                when (resource.status) {
-                    Status.SUCCESS -> {
-                        mainRecycler.visibility = View.VISIBLE
-                        progressBar2.visibility = View.GONE
-                        resource.data?.let { roverInfo ->
-                            addRovInfo(rovInfo, roverInfo.photoManifest)
-                            setListRovInfo(rovInfo)
-                            if (resultList.size == 3) {
-                                retrieveList(resultList)
-                            }
-                        }
-                    }
-                    Status.ERROR -> {
-                        mainRecycler.visibility = View.VISIBLE
-                        progressBar2.visibility = View.GONE
-                        Toast.makeText(
-                            context,
-                            getString(R.string.toast_error_message),
-                            Toast.LENGTH_LONG
-                        ).show()
-
-                        //Log
-                        Log.d(LOG_TAG, it.message.toString())
-                    }
-                    Status.LOADING -> {
-                        progressBar2.visibility = View.VISIBLE
-                        mainRecycler.visibility = View.GONE
+                        binding.progressBar2.visibility = View.VISIBLE
+                        binding.mainRecycler.visibility = View.GONE
                     }
                 }
             }
@@ -213,15 +114,15 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun setupUI() {
-        mainRecycler.layoutManager =
+        binding.mainRecycler.layoutManager =
             LinearLayoutManager(
                 context,
                 LinearLayoutManager.HORIZONTAL,
                 false
             )
-        mainRecycler.addItemDecoration(LinePagerIndicatorDecoration())
+        binding.mainRecycler.addItemDecoration(LinePagerIndicatorDecoration())
         adapter = MainAdapter(arrayListOf(), clickListener)
-        mainRecycler.adapter = adapter
+        binding.mainRecycler.adapter = adapter
     }
 
     private fun retrieveList(roversInfo: MutableList<RoverInfo>) {

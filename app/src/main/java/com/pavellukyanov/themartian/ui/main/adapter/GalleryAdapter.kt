@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.model.Photo
+import com.pavellukyanov.themartian.databinding.RvGalleryItemBinding
 import com.pavellukyanov.themartian.ui.main.adapter.GalleryAdapter.DataViewHolder
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.rv_gallery_item.view.*
@@ -16,10 +17,9 @@ class GalleryAdapter(private val photos: ArrayList<Photo>) :
     RecyclerView.Adapter<DataViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
-        val inflater =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.rv_gallery_item, parent, false)
-        return DataViewHolder(inflater)
+        val binding =
+            RvGalleryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return DataViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
@@ -37,12 +37,12 @@ class GalleryAdapter(private val photos: ArrayList<Photo>) :
         }
     }
 
-    class DataViewHolder(override val containerView: View) :
-        RecyclerView.ViewHolder(containerView), LayoutContainer {
+    class DataViewHolder(private val binding: RvGalleryItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(photo: Photo) {
-            with(containerView) {
-                Glide.with(context)
+            with(binding) {
+                Glide.with(itemView.context)
                     .asBitmap()
                     .load(photo.srcPhoto)
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
