@@ -1,17 +1,13 @@
 package com.pavellukyanov.themartian.ui.main.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.data.model.Photo
+import com.pavellukyanov.themartian.data.models.networkmodel.Photo
 import com.pavellukyanov.themartian.databinding.RvGalleryItemBinding
 import com.pavellukyanov.themartian.ui.main.adapter.GalleryAdapter.DataViewHolder
-import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.rv_gallery_item.view.*
 
 class GalleryAdapter(private val photos: ArrayList<Photo>) :
     RecyclerView.Adapter<DataViewHolder>() {

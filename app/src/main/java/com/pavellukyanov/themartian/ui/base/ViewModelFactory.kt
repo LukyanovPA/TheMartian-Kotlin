@@ -3,7 +3,7 @@ package com.pavellukyanov.themartian.ui.base
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.pavellukyanov.themartian.data.api.ApiHelper
-import com.pavellukyanov.themartian.data.repository.MainRepository
+import com.pavellukyanov.themartian.data.repository.old.MainRepository
 import com.pavellukyanov.themartian.ui.main.viewmodel.MainVewModel
 import java.lang.IllegalArgumentException
 

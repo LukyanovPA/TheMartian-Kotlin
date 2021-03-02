@@ -1,11 +1,9 @@
 package com.pavellukyanov.themartian.ui.main.viewmodel
 
-import android.os.Parcelable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.pavellukyanov.themartian.data.repository.ManifestRepository
+import com.pavellukyanov.themartian.data.repository.old.ManifestRepository
 import com.pavellukyanov.themartian.utils.Resource
-import kotlinx.android.parcel.Parcelize
 import kotlinx.coroutines.Dispatchers
 import java.lang.Exception
 

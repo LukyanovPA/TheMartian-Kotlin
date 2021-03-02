@@ -1,16 +1,18 @@
 package com.pavellukyanov.themartian.ui.main.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.pavellukyanov.themartian.data.model.RoverInfo
+import com.pavellukyanov.themartian.data.models.dbmodel.RoverInfoEntity
+import com.pavellukyanov.themartian.data.models.networkmodel.RoverInfo
 import com.pavellukyanov.themartian.databinding.MainPageViewHolderBinding
 
 class MainAdapter(
-    private val roverInfo: MutableList<RoverInfo>,
-    private val clickListener: ItemClickListener
+    private var roverInfo: List<RoverInfoEntity>,
+    private val clickListener: NewItemClickListener
 ) : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
@@ -22,37 +24,39 @@ class MainAdapter(
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         holder.bind(getItem(position))
         holder.itemView.setOnClickListener {
-            clickListener.onItemClicked(getItem(position))
+            clickListener.onClicked(getItem(position))
         }
     }
 
-    private fun getItem(position: Int): RoverInfo = roverInfo[position]
+    private fun getItem(position: Int): RoverInfoEntity = roverInfo[position]
 
     override fun getItemCount(): Int = roverInfo.size
 
-    fun addRoversInfo(rovers: MutableList<RoverInfo>) {
-        this.roverInfo.apply {
-            clear()
-            addAll(rovers)
-        }
-    }
+
+//    fun addRoversInfo(rovers: List<RoverInfoEntity>) {
+//        this.roverInfo.apply {
+//            clear()
+//            addAll(rovers)
+//        }
+//    }
 
     class MainViewHolder(private val binding: MainPageViewHolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(roverInfo: RoverInfo) {
+        fun bind(roverInfo: RoverInfoEntity) {
+            Log.d("ttt", "Reci - ${roverInfo.name}")
             with(binding) {
                 Glide.with(itemView.context)
                     .asBitmap()
-                    .load(roverInfo.picture)
+                    .load(roverInfo.roverPictureInMainPage)
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .centerCrop()
                     .into(roverPicture)
 
-                roverNameMain.append(roverInfo.name)
-                launchDate.append(roverInfo.launchData)
-                latestPhotoDate.append(roverInfo.maxDate.toString())
-                totalPhotos.append(roverInfo.totalPhotos.toString())
+                roverNameMain.text = roverInfo.name
+                launchDate.text = roverInfo.launchData
+                latestPhotoDate.text = roverInfo.maxDate.toString()
+                totalPhotos.text = roverInfo.totalPhotos.toString()
             }
         }
 
@@ -61,4 +65,8 @@ class MainAdapter(
 
 interface ItemClickListener {
     fun onItemClicked(roverInfo: RoverInfo)
+}
+
+interface NewItemClickListener {
+    fun onClicked(roverInfo: RoverInfoEntity)
 }

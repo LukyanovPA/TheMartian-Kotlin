@@ -5,24 +5,29 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.api.ApiManifestHelper
 import com.pavellukyanov.themartian.data.api.GoRetrofit
-import com.pavellukyanov.themartian.data.model.RoverInfo
+import com.pavellukyanov.themartian.data.database.DataBase
+import com.pavellukyanov.themartian.data.models.networkmodel.RoverInfo
+import com.pavellukyanov.themartian.data.repository.DataBaseRepoImpl
 import com.pavellukyanov.themartian.databinding.FragmentMainBinding
 import com.pavellukyanov.themartian.ui.base.ManifestViewModFactory
+import com.pavellukyanov.themartian.ui.base.TestViewModelFactory
 import com.pavellukyanov.themartian.ui.main.adapter.ItemClickListener
 import com.pavellukyanov.themartian.ui.main.adapter.LinePagerIndicatorDecoration
 import com.pavellukyanov.themartian.ui.main.adapter.MainAdapter
 import com.pavellukyanov.themartian.ui.main.helpers.GetRoverInfos
 import com.pavellukyanov.themartian.ui.main.viewmodel.ManifestViewModel
+import com.pavellukyanov.themartian.ui.main.viewmodel.TestViewModel
 import com.pavellukyanov.themartian.utils.Status
 
 class MainFragment : Fragment(R.layout.fragment_main) {
-
+    //переписать с 1 ViewModel
     private lateinit var vmCuriosity: ManifestViewModel
     private lateinit var vmOpportunity: ManifestViewModel
     private lateinit var vmSpirit: ManifestViewModel
@@ -31,13 +36,14 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private lateinit var binding: FragmentMainBinding
 
-    private val riSpirit = GetRoverInfos().getSpirit()
-    private val riOpportunity = GetRoverInfos().getOpportunity()
-    private val riCuriosity = GetRoverInfos().getCuriosity()
+//    private val riSpirit = GetRoverInfos().getSpirit()
+//    private val riOpportunity = GetRoverInfos().getOpportunity()
+//    private val riCuriosity = GetRoverInfos().getCuriosity()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMainBinding.bind(view)
+
         initViewModels()
         setupUI()
         setupData()
@@ -52,9 +58,9 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private fun setupData() {
         resultList = mutableListOf()
-        getRoverManifest(riCuriosity, vmCuriosity, CURIOSITY)
-        getRoverManifest(riOpportunity, vmOpportunity, OPPORTUNITY)
-        getRoverManifest(riSpirit, vmSpirit, SPIRIT)
+//        getRoverManifest(riCuriosity, vmCuriosity, CURIOSITY)
+//        getRoverManifest(riOpportunity, vmOpportunity, OPPORTUNITY)
+//        getRoverManifest(riSpirit, vmSpirit, SPIRIT)
     }
 
     private fun setListRovInfo(rovInfo: RoverInfo) {
@@ -66,7 +72,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         vmRover: ManifestViewModel,
         roverName: String
     ) {
-        vmRover.getRoverManifest(roverName).observe(this, Observer {
+        vmRover.getRoverManifest(roverName).observe(this.viewLifecycleOwner, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
@@ -120,13 +126,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 false
             )
         binding.mainRecycler.addItemDecoration(LinePagerIndicatorDecoration())
-        adapter = MainAdapter(arrayListOf(), clickListener)
-        binding.mainRecycler.adapter = adapter
+//        adapter = MainAdapter(arrayListOf(), clickListener)
+//        binding.mainRecycler.adapter = adapter
     }
 
     private fun retrieveList(roversInfo: MutableList<RoverInfo>) {
         adapter.apply {
-            addRoversInfo(roversInfo)
+//            addRoversInfo(roversInfo)
             notifyDataSetChanged()
         }
     }

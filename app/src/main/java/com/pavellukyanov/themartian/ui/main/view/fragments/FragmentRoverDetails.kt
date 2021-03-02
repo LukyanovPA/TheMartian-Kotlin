@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.api.ApiHelper
 import com.pavellukyanov.themartian.data.api.GoRetrofit
-import com.pavellukyanov.themartian.data.model.Photo
-import com.pavellukyanov.themartian.data.model.RoverInfo
+import com.pavellukyanov.themartian.data.models.networkmodel.Photo
+import com.pavellukyanov.themartian.data.models.networkmodel.RoverInfo
 import com.pavellukyanov.themartian.databinding.FragmentRoverDetailsBinding
 import com.pavellukyanov.themartian.ui.base.ViewModelFactory
 import com.pavellukyanov.themartian.ui.main.adapter.GalleryAdapter

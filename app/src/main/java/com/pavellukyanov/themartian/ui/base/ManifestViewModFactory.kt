@@ -2,11 +2,8 @@ package com.pavellukyanov.themartian.ui.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.pavellukyanov.themartian.data.api.ApiHelper
 import com.pavellukyanov.themartian.data.api.ApiManifestHelper
-import com.pavellukyanov.themartian.data.repository.MainRepository
-import com.pavellukyanov.themartian.data.repository.ManifestRepository
-import com.pavellukyanov.themartian.ui.main.viewmodel.MainVewModel
+import com.pavellukyanov.themartian.data.repository.old.ManifestRepository
 import com.pavellukyanov.themartian.ui.main.viewmodel.ManifestViewModel
 import java.lang.IllegalArgumentException
 

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.ui.main.view.fragments.FragmentRoverDetails
+import com.pavellukyanov.themartian.ui.main.view.fragments.FragmentTest
 import com.pavellukyanov.themartian.ui.main.view.fragments.MainFragment
 
 class MainActivity : AppCompatActivity() {
@@ -14,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .add(R.id.flMainFragmetn, MainFragment())
+                .add(R.id.flMainFragmetn, FragmentTest())
                 .commit()
         }
     }
