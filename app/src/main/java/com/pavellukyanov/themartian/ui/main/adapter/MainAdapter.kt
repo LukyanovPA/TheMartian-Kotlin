@@ -8,11 +8,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.model.RoverInfo
-import com.pavellukyanov.themartian.ui.main.view.fragments.MainFragment
-import com.pavellukyanov.themartian.ui.main.viewmodel.ManifestViewModel
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.main_page_view_holder.view.*
-import kotlinx.android.synthetic.main.rv_gallery_item.view.*
 
 class MainAdapter(
     private val roverInfo: MutableList<RoverInfo>,
@@ -51,7 +48,14 @@ class MainAdapter(
             with(containerView) {
                 Glide.with(context)
                     .asBitmap()
-                    .load(roverInfo.picture)
+                    .load(
+                        when (roverInfo.name) {
+                            CURIOSITY -> R.drawable.curiosity
+                            OPPORTUNITY -> R.drawable.opportunity
+                            SPIRIT -> R.drawable.spirit
+                            else -> null
+                        }
+                    )
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .centerCrop()
                     .into(roverPicture)
@@ -63,6 +67,12 @@ class MainAdapter(
             }
         }
 
+    }
+
+    companion object {
+        private const val CURIOSITY = "Curiosity"
+        private const val OPPORTUNITY = "Opportunity"
+        private const val SPIRIT = "Spirit"
     }
 }
 

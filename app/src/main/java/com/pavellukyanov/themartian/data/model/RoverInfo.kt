@@ -1,27 +1,26 @@
 package com.pavellukyanov.themartian.data.model
 
+import android.graphics.drawable.Drawable
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 class RoverInfo(
-    var roverPicture: Int,
-    var picture: Int,
     @SerializedName("name")
-    var name: String?,
+    var name: String,
     @SerializedName("landing_date")
-    var landingDate: String?,
+    var landingDate: String,
     @SerializedName("launch_date")
-    var launchData: String?,
+    var launchData: String,
     @SerializedName("status")
-    var status: String?,
+    var status: String,
     @SerializedName("max_sol")
-    var maxSol: Long?,
+    var maxSol: Long,
     @SerializedName("max_date")
-    var maxDate: String?,
+    var maxDate: String,
     @SerializedName("total_photos")
-    var totalPhotos: Long?,
+    var totalPhotos: Long,
     @SerializedName("photos")
-    var photos: List<PhotosInfo>?
+    var photos: List<PhotosInfo>
 ) : Parcelable

@@ -5,7 +5,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object GoRetrofit {
+object Router {
     private const val BASE_URL = "https://api.nasa.gov/mars-photos/api/v1/rovers/"
     private const val MANIFESTS_URL = "https://api.nasa.gov/mars-photos/api/v1/manifests/"
     private const val API_KEY = "f8FYngXOCFmWPVOgmcugDO5JwAsPB238oee4wh6V"
