@@ -2,12 +2,12 @@ package com.pavellukyanov.themartian.ui.main.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.pavellukyanov.themartian.data.repository.MainRepository
+import com.pavellukyanov.themartian.data.repository.old.MainRepository
 import com.pavellukyanov.themartian.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import java.lang.Exception
 
-class MainVewModel(private val mainRepository: MainRepository) : ViewModel() {
+class RoverDetailsVewModel(private val mainRepository: MainRepository) : ViewModel() {
 
     fun getPhotos(roverName: String, sol: Long) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))

@@ -10,18 +10,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.api.ApiHelper
-import com.pavellukyanov.themartian.data.api.GoRetrofit
-import com.pavellukyanov.themartian.data.model.Photo
-import com.pavellukyanov.themartian.ui.base.ViewModelFactory
+import com.pavellukyanov.themartian.data.api.Router
+import com.pavellukyanov.themartian.data.models.network.Photo
+import com.pavellukyanov.themartian.ui.base.RoverDetailsViewModelFactory
 import com.pavellukyanov.themartian.ui.main.adapter.GalleryAdapter
-import com.pavellukyanov.themartian.ui.main.viewmodel.MainVewModel
+import com.pavellukyanov.themartian.ui.main.viewmodel.RoverDetailsVewModel
 import com.pavellukyanov.themartian.utils.Status
 import kotlinx.android.synthetic.main.fragment_photo_gallery.*
-import java.util.EnumSet.of
 
 class PhotoGalleryFragment : Fragment(R.layout.fragment_photo_gallery) {
 
-    private lateinit var viewModel: MainVewModel
+    private lateinit var viewModel: RoverDetailsVewModel
     private lateinit var adapter: GalleryAdapter
     private val roverName = "curiosity"
     private val sol = 1650L
@@ -34,8 +33,8 @@ class PhotoGalleryFragment : Fragment(R.layout.fragment_photo_gallery) {
     }
 
     private fun setupViewModel() {
-        val factory = ViewModelFactory(ApiHelper(GoRetrofit.apiService))
-        viewModel = ViewModelProvider(this, factory).get(MainVewModel::class.java)
+        val factory = RoverDetailsViewModelFactory(ApiHelper(Router.apiService))
+        viewModel = ViewModelProvider(this, factory).get(RoverDetailsVewModel::class.java)
     }
 
     private fun setupUI() {

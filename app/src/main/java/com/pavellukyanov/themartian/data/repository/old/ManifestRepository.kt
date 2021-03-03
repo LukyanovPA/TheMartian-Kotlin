@@ -1,4 +1,4 @@
-package com.pavellukyanov.themartian.data.repository
+package com.pavellukyanov.themartian.data.repository.old
 
 import com.pavellukyanov.themartian.data.api.ApiManifestHelper
 

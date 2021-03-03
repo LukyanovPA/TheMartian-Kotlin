@@ -1,5 +1,6 @@
 package com.pavellukyanov.themartian.ui.main.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,12 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.data.model.RoverInfo
-import com.pavellukyanov.themartian.ui.main.view.fragments.MainFragment
-import com.pavellukyanov.themartian.ui.main.viewmodel.ManifestViewModel
-import kotlinx.android.extensions.LayoutContainer
+import com.pavellukyanov.themartian.data.models.network.RoverInfo
 import kotlinx.android.synthetic.main.main_page_view_holder.view.*
-import kotlinx.android.synthetic.main.rv_gallery_item.view.*
 
 class MainAdapter(
     private val roverInfo: MutableList<RoverInfo>,
@@ -20,13 +17,13 @@ class MainAdapter(
 ) : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        val inflater =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.main_page_view_holder, parent, false)
-        return MainViewHolder(inflater)
+        Log.d("ttt", "Adapter - ${roverInfo.size}")
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.main_page_view_holder, parent, false)
+        return MainViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
+        Log.d("ttt", "Get item - ${getItem(1)}")
         holder.bind(getItem(position))
         holder.itemView.setOnClickListener {
             clickListener.onItemClicked(getItem(position))
@@ -37,21 +34,22 @@ class MainAdapter(
 
     override fun getItemCount(): Int = roverInfo.size
 
-    fun addRoversInfo(rovers: MutableList<RoverInfo>) {
+    fun addRoversInfo(rovers: List<RoverInfo>) {
         this.roverInfo.apply {
             clear()
             addAll(rovers)
         }
     }
 
-    class MainViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
-        LayoutContainer {
+    class MainViewHolder(itemView: View) :
+        RecyclerView.ViewHolder(itemView) {
 
         fun bind(roverInfo: RoverInfo) {
-            with(containerView) {
-                Glide.with(context)
+            Log.d("ttt", "Holder - ${roverInfo.name}")
+            with(itemView) {
+                Glide.with(itemView.context)
                     .asBitmap()
-                    .load(roverInfo.picture)
+                    .load(initDefaultRoverInfo(roverInfo.name))
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .centerCrop()
                     .into(roverPicture)
@@ -61,6 +59,21 @@ class MainAdapter(
                 latestPhotoDate.append(roverInfo.maxDate)
                 totalPhotos.append(roverInfo.totalPhotos.toString())
             }
+        }
+
+        private fun initDefaultRoverInfo(roverName: String): Int {
+            return when (roverName) {
+                CURIOSITY -> R.drawable.curiosity
+                OPPORTUNITY -> R.drawable.opportunity
+                SPIRIT -> R.drawable.spirit
+                else -> 0
+            }
+        }
+
+        companion object {
+            private const val CURIOSITY = "Curiosity"
+            private const val OPPORTUNITY = "Opportunity"
+            private const val SPIRIT = "Spirit"
         }
 
     }

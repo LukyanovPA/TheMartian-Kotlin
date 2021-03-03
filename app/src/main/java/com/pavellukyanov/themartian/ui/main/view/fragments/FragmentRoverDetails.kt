@@ -13,17 +13,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.api.ApiHelper
-import com.pavellukyanov.themartian.data.api.GoRetrofit
-import com.pavellukyanov.themartian.data.model.Photo
-import com.pavellukyanov.themartian.data.model.RoverInfo
-import com.pavellukyanov.themartian.ui.base.ViewModelFactory
+import com.pavellukyanov.themartian.data.api.Router
+import com.pavellukyanov.themartian.data.models.network.Photo
+import com.pavellukyanov.themartian.data.models.network.RoverInfo
+import com.pavellukyanov.themartian.ui.base.RoverDetailsViewModelFactory
 import com.pavellukyanov.themartian.ui.main.adapter.GalleryAdapter
-import com.pavellukyanov.themartian.ui.main.viewmodel.MainVewModel
+import com.pavellukyanov.themartian.ui.main.viewmodel.RoverDetailsVewModel
 import com.pavellukyanov.themartian.utils.Status
 import kotlinx.android.synthetic.main.fragment_rover_details.*
 
 class FragmentRoverDetails: Fragment(R.layout.fragment_rover_details) {
-    private lateinit var vmRover: MainVewModel
+    private lateinit var vmRover: RoverDetailsVewModel
     private lateinit var adapter: GalleryAdapter
     private lateinit var roverInfo: RoverInfo
 
@@ -36,8 +36,8 @@ class FragmentRoverDetails: Fragment(R.layout.fragment_rover_details) {
     }
 
     private fun initViewModel() {
-        val factory = ViewModelFactory(ApiHelper(GoRetrofit.apiService))
-        vmRover = ViewModelProvider(this, factory).get(MainVewModel::class.java)
+        val factory = RoverDetailsViewModelFactory(ApiHelper(Router.apiService))
+        vmRover = ViewModelProvider(this, factory).get(RoverDetailsVewModel::class.java)
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
