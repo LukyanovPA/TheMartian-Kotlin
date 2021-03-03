@@ -70,6 +70,7 @@ class MainAdapter(
     }
 
     companion object {
+        //test
         private const val CURIOSITY = "Curiosity"
         private const val OPPORTUNITY = "Opportunity"
         private const val SPIRIT = "Spirit"
