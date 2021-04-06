@@ -1,0 +1,70 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "f22b54146dc4dfc04caf3c6265388807",
+    "entities": [
+      {
+        "tableName": "rover_info",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`roverName` TEXT NOT NULL, `landingDate` TEXT NOT NULL, `launchData` TEXT NOT NULL, `status` TEXT NOT NULL, `maxSol` TEXT NOT NULL, `maxDate` TEXT NOT NULL, `totalPhotos` TEXT NOT NULL, PRIMARY KEY(`roverName`))",
+        "fields": [
+          {
+            "fieldPath": "roverName",
+            "columnName": "roverName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "landingDate",
+            "columnName": "landingDate",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "launchData",
+            "columnName": "launchData",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxSol",
+            "columnName": "maxSol",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxDate",
+            "columnName": "maxDate",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalPhotos",
+            "columnName": "totalPhotos",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "roverName"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f22b54146dc4dfc04caf3c6265388807')"
+    ]
+  }
+}

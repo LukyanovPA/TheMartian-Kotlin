@@ -1,4 +1,4 @@
-package com.pavellukyanov.themartian.data.model
+package com.pavellukyanov.themartian.data.api.models
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

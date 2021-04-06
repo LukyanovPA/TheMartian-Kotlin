@@ -12,11 +12,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.data.api.ApiHelper
-import com.pavellukyanov.themartian.data.api.ApiManifestHelper
 import com.pavellukyanov.themartian.data.api.Router
-import com.pavellukyanov.themartian.data.model.Photo
-import com.pavellukyanov.themartian.data.model.RoverInfo
+import com.pavellukyanov.themartian.data.api.models.Photo
+import com.pavellukyanov.themartian.data.api.models.RoverInfo
 import com.pavellukyanov.themartian.ui.base.RoverDetailsViewModelFactory
 import com.pavellukyanov.themartian.ui.main.adapter.GalleryAdapter
 import com.pavellukyanov.themartian.ui.main.viewmodel.RoverDetailsViewModel
@@ -25,10 +23,7 @@ import kotlinx.android.synthetic.main.fragment_rover_details.*
 
 class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
     private val roverDetailsViewModel: RoverDetailsViewModel by viewModels {
-        RoverDetailsViewModelFactory(
-            ApiHelper(Router.apiService),
-            ApiManifestHelper(Router.apiManifestService)
-        )
+        RoverDetailsViewModelFactory(Router.apiService)
     }
     private lateinit var adapter: GalleryAdapter
     private lateinit var roverInfo: RoverInfo

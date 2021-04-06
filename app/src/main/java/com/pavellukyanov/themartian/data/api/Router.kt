@@ -1,17 +1,24 @@
 package com.pavellukyanov.themartian.data.api
 
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.internal.managers.ApplicationComponentManager
+import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
+@Module
+@InstallIn(SingletonComponent::class)
 object Router {
-    private const val BASE_URL = "https://api.nasa.gov/mars-photos/api/v1/rovers/"
-    private const val MANIFESTS_URL = "https://api.nasa.gov/mars-photos/api/v1/manifests/"
+    private const val BASE_URL = "https://api.nasa.gov/mars-photos/api/v1/"
     private const val API_KEY = "f8FYngXOCFmWPVOgmcugDO5JwAsPB238oee4wh6V"
 
     private val authInterceptor = Interceptor { chain ->
-        val newUrl = chain.request().url()
+        val newUrl = chain.request().url
             .newBuilder()
             .addQueryParameter("api_key", API_KEY)
             .build()
@@ -28,7 +35,9 @@ object Router {
         .addInterceptor(authInterceptor)
         .build()
 
-    private fun getRetrofit(): Retrofit {
+    @Singleton
+    @Provides
+    fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
             .client(nasaClient)
             .baseUrl(BASE_URL)
@@ -36,14 +45,5 @@ object Router {
             .build()
     }
 
-    private fun getManifest(): Retrofit {
-        return Retrofit.Builder()
-            .client(nasaClient)
-            .baseUrl(MANIFESTS_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
-
     val apiService: ApiNASA = getRetrofit().create(ApiNASA::class.java)
-    val apiManifestService: ApiNASA = getManifest().create(ApiNASA::class.java)
 }

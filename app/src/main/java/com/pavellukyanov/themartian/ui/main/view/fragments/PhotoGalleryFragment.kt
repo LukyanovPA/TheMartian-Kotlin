@@ -9,10 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.data.api.ApiHelper
-import com.pavellukyanov.themartian.data.api.ApiManifestHelper
 import com.pavellukyanov.themartian.data.api.Router
-import com.pavellukyanov.themartian.data.model.Photo
+import com.pavellukyanov.themartian.data.api.models.Photo
 import com.pavellukyanov.themartian.ui.base.RoverDetailsViewModelFactory
 import com.pavellukyanov.themartian.ui.main.adapter.GalleryAdapter
 import com.pavellukyanov.themartian.ui.main.viewmodel.RoverDetailsViewModel
@@ -34,7 +32,7 @@ class PhotoGalleryFragment : Fragment(R.layout.fragment_photo_gallery) {
     }
 
     private fun setupViewModel() {
-        val factory = RoverDetailsViewModelFactory(ApiHelper(Router.apiService), ApiManifestHelper(Router.apiManifestService))
+        val factory = RoverDetailsViewModelFactory(Router.apiService)
         viewModel = ViewModelProvider(this, factory).get(RoverDetailsViewModel::class.java)
     }
 

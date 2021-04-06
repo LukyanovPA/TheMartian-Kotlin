@@ -5,7 +5,9 @@ import android.os.Bundle
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.ui.main.view.fragments.FragmentRoverDetails
 import com.pavellukyanov.themartian.ui.main.view.fragments.MainFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,6 +20,4 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
     }
-
-
 }

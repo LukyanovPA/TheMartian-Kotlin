@@ -8,25 +8,24 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.data.api.ApiHelper
-import com.pavellukyanov.themartian.data.api.ApiManifestHelper
+import com.pavellukyanov.themartian.data.api.ApiNASA
 import com.pavellukyanov.themartian.data.api.Router
-import com.pavellukyanov.themartian.data.model.RoverInfo
+import com.pavellukyanov.themartian.data.api.models.RoverInfo
+import com.pavellukyanov.themartian.data.repository.network.NetworkRepoImpl
 import com.pavellukyanov.themartian.ui.base.MainViewModFactory
 import com.pavellukyanov.themartian.ui.main.adapter.ItemClickListener
 import com.pavellukyanov.themartian.ui.main.adapter.LinePagerIndicatorDecoration
 import com.pavellukyanov.themartian.ui.main.adapter.MainAdapter
 import com.pavellukyanov.themartian.ui.main.viewmodel.MainViewModel
 import com.pavellukyanov.themartian.utils.Status
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_main.*
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
-    private val mainViewModel: MainViewModel by viewModels {
-        MainViewModFactory(
-            ApiHelper(Router.apiService),
-            ApiManifestHelper(Router.apiManifestService)
-        )
-    }
+
+    private val mainViewModel: MainViewModel by viewModels()
     private lateinit var adapter: MainAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

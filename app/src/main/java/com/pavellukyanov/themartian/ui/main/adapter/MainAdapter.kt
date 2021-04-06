@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.data.model.RoverInfo
+import com.pavellukyanov.themartian.data.api.models.RoverInfo
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.main_page_view_holder.view.*
 

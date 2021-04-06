@@ -1,6 +1,5 @@
-package com.pavellukyanov.themartian.data.model
+package com.pavellukyanov.themartian.data.api.models
 
-import android.graphics.drawable.Drawable
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
