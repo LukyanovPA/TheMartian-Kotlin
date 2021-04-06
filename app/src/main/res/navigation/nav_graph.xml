@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.pavellukyanov.themartian.ui.main.view.fragments.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_fragmentRoverDetails"
+            app:destination="@id/fragmentRoverDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentRoverDetails"
+        android:name="com.pavellukyanov.themartian.ui.main.view.fragments.FragmentRoverDetails"
+        android:label="FragmentRoverDetails" >
+        <argument
+            android:name="roverInfo"
+            app:argType="string" />
+        <argument
+            android:name="maxDate"
+            app:argType="string" />
+    </fragment>
+</navigation>

@@ -10,6 +10,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion 30
@@ -103,4 +104,10 @@ dependencies {
     //Worker
     def worker_version = "2.5.0"
     implementation "androidx.work:work-runtime-ktx:$worker_version"
+
+    //Navigation Components
+    def nav_version = "2.3.4"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
 }

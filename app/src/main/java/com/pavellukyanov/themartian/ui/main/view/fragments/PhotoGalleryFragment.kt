@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.api.Router
 import com.pavellukyanov.themartian.data.api.models.Photo
-import com.pavellukyanov.themartian.ui.base.RoverDetailsViewModelFactory
 import com.pavellukyanov.themartian.ui.main.adapter.GalleryAdapter
 import com.pavellukyanov.themartian.ui.main.viewmodel.RoverDetailsViewModel
 import com.pavellukyanov.themartian.utils.Status
@@ -26,14 +25,8 @@ class PhotoGalleryFragment : Fragment(R.layout.fragment_photo_gallery) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupViewModel()
         setupUI()
         setupObservers()
-    }
-
-    private fun setupViewModel() {
-        val factory = RoverDetailsViewModelFactory(Router.apiService)
-        viewModel = ViewModelProvider(this, factory).get(RoverDetailsViewModel::class.java)
     }
 
     private fun setupUI() {

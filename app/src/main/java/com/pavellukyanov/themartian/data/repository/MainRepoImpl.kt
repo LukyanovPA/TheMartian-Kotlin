@@ -42,8 +42,10 @@ class MainRepoImpl @Inject constructor(
         }
     }
 
+    override suspend fun getRoverInfo(roverName: String): RoverInfoEntity =
+        databaseRepo.getRoverInfo(roverName)
+
     override suspend fun getRoverManifest(): LiveData<List<RoverInfoEntity>> {
-        Log.d("ttt", "Main repo ${databaseRepo.getAllRoverInfo().value?.size}")
         return databaseRepo.getAllRoverInfo()
     }
 

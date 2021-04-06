@@ -6,7 +6,7 @@ import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
 interface DatabaseRepo {
     suspend fun getRoverInfo(roverName: String): RoverInfoEntity
 
-    fun getAllRoverInfo(): LiveData<List<RoverInfoEntity>>
+    suspend fun getAllRoverInfo(): LiveData<List<RoverInfoEntity>>
 
     suspend fun insertRoverInfo(roverInfoEntity: RoverInfoEntity)
 

@@ -1,109 +1,69 @@
 package com.pavellukyanov.themartian.ui.main.view.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.data.api.ApiNASA
-import com.pavellukyanov.themartian.data.api.Router
-import com.pavellukyanov.themartian.data.api.models.RoverInfo
 import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
-import com.pavellukyanov.themartian.data.repository.network.NetworkRepoImpl
-import com.pavellukyanov.themartian.ui.base.MainViewModFactory
+import com.pavellukyanov.themartian.databinding.FragmentMainBinding
 import com.pavellukyanov.themartian.ui.main.adapter.ItemClickListener
 import com.pavellukyanov.themartian.ui.main.adapter.LinePagerIndicatorDecoration
 import com.pavellukyanov.themartian.ui.main.adapter.MainAdapter
 import com.pavellukyanov.themartian.ui.main.viewmodel.MainViewModel
-import com.pavellukyanov.themartian.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_main.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
-
+    private lateinit var binding: FragmentMainBinding
     private val mainViewModel: MainViewModel by viewModels()
-    private lateinit var adapter: MainAdapter
+    private val mainAdapter by lazy { MainAdapter(mutableListOf(), clickListener) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentMainBinding.bind(view)
         subscribeLiveData()
         setupUI()
     }
 
     private fun subscribeLiveData() {
-        mainViewModel.getRoverManifest().observe(this.viewLifecycleOwner, { response ->
+        mainViewModel.getRoverManifest().observe(viewLifecycleOwner, { response ->
             response?.let { data ->
-                mainRecycler.visibility = View.VISIBLE
-                progressBar2.visibility = View.GONE
-                retrieveList(data.toMutableList())
-//                when (response.status) {
-//                    Status.SUCCESS -> {
-//                        mainRecycler.visibility = View.VISIBLE
-//                        progressBar2.visibility = View.GONE
-//                        response.data?.let {
-//                            Log.d("ttt", "frag ${it.size}")
-//                            retrieveList(it.toMutableList())
-//                        }
-//                    }
-//                    Status.LOADING -> {
-//                        progressBar2.visibility = View.VISIBLE
-//                        mainRecycler.visibility = View.GONE
-//                    }
-//                    Status.ERROR -> {
-//                        mainRecycler.visibility = View.VISIBLE
-//                        progressBar2.visibility = View.GONE
-//                        Toast.makeText(
-//                            context,
-//                            getString(R.string.toast_error_message),
-//                            Toast.LENGTH_LONG
-//                        ).show()
-//
-//                        //Log
-//                        Log.d(LOG_TAG, data.message.toString())
-//                    }
-//                }
+                retrieveList(data)
             }
         })
     }
 
     private fun setupUI() {
-        mainRecycler.layoutManager =
-            LinearLayoutManager(
-                context,
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
-        mainRecycler.addItemDecoration(LinePagerIndicatorDecoration())
-        adapter = MainAdapter(arrayListOf(), clickListener)
-        mainRecycler.adapter = adapter
+        binding.mainRecycler.apply {
+            adapter = mainAdapter
+            layoutManager =
+                LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+            addItemDecoration(LinePagerIndicatorDecoration())
+        }
     }
 
-    private fun retrieveList(roversInfo: MutableList<RoverInfoEntity>) {
-        adapter.apply {
+    private fun retrieveList(roversInfo: List<RoverInfoEntity>) {
+        mainAdapter.apply {
             addRoversInfo(roversInfo)
             notifyDataSetChanged()
         }
     }
 
     val clickListener = object : ItemClickListener {
-        override fun onItemClicked(roverInfo: RoverInfoEntity) {
-//            showRoverDetailsFragment(roverInfo)
+        override fun onItemClicked(roverName: String, maxDate: String) {
+            showRoverDetailsFragment(roverName, maxDate)
         }
     }
 
-    private fun showRoverDetailsFragment(roverInfo: RoverInfo) {
-        requireFragmentManager().beginTransaction()
-            .replace(R.id.flMainFragmetn, FragmentRoverDetails.newInstance(roverInfo))
-            .addToBackStack("FragmentRoverDetails")
-            .commit()
-    }
-
-    companion object {
-        private const val LOG_TAG = "MainFragment"
+    private fun showRoverDetailsFragment(roverName: String, maxDate: String) {
+        val action = MainFragmentDirections.actionMainFragmentToFragmentRoverDetails(roverName, maxDate)
+        findNavController().navigate(action)
     }
 }
