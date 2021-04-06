@@ -11,6 +11,7 @@ import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.api.ApiNASA
 import com.pavellukyanov.themartian.data.api.Router
 import com.pavellukyanov.themartian.data.api.models.RoverInfo
+import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
 import com.pavellukyanov.themartian.data.repository.network.NetworkRepoImpl
 import com.pavellukyanov.themartian.ui.base.MainViewModFactory
 import com.pavellukyanov.themartian.ui.main.adapter.ItemClickListener
@@ -37,29 +38,35 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private fun subscribeLiveData() {
         mainViewModel.getRoverManifest().observe(this.viewLifecycleOwner, { response ->
             response?.let { data ->
-                when (response.status) {
-                    Status.SUCCESS -> {
-                        mainRecycler.visibility = View.VISIBLE
-                        progressBar2.visibility = View.GONE
-                        response.data?.let { retrieveList(it.toMutableList()) }
-                    }
-                    Status.LOADING -> {
-                        progressBar2.visibility = View.VISIBLE
-                        mainRecycler.visibility = View.GONE
-                    }
-                    Status.ERROR -> {
-                        mainRecycler.visibility = View.VISIBLE
-                        progressBar2.visibility = View.GONE
-                        Toast.makeText(
-                            context,
-                            getString(R.string.toast_error_message),
-                            Toast.LENGTH_LONG
-                        ).show()
-
-                        //Log
-                        Log.d(LOG_TAG, data.message.toString())
-                    }
-                }
+                mainRecycler.visibility = View.VISIBLE
+                progressBar2.visibility = View.GONE
+                retrieveList(data.toMutableList())
+//                when (response.status) {
+//                    Status.SUCCESS -> {
+//                        mainRecycler.visibility = View.VISIBLE
+//                        progressBar2.visibility = View.GONE
+//                        response.data?.let {
+//                            Log.d("ttt", "frag ${it.size}")
+//                            retrieveList(it.toMutableList())
+//                        }
+//                    }
+//                    Status.LOADING -> {
+//                        progressBar2.visibility = View.VISIBLE
+//                        mainRecycler.visibility = View.GONE
+//                    }
+//                    Status.ERROR -> {
+//                        mainRecycler.visibility = View.VISIBLE
+//                        progressBar2.visibility = View.GONE
+//                        Toast.makeText(
+//                            context,
+//                            getString(R.string.toast_error_message),
+//                            Toast.LENGTH_LONG
+//                        ).show()
+//
+//                        //Log
+//                        Log.d(LOG_TAG, data.message.toString())
+//                    }
+//                }
             }
         })
     }
@@ -76,7 +83,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         mainRecycler.adapter = adapter
     }
 
-    private fun retrieveList(roversInfo: MutableList<RoverInfo>) {
+    private fun retrieveList(roversInfo: MutableList<RoverInfoEntity>) {
         adapter.apply {
             addRoversInfo(roversInfo)
             notifyDataSetChanged()
@@ -84,8 +91,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     val clickListener = object : ItemClickListener {
-        override fun onItemClicked(roverInfo: RoverInfo) {
-            showRoverDetailsFragment(roverInfo)
+        override fun onItemClicked(roverInfo: RoverInfoEntity) {
+//            showRoverDetailsFragment(roverInfo)
         }
     }
 

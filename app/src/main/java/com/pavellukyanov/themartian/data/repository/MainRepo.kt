@@ -1,10 +1,14 @@
 package com.pavellukyanov.themartian.data.repository
 
+import androidx.lifecycle.LiveData
 import com.pavellukyanov.themartian.data.api.models.Mars
-import com.pavellukyanov.themartian.data.api.models.RoverInfo
+import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
 
 interface MainRepo {
-    suspend fun getRoverManifest(): List<RoverInfo>
+
+    suspend fun setRoverInfoFromWorker()
+
+    suspend fun getRoverManifest(): LiveData<List<RoverInfoEntity>>
 
     suspend fun getPhotoForSol(roverName: String, sol: Long): Mars
 

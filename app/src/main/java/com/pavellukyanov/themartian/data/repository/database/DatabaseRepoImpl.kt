@@ -15,8 +15,10 @@ class DatabaseRepoImpl @Inject constructor(
     override suspend fun getRoverInfo(roverName: String): RoverInfoEntity =
         database.roverInfoDao().getRoverInfo(roverName)
 
-    override fun getAllRoverInfo(): LiveData<List<RoverInfoEntity>> =
-        database.roverInfoDao().getAllRoverInfo()
+    override fun getAllRoverInfo(): LiveData<List<RoverInfoEntity>> {
+//        database.clearAllTables()
+        return database.roverInfoDao().getAllRoverInfo()
+    }
 
     override suspend fun insertRoverInfo(roverInfoEntity: RoverInfoEntity) {
         database.roverInfoDao().insertRoverInfo(roverInfoEntity)
