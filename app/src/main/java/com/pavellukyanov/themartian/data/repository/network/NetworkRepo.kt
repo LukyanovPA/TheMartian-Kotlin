@@ -1,9 +1,9 @@
-package com.pavellukyanov.themartian.data.repository
+package com.pavellukyanov.themartian.data.repository.network
 
-import com.pavellukyanov.themartian.data.model.Mars
-import com.pavellukyanov.themartian.data.model.RoverInfo
+import com.pavellukyanov.themartian.data.api.models.Mars
+import com.pavellukyanov.themartian.data.api.models.RoverInfo
 
-interface NetworkRepoInterface {
+interface NetworkRepo {
     suspend fun getRoverManifest(): List<RoverInfo>
 
     suspend fun getPhotoForSol(roverName: String, sol: Long): Mars

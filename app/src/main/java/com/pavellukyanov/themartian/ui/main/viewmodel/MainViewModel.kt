@@ -1,20 +1,27 @@
 package com.pavellukyanov.themartian.ui.main.viewmodel
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
-import com.pavellukyanov.themartian.data.repository.NetworkRepoInterface
+import androidx.lifecycle.*
+import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
+import com.pavellukyanov.themartian.data.repository.MainRepo
+import com.pavellukyanov.themartian.data.repository.network.NetworkRepo
 import com.pavellukyanov.themartian.utils.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.lang.Exception
+import javax.inject.Inject
 
-class MainViewModel(private val networkRepoInterface: NetworkRepoInterface) : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val mainRepo: MainRepo) : ViewModel() {
+    private var _roverInfo: MutableLiveData<List<RoverInfoEntity>> = MutableLiveData()
+    private val roverInfo: LiveData<List<RoverInfoEntity>> get() = _roverInfo
 
-    fun getRoverManifest() = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
-        try {
-            emit(Resource.success(data = networkRepoInterface.getRoverManifest()))
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+    init {
+        viewModelScope.launch {
+            mainRepo.getRoverManifest().observeForever { _roverInfo.postValue(it) }
+            mainRepo.setRoverInfoFromWorker()
         }
     }
+
+    fun getRoverManifest(): LiveData<List<RoverInfoEntity>> = roverInfo
 }

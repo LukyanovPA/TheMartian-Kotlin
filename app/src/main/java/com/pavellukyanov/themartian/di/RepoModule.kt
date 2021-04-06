@@ -1,0 +1,18 @@
+package com.pavellukyanov.themartian.di
+
+import com.pavellukyanov.themartian.data.repository.MainRepo
+import com.pavellukyanov.themartian.data.repository.MainRepoImpl
+import com.pavellukyanov.themartian.data.repository.database.DatabaseRepoImpl
+import com.pavellukyanov.themartian.data.repository.network.NetworkRepoImpl
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+
+@InstallIn(SingletonComponent::class)
+@Module
+object RepoModule {
+
+    @Provides
+    fun provideMainRepo(database: DatabaseRepoImpl, networkRepo: NetworkRepoImpl): MainRepo = MainRepoImpl(database, networkRepo)
+}
