@@ -23,6 +23,7 @@ class App : Application(), Configuration.Provider {
 
     override fun getWorkManagerConfiguration(): Configuration =
         Configuration.Builder()
+            .setMinimumLoggingLevel(android.util.Log.INFO)
             .setWorkerFactory(workerFactory)
             .build()
 
@@ -33,6 +34,7 @@ class App : Application(), Configuration.Provider {
 
     private fun initWorker() {
         scope.launch {
+            Log.d("ttt", "Worker")
             setupWorker()
         }
     }

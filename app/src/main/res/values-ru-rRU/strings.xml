@@ -20,4 +20,7 @@
     <string name="details_latest_photo_title">ПОСЛЕДНЕЕ ФОТО</string>
     <string name="button_back">Кнопка назад</string>
     <string name="toast_error_message">Нет соединения с интернетом! :(</string>
+    <string name="fab_description">Выбор даты фото</string>
+    <string name="favourites_title">Избранное</string>
+    <string name="photo_list">Фото</string>
 </resources>

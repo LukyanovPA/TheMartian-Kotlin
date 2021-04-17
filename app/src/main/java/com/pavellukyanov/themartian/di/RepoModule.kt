@@ -8,11 +8,13 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
 object RepoModule {
 
+    @Singleton
     @Provides
     fun provideMainRepo(database: DatabaseRepoImpl, networkRepo: NetworkRepoImpl): MainRepo = MainRepoImpl(database, networkRepo)
 }

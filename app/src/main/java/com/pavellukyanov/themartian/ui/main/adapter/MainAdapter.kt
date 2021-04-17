@@ -11,6 +11,7 @@ import com.pavellukyanov.themartian.databinding.MainPageViewHolderBinding
 import com.pavellukyanov.themartian.utils.Constants.Companion.CURIOSITY
 import com.pavellukyanov.themartian.utils.Constants.Companion.OPPORTUNITY
 import com.pavellukyanov.themartian.utils.Constants.Companion.SPIRIT
+import com.pavellukyanov.themartian.utils.Constants.Companion.PERSEVERANCE
 
 class MainAdapter(
     private val roverInfo: MutableList<RoverInfoEntity>,
@@ -52,6 +53,7 @@ class MainAdapter(
                             CURIOSITY -> R.drawable.curiosity
                             OPPORTUNITY -> R.drawable.opportunity
                             SPIRIT -> R.drawable.spirit
+                            PERSEVERANCE -> R.drawable.perseverance
                             else -> null
                         }
                     )

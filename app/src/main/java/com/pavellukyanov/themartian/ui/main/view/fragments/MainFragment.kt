@@ -63,7 +63,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun showRoverDetailsFragment(roverName: String, maxDate: String) {
-        val action = MainFragmentDirections.actionMainFragmentToFragmentRoverDetails(roverName, maxDate)
+        val action = MainFragmentDirections.actionMainFragmentToFragmentPager(roverName, maxDate)
         findNavController().navigate(action)
     }
 }

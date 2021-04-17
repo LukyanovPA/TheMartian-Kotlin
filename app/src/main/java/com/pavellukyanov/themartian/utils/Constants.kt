@@ -5,6 +5,7 @@ class Constants {
         const val CURIOSITY = "Curiosity"
         const val OPPORTUNITY = "Opportunity"
         const val SPIRIT = "Spirit"
+        const val PERSEVERANCE = "Perseverance"
         const val WORK_NAME = "com.pavellukyanov.themartian.worker.RoverInfoUpdateWorker"
     }
 }
