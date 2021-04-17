@@ -1,18 +1,15 @@
 package com.pavellukyanov.themartian.ui.main.view.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.api.models.Photo
 import com.pavellukyanov.themartian.databinding.FragmentRoverDetailsBinding
-import com.pavellukyanov.themartian.ui.main.adapter.GalleryAdapter
+import com.pavellukyanov.themartian.ui.main.adapters.GalleryAdapter
 import com.pavellukyanov.themartian.ui.main.viewmodel.ExchangeViewModel
-import com.pavellukyanov.themartian.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,7 +39,6 @@ class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
     private fun retrieveList(photos: List<Photo>) {
         galleryAdapter.apply {
             addPhotos(photos)
-            notifyDataSetChanged()
         }
     }
 }

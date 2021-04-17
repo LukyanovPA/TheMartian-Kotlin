@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "f22b54146dc4dfc04caf3c6265388807",
+    "identityHash": "f1eb921686af8ebe4a94f46e35bac051",
     "entities": [
       {
         "tableName": "rover_info",
@@ -59,12 +59,56 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "favourites",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `sol` INTEGER NOT NULL, `srcPhoto` TEXT NOT NULL, `dataEarth` TEXT NOT NULL, `rover` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sol",
+            "columnName": "sol",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "srcPhoto",
+            "columnName": "srcPhoto",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataEarth",
+            "columnName": "dataEarth",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rover",
+            "columnName": "rover",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f22b54146dc4dfc04caf3c6265388807')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f1eb921686af8ebe4a94f46e35bac051')"
     ]
   }
 }

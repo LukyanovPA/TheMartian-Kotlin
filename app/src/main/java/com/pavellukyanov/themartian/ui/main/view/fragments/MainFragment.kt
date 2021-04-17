@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
 import com.pavellukyanov.themartian.databinding.FragmentMainBinding
-import com.pavellukyanov.themartian.ui.main.adapter.ItemClickListener
-import com.pavellukyanov.themartian.ui.main.adapter.LinePagerIndicatorDecoration
-import com.pavellukyanov.themartian.ui.main.adapter.MainAdapter
+import com.pavellukyanov.themartian.ui.main.adapters.ItemClickListener
+import com.pavellukyanov.themartian.ui.main.adapters.LinePagerIndicatorDecoration
+import com.pavellukyanov.themartian.ui.main.adapters.MainAdapter
 import com.pavellukyanov.themartian.ui.main.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -52,7 +52,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private fun retrieveList(roversInfo: List<RoverInfoEntity>) {
         mainAdapter.apply {
             addRoversInfo(roversInfo)
-            notifyDataSetChanged()
         }
     }
 

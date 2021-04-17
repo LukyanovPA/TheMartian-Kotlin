@@ -1,4 +1,4 @@
-package com.pavellukyanov.themartian.ui.main.adapter
+package com.pavellukyanov.themartian.ui.main.adapters
 
 import android.content.res.Resources
 import android.graphics.Canvas

@@ -2,20 +2,16 @@ package com.pavellukyanov.themartian.data.repository
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.pavellukyanov.themartian.data.api.models.Mars
-import com.pavellukyanov.themartian.data.api.models.RoverInfo
+import com.pavellukyanov.themartian.data.api.models.Photo
+import com.pavellukyanov.themartian.data.database.models.PhotoEntity
 import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
+import com.pavellukyanov.themartian.data.mapper.PhotoMapper
 import com.pavellukyanov.themartian.data.mapper.PojoToEntity
 import com.pavellukyanov.themartian.data.repository.database.DatabaseRepo
 import com.pavellukyanov.themartian.data.repository.network.NetworkRepo
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.*
 import javax.inject.Inject
-import javax.inject.Singleton
 
 
 class MainRepoImpl @Inject constructor(
@@ -54,4 +50,16 @@ class MainRepoImpl @Inject constructor(
 
     override suspend fun getPhotoForEarthDate(roverName: String, earthData: String): Mars =
         networkRepo.getPhotoForEarthDate(roverName, earthData)
+
+    override suspend fun getAllFavouritePhoto(): LiveData<List<PhotoEntity>> {
+        return databaseRepo.getAllPhoto()
+    }
+
+    override suspend fun insertPhotoToFavourite(photo: Photo) {
+        databaseRepo.insertPhoto(PhotoMapper()(photo))
+    }
+
+    override suspend fun deletePhotoInFavourite(id: Long) {
+        databaseRepo.deletePhoto(id)
+    }
 }

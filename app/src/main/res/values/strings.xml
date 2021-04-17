@@ -22,4 +22,5 @@
     <string name="fab_description">Change photo date</string>
     <string name="favourites_title">Favourites</string>
     <string name="photo_list">Photos</string>
+    <string name="photo_description">Mars photo</string>
 </resources>

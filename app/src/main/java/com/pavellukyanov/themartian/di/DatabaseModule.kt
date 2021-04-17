@@ -3,6 +3,7 @@ package com.pavellukyanov.themartian.di
 import android.content.Context
 import androidx.room.Room
 import com.pavellukyanov.themartian.data.database.MartianDatabase
+import com.pavellukyanov.themartian.data.database.PhotoDao
 import com.pavellukyanov.themartian.data.database.RoverInfoDao
 import dagger.Module
 import dagger.Provides
@@ -30,5 +31,10 @@ object DatabaseModule {
     @Provides
     fun provideRoverInfoDao(database: MartianDatabase): RoverInfoDao {
         return database.roverInfoDao()
+    }
+
+    @Provides
+    fun providePhotoDao(database: MartianDatabase): PhotoDao {
+        return database.photoDao()
     }
 }
