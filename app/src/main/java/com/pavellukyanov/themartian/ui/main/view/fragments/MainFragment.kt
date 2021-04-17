@@ -7,8 +7,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pavellukyanov.themartian.R
+import com.pavellukyanov.themartian.data.api.models.Photo
 import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
 import com.pavellukyanov.themartian.databinding.FragmentMainBinding
+import com.pavellukyanov.themartian.ui.main.adapters.AddFavouriteOnClickListener
 import com.pavellukyanov.themartian.ui.main.adapters.ItemClickListener
 import com.pavellukyanov.themartian.ui.main.adapters.LinePagerIndicatorDecoration
 import com.pavellukyanov.themartian.ui.main.adapters.MainAdapter
@@ -55,7 +57,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
     }
 
-    val clickListener = object : ItemClickListener {
+    private val clickListener = object : ItemClickListener {
         override fun onItemClicked(roverName: String, maxDate: String) {
             showRoverDetailsFragment(roverName, maxDate)
         }

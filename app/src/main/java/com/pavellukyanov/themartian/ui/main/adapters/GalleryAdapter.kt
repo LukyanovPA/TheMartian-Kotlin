@@ -12,8 +12,12 @@ import com.pavellukyanov.themartian.data.api.models.Photo
 import com.pavellukyanov.themartian.databinding.RvGalleryItemBinding
 import com.pavellukyanov.themartian.ui.main.adapters.GalleryAdapter.DataViewHolder
 import com.pavellukyanov.themartian.ui.main.adapters.diff.GalleryDiffUtils
+import kotlinx.android.synthetic.main.rv_gallery_item.view.*
 
-class GalleryAdapter(private var photos: List<Photo>) :
+class GalleryAdapter(
+    private var photos: List<Photo>,
+    private val favouriteClickListener: AddFavouriteOnClickListener
+) :
     RecyclerView.Adapter<DataViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
@@ -24,6 +28,11 @@ class GalleryAdapter(private var photos: List<Photo>) :
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
         holder.bind(getItem(position))
+        holder.itemView.favourite.setOnClickListener {
+            favouriteClickListener.addToFavouriteOnClicked(
+                getItem(holder.absoluteAdapterPosition)
+            )
+        }
     }
 
     override fun getItemCount(): Int = photos.size

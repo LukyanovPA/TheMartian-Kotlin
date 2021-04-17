@@ -75,5 +75,11 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
                 Log.d("ttt", "pager ${response.photos.size}")
                 exchangeViewModel.selectListPhoto(response.photos)
             })
+        exchangeViewModel.getPhotoToFavourite().observe(viewLifecycleOwner, {
+            roverDetailsViewModel.addPhotoToFavourite(it)
+        })
+        exchangeViewModel.getIdPhoto().observe(viewLifecycleOwner, {
+            roverDetailsViewModel.deletePhotoFromFavourite(it)
+        })
     }
 }

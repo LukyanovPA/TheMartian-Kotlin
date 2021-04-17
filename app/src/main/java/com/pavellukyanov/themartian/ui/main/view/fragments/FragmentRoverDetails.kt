@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.api.models.Photo
 import com.pavellukyanov.themartian.databinding.FragmentRoverDetailsBinding
+import com.pavellukyanov.themartian.ui.main.adapters.AddFavouriteOnClickListener
 import com.pavellukyanov.themartian.ui.main.adapters.GalleryAdapter
 import com.pavellukyanov.themartian.ui.main.viewmodel.ExchangeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
     private val exchangeViewModel: ExchangeViewModel by activityViewModels()
     private lateinit var binding: FragmentRoverDetailsBinding
-    private val galleryAdapter by lazy { GalleryAdapter(arrayListOf()) }
+    private val galleryAdapter by lazy { GalleryAdapter(arrayListOf(), addToFavouriteOnClickListener) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,6 +35,12 @@ class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
 
     private fun subscribeExchangeData() {
         exchangeViewModel.returnListPhoto().observe(viewLifecycleOwner, { retrieveList(it) })
+    }
+
+    private val addToFavouriteOnClickListener = object : AddFavouriteOnClickListener {
+        override fun addToFavouriteOnClicked(photo: Photo) {
+            exchangeViewModel.addPhotoToFavourite(photo)
+        }
     }
 
     private fun retrieveList(photos: List<Photo>) {

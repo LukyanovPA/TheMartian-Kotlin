@@ -72,7 +72,3 @@ class MainAdapter(
         }
     }
 }
-
-interface ItemClickListener {
-    fun onItemClicked(roverName: String, maxDate: String)
-}
