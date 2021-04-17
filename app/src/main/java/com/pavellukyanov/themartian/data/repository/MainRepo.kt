@@ -5,8 +5,9 @@ import com.pavellukyanov.themartian.data.api.models.Mars
 import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
 
 interface MainRepo {
-
     suspend fun setRoverInfoFromWorker()
+
+    suspend fun getRoverInfo(roverName: String): RoverInfoEntity
 
     suspend fun getRoverManifest(): LiveData<List<RoverInfoEntity>>
 

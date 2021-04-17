@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="roverName">
+        <item name="android:textSize">28sp</item>
+        <item name="android:fontFamily">@font/gotham_pro_light</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="tabLayout">
+        <item name="android:textSize">28sp</item>
+        <item name="android:fontFamily">@font/gotham_pro_medium</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="roverInformationTitle">
+        <item name="android:textSize">10sp</item>
+        <item name="android:fontFamily">@font/gotham_pro_light</item>
+        <item name="android:textColor">@color/slogan</item>
+    </style>
+    <style name="roverInformation">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/gotham_pro_light</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+</resources>

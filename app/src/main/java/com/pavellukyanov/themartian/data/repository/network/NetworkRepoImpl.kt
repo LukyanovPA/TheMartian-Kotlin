@@ -6,6 +6,7 @@ import com.pavellukyanov.themartian.data.api.models.RoverInfo
 import com.pavellukyanov.themartian.utils.Constants.Companion.CURIOSITY
 import com.pavellukyanov.themartian.utils.Constants.Companion.OPPORTUNITY
 import com.pavellukyanov.themartian.utils.Constants.Companion.SPIRIT
+import com.pavellukyanov.themartian.utils.Constants.Companion.PERSEVERANCE
 import dagger.Provides
 import javax.inject.Inject
 
@@ -14,7 +15,7 @@ class NetworkRepoImpl @Inject constructor(
 ) : NetworkRepo {
 
     override suspend fun getRoverManifest(): List<RoverInfo> {
-        val roverNames: List<String> = listOf(CURIOSITY, OPPORTUNITY, SPIRIT)
+        val roverNames: List<String> = listOf(CURIOSITY, OPPORTUNITY, SPIRIT, PERSEVERANCE)
         val finallyList = mutableListOf<RoverInfo>()
         roverNames.forEach {
             finallyList.add(getRoverManifestInNetwork(it))
