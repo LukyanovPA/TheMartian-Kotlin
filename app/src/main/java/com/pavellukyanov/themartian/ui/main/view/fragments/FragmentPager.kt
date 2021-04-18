@@ -72,8 +72,8 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
         roverDetailsViewModel.getRoverInfo(roverName).observe(viewLifecycleOwner, { setupUI(it) })
         roverDetailsViewModel.getPhotosForEarthData(roverName, photoDate)
             .observe(viewLifecycleOwner, { response ->
-                Log.d("ttt", "pager ${response.photos.size}")
-                exchangeViewModel.selectListPhoto(response.photos)
+                Log.d("ttt", "pager ${response.size}")
+                exchangeViewModel.selectListPhoto(response)
             })
 
         exchangeViewModel.getPhotoToFavourite().observe(viewLifecycleOwner, {

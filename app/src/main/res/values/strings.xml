@@ -28,4 +28,8 @@
     <string name="rover_name_temp">Perseverance</string>
     <string name="line_descr">Line</string>
     <string name="snack_delete">Delete in Favourites</string>
+    <string name="date">Date</string>
+    <string name="camera_temp">CHEMCAM</string>
+    <string name="rover">Rover</string>
+    <string name="camera">Camera</string>
 </resources>

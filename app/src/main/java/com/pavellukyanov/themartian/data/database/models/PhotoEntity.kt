@@ -9,5 +9,6 @@ class PhotoEntity(
     val sol: Long,
     val srcPhoto: String,
     val dataEarth: String,
-    val rover: String
+    val rover: String,
+    val camera: String
 )

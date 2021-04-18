@@ -5,6 +5,7 @@ import com.pavellukyanov.themartian.data.api.models.Mars
 import com.pavellukyanov.themartian.data.api.models.Photo
 import com.pavellukyanov.themartian.data.database.models.PhotoEntity
 import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
+import com.pavellukyanov.themartian.data.domain.DomainPhoto
 import com.pavellukyanov.themartian.data.repository.MainRepo
 import com.pavellukyanov.themartian.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,8 +18,8 @@ import javax.inject.Inject
 class RoverDetailsViewModel @Inject constructor(private val mainRepo: MainRepo) : ViewModel() {
     private var _roverInfo: MutableLiveData<RoverInfoEntity> = MutableLiveData()
     private val roverInfo: LiveData<RoverInfoEntity> get() = _roverInfo
-    private var _marsData: MutableLiveData<Mars> = MutableLiveData()
-    private val marsData: LiveData<Mars> get() = _marsData
+    private var _marsData: MutableLiveData<List<DomainPhoto>> = MutableLiveData()
+    private val marsData: LiveData<List<DomainPhoto>> get() = _marsData
 
     fun getPhotosForSol(roverName: String, sol: Long) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
@@ -29,7 +30,7 @@ class RoverDetailsViewModel @Inject constructor(private val mainRepo: MainRepo) 
         }
     }
 
-    fun getPhotosForEarthData(roverName: String, earthData: String): LiveData<Mars> {
+    fun getPhotosForEarthData(roverName: String, earthData: String): LiveData<List<DomainPhoto>> {
         viewModelScope.launch {
             _marsData.postValue(mainRepo.getPhotoForEarthDate(roverName, earthData))
         }
@@ -43,7 +44,7 @@ class RoverDetailsViewModel @Inject constructor(private val mainRepo: MainRepo) 
         return roverInfo
     }
 
-    fun addPhotoToFavourite(photo: Photo) {
+    fun addPhotoToFavourite(photo: DomainPhoto) {
         viewModelScope.launch {
             mainRepo.insertPhotoToFavourite(photo)
         }

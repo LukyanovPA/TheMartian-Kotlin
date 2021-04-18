@@ -9,12 +9,13 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.pavellukyanov.themartian.data.database.models.PhotoEntity
+import com.pavellukyanov.themartian.data.domain.DomainPhoto
 import com.pavellukyanov.themartian.databinding.FavouriteItemBinding
 import com.pavellukyanov.themartian.ui.main.adapters.diff.FavouritesDiffUtils
 import kotlinx.android.synthetic.main.favourite_item.view.*
 
 class FavouritesAdapter(
-    private var photos: List<PhotoEntity>,
+    private var photos: List<DomainPhoto>,
     private val deleteFavouriteOnClickListener: DeleteFavouriteOnClickListener
 ) : RecyclerView.Adapter<FavouritesAdapter.FavouriteViewHolder>() {
 
@@ -35,9 +36,9 @@ class FavouritesAdapter(
 
     override fun getItemCount(): Int = photos.size
 
-    private fun getItem(position: Int): PhotoEntity = photos[position]
+    private fun getItem(position: Int): DomainPhoto = photos[position]
 
-    fun addPhotos(newPhotos: List<PhotoEntity>) {
+    fun addPhotos(newPhotos: List<DomainPhoto>) {
         val diffUtils = FavouritesDiffUtils(photos, newPhotos)
         val diffResult = DiffUtil.calculateDiff(diffUtils)
         photos = newPhotos
@@ -47,7 +48,7 @@ class FavouritesAdapter(
     class FavouriteViewHolder(private val binding: FavouriteItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(photoEntity: PhotoEntity) {
+        fun bind(photoEntity: DomainPhoto) {
             with(itemView) {
                 Glide.with(context)
                     .asBitmap()

@@ -23,6 +23,9 @@
         <argument
             android:name="maxDate"
             app:argType="string" />
+        <action
+            android:id="@+id/action_fragmentRoverDetails_to_fragmentPhoto"
+            app:destination="@id/fragmentPhoto" />
     </fragment>
     <fragment
         android:id="@+id/fragmentPager"
@@ -35,5 +38,16 @@
         <argument
             android:name="maxDate"
             app:argType="string" />
+        <action
+            android:id="@+id/action_fragmentPager_to_fragmentPhoto"
+            app:destination="@id/fragmentPhoto" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentPhoto"
+        android:name="com.pavellukyanov.themartian.ui.main.view.fragments.FragmentPhoto"
+        android:label="FragmentPhoto" >
+        <argument
+            android:name="photo"
+            app:argType="com.pavellukyanov.themartian.data.domain.DomainPhoto" />
     </fragment>
 </navigation>

@@ -9,13 +9,14 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.pavellukyanov.themartian.data.api.models.Photo
+import com.pavellukyanov.themartian.data.domain.DomainPhoto
 import com.pavellukyanov.themartian.databinding.RvGalleryItemBinding
 import com.pavellukyanov.themartian.ui.main.adapters.GalleryAdapter.DataViewHolder
 import com.pavellukyanov.themartian.ui.main.adapters.diff.GalleryDiffUtils
 import kotlinx.android.synthetic.main.rv_gallery_item.view.*
 
 class GalleryAdapter(
-    private var photos: List<Photo>,
+    private var photos: List<DomainPhoto>,
     private val favouriteClickListener: AddFavouriteOnClickListener
 ) :
     RecyclerView.Adapter<DataViewHolder>() {
@@ -37,9 +38,9 @@ class GalleryAdapter(
 
     override fun getItemCount(): Int = photos.size
 
-    private fun getItem(position: Int): Photo = photos[position]
+    private fun getItem(position: Int): DomainPhoto = photos[position]
 
-    fun addPhotos(newPhotos: List<Photo>) {
+    fun addPhotos(newPhotos: List<DomainPhoto>) {
         val diffUtils = GalleryDiffUtils(photos, newPhotos)
         val diffResult = DiffUtil.calculateDiff(diffUtils)
         photos = newPhotos
@@ -49,7 +50,7 @@ class GalleryAdapter(
     class DataViewHolder(private val binding: RvGalleryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(photo: Photo) {
+        fun bind(photo: DomainPhoto) {
             with(itemView) {
                 Glide.with(context)
                     .asBitmap()

@@ -13,5 +13,5 @@ class Camera(
     @SerializedName("rover_id")
     val roverID: Long,
     @SerializedName("full_name")
-    val fuulName: String
+    val fullName: String
 ): Parcelable

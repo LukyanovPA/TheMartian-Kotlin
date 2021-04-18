@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.database.models.PhotoEntity
+import com.pavellukyanov.themartian.data.domain.DomainPhoto
 import com.pavellukyanov.themartian.databinding.FragmentFavouritesBinding
 import com.pavellukyanov.themartian.ui.main.adapters.DeleteFavouriteOnClickListener
 import com.pavellukyanov.themartian.ui.main.adapters.FavouritesAdapter
@@ -46,7 +47,7 @@ class FragmentFavourites : Fragment(R.layout.fragment_favourites) {
         }
     }
 
-    private fun retrieveList(list: List<PhotoEntity>) {
+    private fun retrieveList(list: List<DomainPhoto>) {
         favouritesAdapter.apply {
             addPhotos(list)
         }

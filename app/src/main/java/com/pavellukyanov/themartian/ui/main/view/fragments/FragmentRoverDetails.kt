@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.api.models.Photo
+import com.pavellukyanov.themartian.data.domain.DomainPhoto
 import com.pavellukyanov.themartian.databinding.FragmentRoverDetailsBinding
 import com.pavellukyanov.themartian.ui.main.adapters.AddFavouriteOnClickListener
 import com.pavellukyanov.themartian.ui.main.adapters.GalleryAdapter
@@ -40,13 +41,13 @@ class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
     }
 
     private val addToFavouriteOnClickListener = object : AddFavouriteOnClickListener {
-        override fun addToFavouriteOnClicked(photo: Photo) {
+        override fun addToFavouriteOnClicked(photo: DomainPhoto) {
             exchangeViewModel.addPhotoToFavourite(photo)
             Snackbar.make(binding.scrollLayout, getString(R.string.snack_add_favourite), Snackbar.LENGTH_SHORT).show()
         }
     }
 
-    private fun retrieveList(photos: List<Photo>) {
+    private fun retrieveList(photos: List<DomainPhoto>) {
         galleryAdapter.apply {
             addPhotos(photos)
         }

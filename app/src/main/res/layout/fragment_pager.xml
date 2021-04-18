@@ -131,13 +131,14 @@
             android:background="@color/black"
             app:layout_collapseMode="pin"
             app:tabGravity="start"
-            app:tabIndicator="@color/black"
-            app:tabIndicatorColor="@color/black"
+            app:tabIndicator="@color/white"
+            app:tabIndicatorColor="@color/white"
             app:tabIndicatorHeight="0dp"
             app:tabMode="fixed"
             app:tabPaddingStart="0dp"
             app:tabSelectedTextColor="@color/white"
-            app:tabTextAppearance="@style/tabLayout" />
+            app:tabTextAppearance="@style/tabLayout"
+            app:tabTextColor="@android:color/darker_gray" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -159,7 +160,7 @@
         android:layout_margin="16dp"
         android:contentDescription="@string/fab_description"
         android:elevation="6dp"
-        android:src="@drawable/outline_edit_calendar_white_48"
+        android:src="@drawable/menu"
         app:borderWidth="1dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

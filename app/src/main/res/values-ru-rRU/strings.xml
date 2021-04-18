@@ -29,4 +29,8 @@
     <string name="rover_name_temp">Perseverance</string>
     <string name="line_descr">Линия</string>
     <string name="snack_delete">Удалено из Избранного</string>
+    <string name="date">Дата</string>
+    <string name="camera_temp">CHEMCAM</string>
+    <string name="rover">Ровер</string>
+    <string name="camera">Камера</string>
 </resources>

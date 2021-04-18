@@ -2,10 +2,11 @@ package com.pavellukyanov.themartian.ui.main.adapters.diff
 
 import androidx.recyclerview.widget.DiffUtil
 import com.pavellukyanov.themartian.data.api.models.Photo
+import com.pavellukyanov.themartian.data.domain.DomainPhoto
 
 class GalleryDiffUtils(
-    private val oldList: List<Photo>,
-    private val newList: List<Photo>
+    private val oldList: List<DomainPhoto>,
+    private val newList: List<DomainPhoto>
 ) : DiffUtil.Callback(){
     override fun getOldListSize(): Int = oldList.size
 
