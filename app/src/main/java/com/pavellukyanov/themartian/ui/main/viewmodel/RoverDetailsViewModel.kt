@@ -2,6 +2,8 @@ package com.pavellukyanov.themartian.ui.main.viewmodel
 
 import androidx.lifecycle.*
 import com.pavellukyanov.themartian.data.api.models.Mars
+import com.pavellukyanov.themartian.data.api.models.Photo
+import com.pavellukyanov.themartian.data.database.models.PhotoEntity
 import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
 import com.pavellukyanov.themartian.data.repository.MainRepo
 import com.pavellukyanov.themartian.utils.Resource
@@ -39,5 +41,11 @@ class RoverDetailsViewModel @Inject constructor(private val mainRepo: MainRepo) 
             _roverInfo.postValue(mainRepo.getRoverInfo(roverName))
         }
         return roverInfo
+    }
+
+    fun addPhotoToFavourite(photo: Photo) {
+        viewModelScope.launch {
+            mainRepo.insertPhotoToFavourite(photo)
+        }
     }
 }

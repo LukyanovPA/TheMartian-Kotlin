@@ -3,7 +3,6 @@ package com.pavellukyanov.themartian.ui.main.view.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -13,10 +12,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
 import com.pavellukyanov.themartian.databinding.FragmentPagerBinding
-import com.pavellukyanov.themartian.ui.main.adapter.ViewPageAdapter
+import com.pavellukyanov.themartian.ui.main.adapters.ViewPageAdapter
 import com.pavellukyanov.themartian.ui.main.viewmodel.ExchangeViewModel
 import com.pavellukyanov.themartian.ui.main.viewmodel.RoverDetailsViewModel
-import com.pavellukyanov.themartian.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -77,5 +75,9 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
                 Log.d("ttt", "pager ${response.photos.size}")
                 exchangeViewModel.selectListPhoto(response.photos)
             })
+
+        exchangeViewModel.getPhotoToFavourite().observe(viewLifecycleOwner, {
+            roverDetailsViewModel.addPhotoToFavourite(it)
+        })
     }
 }

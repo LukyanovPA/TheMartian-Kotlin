@@ -7,11 +7,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pavellukyanov.themartian.R
+import com.pavellukyanov.themartian.data.api.models.Photo
 import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
 import com.pavellukyanov.themartian.databinding.FragmentMainBinding
-import com.pavellukyanov.themartian.ui.main.adapter.ItemClickListener
-import com.pavellukyanov.themartian.ui.main.adapter.LinePagerIndicatorDecoration
-import com.pavellukyanov.themartian.ui.main.adapter.MainAdapter
+import com.pavellukyanov.themartian.ui.main.adapters.AddFavouriteOnClickListener
+import com.pavellukyanov.themartian.ui.main.adapters.ItemClickListener
+import com.pavellukyanov.themartian.ui.main.adapters.LinePagerIndicatorDecoration
+import com.pavellukyanov.themartian.ui.main.adapters.MainAdapter
 import com.pavellukyanov.themartian.ui.main.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,11 +31,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun subscribeLiveData() {
-        mainViewModel.getRoverManifest().observe(viewLifecycleOwner, { response ->
-            response?.let { data ->
-                retrieveList(data)
-            }
-        })
+        mainViewModel.getRoverManifest().observe(viewLifecycleOwner, { retrieveList(it) })
     }
 
     private fun setupUI() {
@@ -52,11 +50,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private fun retrieveList(roversInfo: List<RoverInfoEntity>) {
         mainAdapter.apply {
             addRoversInfo(roversInfo)
-            notifyDataSetChanged()
         }
     }
 
-    val clickListener = object : ItemClickListener {
+    private val clickListener = object : ItemClickListener {
         override fun onItemClicked(roverName: String, maxDate: String) {
             showRoverDetailsFragment(roverName, maxDate)
         }

@@ -6,12 +6,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.data.api.Router
 import com.pavellukyanov.themartian.data.api.models.Photo
-import com.pavellukyanov.themartian.ui.main.adapter.GalleryAdapter
+import com.pavellukyanov.themartian.ui.main.adapters.GalleryAdapter
 import com.pavellukyanov.themartian.ui.main.viewmodel.RoverDetailsViewModel
 import com.pavellukyanov.themartian.utils.Status
 import kotlinx.android.synthetic.main.fragment_photo_gallery.*
@@ -31,8 +29,8 @@ class PhotoGalleryFragment : Fragment(R.layout.fragment_photo_gallery) {
 
     private fun setupUI() {
         rvPhotoGallery.layoutManager = GridLayoutManager(context, 2)
-        adapter = GalleryAdapter(arrayListOf())
-        rvPhotoGallery.adapter = adapter
+//        adapter = GalleryAdapter(arrayListOf())
+//        rvPhotoGallery.adapter = adapter
     }
 
     private fun setupObservers() {

@@ -1,4 +1,4 @@
-package com.pavellukyanov.themartian.ui.main.adapter
+package com.pavellukyanov.themartian.ui.main.adapters
 
 import android.content.Context
 import androidx.fragment.app.Fragment

@@ -2,6 +2,8 @@ package com.pavellukyanov.themartian.data.repository
 
 import androidx.lifecycle.LiveData
 import com.pavellukyanov.themartian.data.api.models.Mars
+import com.pavellukyanov.themartian.data.api.models.Photo
+import com.pavellukyanov.themartian.data.database.models.PhotoEntity
 import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
 
 interface MainRepo {
@@ -14,4 +16,10 @@ interface MainRepo {
     suspend fun getPhotoForSol(roverName: String, sol: Long): Mars
 
     suspend fun getPhotoForEarthDate(roverName: String, earthData: String): Mars
+
+    suspend fun getAllFavouritePhoto(): LiveData<List<PhotoEntity>>
+
+    suspend fun insertPhotoToFavourite(photo: Photo)
+
+    suspend fun deletePhotoInFavourite(id: Long)
 }
