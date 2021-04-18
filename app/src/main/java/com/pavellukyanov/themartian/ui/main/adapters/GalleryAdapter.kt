@@ -37,7 +37,7 @@ class GalleryAdapter(
 
     override fun getItemCount(): Int = photos.size
 
-    fun getItem(position: Int): Photo = photos[position]
+    private fun getItem(position: Int): Photo = photos[position]
 
     fun addPhotos(newPhotos: List<Photo>) {
         val diffUtils = GalleryDiffUtils(photos, newPhotos)

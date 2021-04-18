@@ -7,5 +7,6 @@ class Constants {
         const val SPIRIT = "Spirit"
         const val PERSEVERANCE = "Perseverance"
         const val WORK_NAME = "com.pavellukyanov.themartian.worker.RoverInfoUpdateWorker"
+        const val GRID_COLUMNS = 2
     }
 }

@@ -24,4 +24,9 @@
     <string name="favourites_title">Избранное</string>
     <string name="photo_list">Фото</string>
     <string name="photo_description">Фото Марса</string>
+    <string name="snack_add_favourite">Добавлено в Избранное</string>
+    <string name="date_temp">20-06-2020</string>
+    <string name="rover_name_temp">Perseverance</string>
+    <string name="line_descr">Линия</string>
+    <string name="snack_delete">Удалено из Избранного</string>
 </resources>

@@ -31,11 +31,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun subscribeLiveData() {
-        mainViewModel.getRoverManifest().observe(viewLifecycleOwner, { response ->
-            response?.let { data ->
-                retrieveList(data)
-            }
-        })
+        mainViewModel.getRoverManifest().observe(viewLifecycleOwner, { retrieveList(it) })
     }
 
     private fun setupUI() {

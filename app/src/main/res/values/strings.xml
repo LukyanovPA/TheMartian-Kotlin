@@ -23,4 +23,9 @@
     <string name="favourites_title">Favourites</string>
     <string name="photo_list">Photos</string>
     <string name="photo_description">Mars photo</string>
+    <string name="snack_add_favourite">Add to Favourite</string>
+    <string name="date_temp">20-06-2020</string>
+    <string name="rover_name_temp">Perseverance</string>
+    <string name="line_descr">Line</string>
+    <string name="snack_delete">Delete in Favourites</string>
 </resources>

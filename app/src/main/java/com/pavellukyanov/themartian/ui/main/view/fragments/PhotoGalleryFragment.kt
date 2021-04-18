@@ -29,8 +29,8 @@ class PhotoGalleryFragment : Fragment(R.layout.fragment_photo_gallery) {
 
     private fun setupUI() {
         rvPhotoGallery.layoutManager = GridLayoutManager(context, 2)
-        adapter = GalleryAdapter(arrayListOf())
-        rvPhotoGallery.adapter = adapter
+//        adapter = GalleryAdapter(arrayListOf())
+//        rvPhotoGallery.adapter = adapter
     }
 
     private fun setupObservers() {

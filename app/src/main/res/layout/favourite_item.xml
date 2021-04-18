@@ -36,15 +36,15 @@
             android:layout_alignBottom="@+id/ivPhotoItem"
             android:layout_alignParentBottom="false"
             android:gravity="bottom"
-            android:padding="15dp"
+            android:layout_margin="5dp"
+            android:padding="2dp"
             android:text="@string/date_temp"
             android:textAppearance="@style/itemInformation"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/roverName"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
-            android:id="@+id/favourite"
+            android:id="@+id/deleteFavourite"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="15dp"
@@ -52,7 +52,18 @@
             android:contentDescription="@string/photo_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/heart" />
+            app:srcCompat="@drawable/trash" />
+
+        <TextView
+            android:id="@+id/roverName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:layout_margin="5dp"
+            android:textAppearance="@style/itemInformation"
+            android:text="@string/rover_name_temp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
