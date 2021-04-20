@@ -2,6 +2,8 @@ package com.pavellukyanov.themartian.ui.main.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -14,12 +16,12 @@ import com.pavellukyanov.themartian.databinding.RvGalleryItemBinding
 import com.pavellukyanov.themartian.ui.main.adapters.GalleryAdapter.DataViewHolder
 import com.pavellukyanov.themartian.ui.main.adapters.diff.GalleryDiffUtils
 import kotlinx.android.synthetic.main.rv_gallery_item.view.*
+import java.util.*
 
 class GalleryAdapter(
     private var photos: List<DomainPhoto>,
     private val favouriteClickListener: AddFavouriteOnClickListener
-) :
-    RecyclerView.Adapter<DataViewHolder>() {
+) : RecyclerView.Adapter<DataViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
         val binding =
@@ -60,6 +62,7 @@ class GalleryAdapter(
                     .into(binding.ivPhotoItem)
 
                 binding.tvEarthDate.text = photo.dataEarth
+                binding.cameraName.text = photo.camera
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.pavellukyanov.themartian.ui.main.view.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -22,7 +23,13 @@ class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
     private val exchangeViewModel: ExchangeViewModel by activityViewModels()
     private val detailViewModel: RoverDetailsViewModel by viewModels()
     private lateinit var binding: FragmentRoverDetailsBinding
-    private val galleryAdapter by lazy { GalleryAdapter(arrayListOf(), addToFavouriteOnClickListener) }
+    private val galleryAdapter by lazy {
+        GalleryAdapter(
+            arrayListOf(),
+            addToFavouriteOnClickListener
+        )
+    }
+    private var photosList = mutableListOf<DomainPhoto>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,20 +52,42 @@ class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
     }
 
     private fun subscribeMarsData(roverName: String, date: String) {
-        detailViewModel.getPhotosForEarthData(roverName, date).observe(viewLifecycleOwner, { listPhotos ->
-            retrieveList(listPhotos)
-            val cameras: HashSet<String> = hashSetOf()
-            listPhotos.forEach {
-                cameras.add(it.camera)
+        detailViewModel.getPhotosForEarthData(roverName, date)
+            .observe(viewLifecycleOwner, { listPhotos ->
+                photosList = listPhotos.toMutableList()
+                retrieveList(photosList)
+                val cameras: HashSet<String> = hashSetOf()
+                listPhotos.forEach {
+                    cameras.add(it.camera)
+                }
+                Log.d("ttt", "cameras - ${cameras.size}")
+                exchangeViewModel.selectNetworkCameras(cameras)
+            })
+        exchangeViewModel.returnChooseCam().observe(viewLifecycleOwner, { choosedCam ->
+            val filteredList = mutableListOf<DomainPhoto>()
+            choosedCam.forEach { choos ->
+                photosList.forEach { photo ->
+                    if (photo.camera == choos) {
+                        filteredList.add(photo)
+                    }
+                }
             }
-            exchangeViewModel.selectCameras(cameras)
-        } )
+            if (choosedCam.isEmpty()) {
+                retrieveList(photosList)
+            } else {
+                retrieveList(filteredList)
+            }
+        })
     }
 
     private val addToFavouriteOnClickListener = object : AddFavouriteOnClickListener {
         override fun addToFavouriteOnClicked(photo: DomainPhoto) {
             detailViewModel.addPhotoToFavourite(photo)
-            Snackbar.make(binding.scrollLayout, getString(R.string.snack_add_favourite), Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(
+                binding.scrollLayout,
+                getString(R.string.snack_add_favourite),
+                Snackbar.LENGTH_SHORT
+            ).show()
         }
     }
 

@@ -2,17 +2,13 @@ package com.pavellukyanov.themartian.ui.main.view.fragments
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
-import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
-import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -21,7 +17,6 @@ import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
 import com.pavellukyanov.themartian.databinding.FragmentPagerBinding
 import com.pavellukyanov.themartian.ui.main.adapters.ViewPageAdapter
 import com.pavellukyanov.themartian.ui.main.viewmodel.ExchangeViewModel
-import com.pavellukyanov.themartian.ui.main.viewmodel.RoverDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -38,7 +33,8 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
     private val photoDate by lazy { args.roverInfoEntity.maxDate }
     private val minDate by lazy { args.roverInfoEntity.landingDate }
     private var fabIsOpen = false
-    private lateinit var cameras: Array<CharSequence>
+    private var networkCameras = arrayListOf<String>()
+    private var favouritesCameras = arrayListOf<String>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,16 +46,13 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
 
     private fun setupExchangeInformation(roverName: String, date: String) {
         exchangeViewModel.selectActualDate(roverName, date)
-        exchangeViewModel.returnCameras().observe(viewLifecycleOwner, { camResponse ->
+        exchangeViewModel.returnNetworkCameras().observe(viewLifecycleOwner, { camResponse ->
             camResponse?.let { listCameras ->
-                val test = arrayListOf<String>()
-                listCameras.forEach {
-                    test.add(it)
-                }
-                cameras = test.toTypedArray()
-                Log.d("ttt", "${cameras[0]} - ${cameras[1]}")
-                Log.d("ttt", "${listCameras.size}")
+                listCameras.forEach { networkCameras.add(it) }
             }
+        })
+        exchangeViewModel.returnFavouritesCameras().observe(viewLifecycleOwner, { camResponse ->
+            camResponse.forEach { favouritesCameras.add(it) }
         })
     }
 
@@ -114,22 +107,42 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
         }
 
         binding.fabCamera.setOnClickListener {
-            val filteredCam = arrayListOf<Int>()
+            var cameras: Array<CharSequence> = arrayOf()
+            when (viewPager.currentItem) {
+                0 -> {
+                    cameras = networkCameras.toTypedArray()
+                }
+                1 -> {
+                    cameras = favouritesCameras.toTypedArray()
+                }
+            }
+            val checkedIndex = arrayListOf<Int>()
             val builder = AlertDialog.Builder(context)
             builder.setTitle(R.string.choose_a_camera)
             builder.setMultiChoiceItems(cameras, null) { _, which, isChecked ->
                 if (isChecked) {
-                    filteredCam.add(which)
+                    checkedIndex.add(which)
                 } else {
-                    filteredCam.remove(Integer.valueOf(which))
+                    checkedIndex.remove(Integer.valueOf(which))
                 }
             }
                 .setPositiveButton(R.string.ok_button) { _, id ->
                     val chooseList = mutableListOf<String>()
-                    filteredCam.forEach {
+                    checkedIndex.forEach {
                         chooseList.add(cameras[it].toString())
                     }
-                    exchangeViewModel.selectedChooseCam(chooseList)
+                    when (viewPager.currentItem) {
+                        0 -> {
+                            exchangeViewModel.selectedChooseCam(chooseList)
+                        }
+                        1 -> {
+                            exchangeViewModel.selectedChooseFavCam(chooseList)
+                        }
+                    }
+                    if (binding.tvCamera.visibility == View.VISIBLE) {
+                        fabIsOpen = true
+                        changeFab(fabIsOpen)
+                    }
                 }
                 .setNegativeButton(R.string.cancel_button, null)
                 .create()
@@ -207,5 +220,4 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
             fabIsOpen = true
         }
     }
-
 }
