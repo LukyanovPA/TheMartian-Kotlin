@@ -34,4 +34,6 @@
     <string name="camera">Camera</string>
     <string name="choose_a_date">Choose a Date</string>
     <string name="choose_a_camera">Choose a Camera</string>
+    <string name="ok_button">OK</string>
+    <string name="cancel_button">CANCEL</string>
 </resources>

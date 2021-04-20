@@ -8,7 +8,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.data.api.models.Photo
 import com.pavellukyanov.themartian.data.domain.DomainPhoto
 import com.pavellukyanov.themartian.databinding.FragmentRoverDetailsBinding
 import com.pavellukyanov.themartian.ui.main.adapters.AddFavouriteOnClickListener
@@ -46,7 +45,14 @@ class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
     }
 
     private fun subscribeMarsData(roverName: String, date: String) {
-        detailViewModel.getPhotosForEarthData(roverName, date).observe(viewLifecycleOwner, { retrieveList(it)} )
+        detailViewModel.getPhotosForEarthData(roverName, date).observe(viewLifecycleOwner, { listPhotos ->
+            retrieveList(listPhotos)
+            val cameras: HashSet<String> = hashSetOf()
+            listPhotos.forEach {
+                cameras.add(it.camera)
+            }
+            exchangeViewModel.selectCameras(cameras)
+        } )
     }
 
     private val addToFavouriteOnClickListener = object : AddFavouriteOnClickListener {

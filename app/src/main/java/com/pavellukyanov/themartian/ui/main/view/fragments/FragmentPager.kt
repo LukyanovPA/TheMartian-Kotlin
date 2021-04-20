@@ -1,6 +1,8 @@
 package com.pavellukyanov.themartian.ui.main.view.fragments
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -23,6 +25,7 @@ import com.pavellukyanov.themartian.ui.main.viewmodel.RoverDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class FragmentPager : Fragment(R.layout.fragment_pager) {
@@ -35,6 +38,7 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
     private val photoDate by lazy { args.roverInfoEntity.maxDate }
     private val minDate by lazy { args.roverInfoEntity.landingDate }
     private var fabIsOpen = false
+    private lateinit var cameras: Array<CharSequence>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,6 +50,17 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
 
     private fun setupExchangeInformation(roverName: String, date: String) {
         exchangeViewModel.selectActualDate(roverName, date)
+        exchangeViewModel.returnCameras().observe(viewLifecycleOwner, { camResponse ->
+            camResponse?.let { listCameras ->
+                val test = arrayListOf<String>()
+                listCameras.forEach {
+                    test.add(it)
+                }
+                cameras = test.toTypedArray()
+                Log.d("ttt", "${cameras[0]} - ${cameras[1]}")
+                Log.d("ttt", "${listCameras.size}")
+            }
+        })
     }
 
     private fun initPageAdapter() {
@@ -99,7 +114,26 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
         }
 
         binding.fabCamera.setOnClickListener {
-            Toast.makeText(context, "Camera", Toast.LENGTH_SHORT).show()
+            val filteredCam = arrayListOf<Int>()
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle(R.string.choose_a_camera)
+            builder.setMultiChoiceItems(cameras, null) { _, which, isChecked ->
+                if (isChecked) {
+                    filteredCam.add(which)
+                } else {
+                    filteredCam.remove(Integer.valueOf(which))
+                }
+            }
+                .setPositiveButton(R.string.ok_button) { _, id ->
+                    val chooseList = mutableListOf<String>()
+                    filteredCam.forEach {
+                        chooseList.add(cameras[it].toString())
+                    }
+                    exchangeViewModel.selectedChooseCam(chooseList)
+                }
+                .setNegativeButton(R.string.cancel_button, null)
+                .create()
+                .show()
         }
 
         binding.fabRover.setOnClickListener {
@@ -116,7 +150,7 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
         val maxDate = format.parse(photoDate)
         val minDate = format.parse(minDate)
 
-        val dpd = DatePickerDialog(requireContext(), { view, year, month, dayOfMonth ->
+        val dpd = DatePickerDialog(requireContext(), { _, year, month, dayOfMonth ->
             val newDate = "$year-${month + 1}-$dayOfMonth"
             setupExchangeInformation(roverName, newDate)
             fabIsOpen = true

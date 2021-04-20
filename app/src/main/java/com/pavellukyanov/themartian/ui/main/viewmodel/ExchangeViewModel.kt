@@ -14,22 +14,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ExchangeViewModel @Inject constructor() : ViewModel() {
-    private var _listPhoto: MutableLiveData<List<DomainPhoto>> = MutableLiveData()
-    private val listPhoto: LiveData<List<DomainPhoto>> get() = _listPhoto
-    private var _photo: MutableLiveData<DomainPhoto> = MutableLiveData()
-    private val photo: LiveData<DomainPhoto> get() = _photo
-    private var _photoId: MutableLiveData<Long> = MutableLiveData()
-    private val photoId: LiveData<Long> get() = _photoId
-    private var _favourites: MutableLiveData<List<PhotoEntity>> = MutableLiveData()
-    private val favourites: LiveData<List<PhotoEntity>> get() = _favourites
+    private var _cameras: MutableLiveData<HashSet<String>> = MutableLiveData()
+    private val cameras: LiveData<HashSet<String>> get() = _cameras
+    private var _chooseCam: MutableLiveData<List<String>> = MutableLiveData()
+    private val chooseCam: LiveData<List<String>> get() = _chooseCam
     private var _actualDate: MutableLiveData<Pair<String, String>> = MutableLiveData()
     private val actualDate: LiveData<Pair<String, String>> get() = _actualDate
-
-//    fun selectListPhoto(list: List<DomainPhoto>) {
-//        _listPhoto.postValue(list)
-//    }
-//
-//    fun returnListPhoto(): LiveData<List<DomainPhoto>> = listPhoto
 
     fun selectActualDate(roverName: String, date: String) {
         val roverData = Pair(roverName, date)
@@ -38,21 +28,15 @@ class ExchangeViewModel @Inject constructor() : ViewModel() {
 
     fun returnActualDate(): LiveData<Pair<String, String>> = actualDate
 
-    fun addPhotoToFavourite(photo: DomainPhoto) {
-        _photo.postValue(photo)
+    fun selectCameras(list: HashSet<String>) {
+        _cameras.postValue(list)
     }
 
-    fun getPhotoToFavourite(): LiveData<DomainPhoto> = photo
+    fun returnCameras(): LiveData<HashSet<String>> = cameras
 
-    fun selectAllFavourites(list: List<PhotoEntity>) {
-        _favourites.postValue(list)
+    fun selectedChooseCam(list: List<String>) {
+        _chooseCam.postValue(list)
     }
 
-    fun getAllFavourites(): LiveData<List<PhotoEntity>> = favourites
-
-    fun deletePhotoInFavourite(id: Long) {
-        _photoId.postValue(id)
-    }
-
-    fun getIdPhoto(): LiveData<Long> = photoId
+    fun returnChooseCam(): LiveData<List<String>> = chooseCam
 }
