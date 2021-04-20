@@ -2,6 +2,7 @@ package com.pavellukyanov.themartian.ui.main.view.fragments
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -70,6 +71,16 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
                 1 -> tab.text = getString(R.string.favourites_title)
             }
         }.attach()
+
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+                if (binding.tvCamera.visibility == View.VISIBLE) {
+                    fabIsOpen = true
+                    changeFab(fabIsOpen)
+                }
+            }
+        })
     }
 
     private fun setupUI(roverInfo: RoverInfoEntity) {
