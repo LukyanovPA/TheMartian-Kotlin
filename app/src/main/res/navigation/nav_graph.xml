@@ -32,15 +32,12 @@
         android:name="com.pavellukyanov.themartian.ui.main.view.fragments.FragmentPager"
         android:label="fragment_pager"
         tools:layout="@layout/fragment_pager" >
-        <argument
-            android:name="roverName"
-            app:argType="string" />
-        <argument
-            android:name="maxDate"
-            app:argType="string" />
         <action
             android:id="@+id/action_fragmentPager_to_fragmentPhoto"
             app:destination="@id/fragmentPhoto" />
+        <argument
+            android:name="roverInfoEntity"
+            app:argType="com.pavellukyanov.themartian.data.database.models.RoverInfoEntity" />
     </fragment>
     <fragment
         android:id="@+id/fragmentPhoto"

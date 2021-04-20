@@ -22,12 +22,21 @@ class ExchangeViewModel @Inject constructor() : ViewModel() {
     private val photoId: LiveData<Long> get() = _photoId
     private var _favourites: MutableLiveData<List<PhotoEntity>> = MutableLiveData()
     private val favourites: LiveData<List<PhotoEntity>> get() = _favourites
+    private var _actualDate: MutableLiveData<Pair<String, String>> = MutableLiveData()
+    private val actualDate: LiveData<Pair<String, String>> get() = _actualDate
 
-    fun selectListPhoto(list: List<DomainPhoto>) {
-        _listPhoto.postValue(list)
+//    fun selectListPhoto(list: List<DomainPhoto>) {
+//        _listPhoto.postValue(list)
+//    }
+//
+//    fun returnListPhoto(): LiveData<List<DomainPhoto>> = listPhoto
+
+    fun selectActualDate(roverName: String, date: String) {
+        val roverData = Pair(roverName, date)
+        _actualDate.postValue(roverData)
     }
 
-    fun returnListPhoto(): LiveData<List<DomainPhoto>> = listPhoto
+    fun returnActualDate(): LiveData<Pair<String, String>> = actualDate
 
     fun addPhotoToFavourite(photo: DomainPhoto) {
         _photo.postValue(photo)

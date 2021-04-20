@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="slogan">#BF3030</color>
+    <color name="fab_text_background">#212121</color>
 </resources>

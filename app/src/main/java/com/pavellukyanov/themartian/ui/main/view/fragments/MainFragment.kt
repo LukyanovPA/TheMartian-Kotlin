@@ -54,13 +54,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private val clickListener = object : ItemClickListener {
-        override fun onItemClicked(roverName: String, maxDate: String) {
-            showRoverDetailsFragment(roverName, maxDate)
+        override fun onItemClicked(roverInfoEntity: RoverInfoEntity) {
+            showRoverDetailsFragment(roverInfoEntity)
         }
     }
 
-    private fun showRoverDetailsFragment(roverName: String, maxDate: String) {
-        val action = MainFragmentDirections.actionMainFragmentToFragmentPager(roverName, maxDate)
+    private fun showRoverDetailsFragment(roverInfoEntity: RoverInfoEntity) {
+        val action = MainFragmentDirections.actionMainFragmentToFragmentPager(roverInfoEntity)
         findNavController().navigate(action)
     }
 }

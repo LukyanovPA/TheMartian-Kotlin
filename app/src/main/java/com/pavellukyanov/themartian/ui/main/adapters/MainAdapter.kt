@@ -29,7 +29,9 @@ class MainAdapter(
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         holder.bind(getItem(position))
         holder.itemView.setOnClickListener {
-            clickListener.onItemClicked(getItem(position).roverName, getItem(position).maxDate)
+            clickListener.onItemClicked(
+                getItem(holder.absoluteAdapterPosition)
+            )
         }
     }
 
