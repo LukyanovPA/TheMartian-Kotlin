@@ -2,7 +2,7 @@
     <string name="app_name">The Martian</string>
     <string name="the_martian">The Martian</string>
     <string name="slogan">THE ENTRY TO THE RED PLANET</string>
-    <string name="hoose_a_rover">Сhoose a Rover</string>
+    <string name="choose_a_rover">Choose a Rover</string>
     <string name="rover_name">Curiosity</string>
     <string name="launch_date_title">Launch date:</string>
     <string name="details_launch_date_title">LAUNCH DATE</string>
@@ -32,4 +32,6 @@
     <string name="camera_temp">CHEMCAM</string>
     <string name="rover">Rover</string>
     <string name="camera">Camera</string>
+    <string name="choose_a_date">Choose a Date</string>
+    <string name="choose_a_camera">Choose a Camera</string>
 </resources>

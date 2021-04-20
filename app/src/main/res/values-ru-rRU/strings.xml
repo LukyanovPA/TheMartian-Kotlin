@@ -3,7 +3,7 @@
     <string name="app_name">The Martian</string>
     <string name="the_martian">The Martian</string>
     <string name="slogan">Путешествие по красной планете</string>
-    <string name="hoose_a_rover">Выберите ровер</string>
+    <string name="choose_a_rover">Выберите ровер</string>
     <string name="rover_name">Curiosity</string>
     <string name="launch_date_title">Дата запуска:</string>
     <string name="details_launch_date_title">ДАТА ЗАПУСКА</string>
@@ -33,4 +33,6 @@
     <string name="camera_temp">CHEMCAM</string>
     <string name="rover">Ровер</string>
     <string name="camera">Камера</string>
+    <string name="choose_a_date">Выберите дату</string>
+    <string name="choose_a_camera">Выберите камеру</string>
 </resources>
