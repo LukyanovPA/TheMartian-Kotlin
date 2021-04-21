@@ -206,7 +206,23 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
                         changeFab(fabIsOpen)
                     }
                 }
-                .setNegativeButton(R.string.cancel_button, null)
+                .setNeutralButton(getString(R.string.select_all)) { _, which ->
+                    val chooseList = mutableListOf<String>()
+                    rovers.forEach { _ ->
+                        checkedIndex.add(which)
+                    }
+                    exchangeViewModel.selectChoosedRovers(chooseList)
+                    if (binding.tvCamera.visibility == View.VISIBLE) {
+                        fabIsOpen = true
+                        changeFab(fabIsOpen)
+                    }
+                }
+                .setNegativeButton(R.string.cancel_button) { _, _ ->
+                    if (binding.tvCamera.visibility == View.VISIBLE) {
+                        fabIsOpen = true
+                        changeFab(fabIsOpen)
+                    }
+                }
                 .create()
                 .show()
         }
