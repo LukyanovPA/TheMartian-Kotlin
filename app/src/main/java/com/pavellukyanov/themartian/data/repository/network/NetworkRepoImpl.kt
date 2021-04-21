@@ -7,7 +7,6 @@ import com.pavellukyanov.themartian.utils.Constants.Companion.CURIOSITY
 import com.pavellukyanov.themartian.utils.Constants.Companion.OPPORTUNITY
 import com.pavellukyanov.themartian.utils.Constants.Companion.SPIRIT
 import com.pavellukyanov.themartian.utils.Constants.Companion.PERSEVERANCE
-import dagger.Provides
 import javax.inject.Inject
 
 class NetworkRepoImpl @Inject constructor(

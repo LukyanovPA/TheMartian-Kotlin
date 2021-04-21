@@ -16,6 +16,10 @@ class ExchangeViewModel @Inject constructor() : ViewModel() {
     private val chooseFavCam: LiveData<List<String>> get() = _chooseFavCam
     private var _actualDate: MutableLiveData<Pair<String, String>> = MutableLiveData()
     private val actualDate: LiveData<Pair<String, String>> get() = _actualDate
+    private var _rovers: MutableLiveData<HashSet<String>> = MutableLiveData()
+    private val rovers: LiveData<HashSet<String>> get() = _rovers
+    private var _chooseRovers: MutableLiveData<List<String>> = MutableLiveData()
+    private val chooseRovers: LiveData<List<String>> get() = _chooseRovers
 
     fun selectActualDate(roverName: String, date: String) {
         val roverData = Pair(roverName, date)
@@ -47,4 +51,16 @@ class ExchangeViewModel @Inject constructor() : ViewModel() {
     }
 
     fun returnChooseFavCam(): LiveData<List<String>> = chooseFavCam
+
+    fun selectRovers(list: HashSet<String>) {
+        _rovers.postValue(list)
+    }
+
+    fun returnRovers(): LiveData<HashSet<String>> = rovers
+
+    fun selectChoosedRovers(list: List<String>) {
+        _chooseRovers.postValue(list)
+    }
+
+    fun returnChoosedRovers(): LiveData<List<String>> = chooseRovers
 }

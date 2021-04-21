@@ -2,7 +2,9 @@ package com.pavellukyanov.themartian.ui.main.view.fragments
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -35,6 +37,7 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
     private var fabIsOpen = false
     private var networkCameras = arrayListOf<String>()
     private var favouritesCameras = arrayListOf<String>()
+    private var roversList = arrayListOf<String>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,12 +50,16 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
     private fun setupExchangeInformation(roverName: String, date: String) {
         exchangeViewModel.selectActualDate(roverName, date)
         exchangeViewModel.returnNetworkCameras().observe(viewLifecycleOwner, { camResponse ->
-            camResponse?.let { listCameras ->
-                listCameras.forEach { networkCameras.add(it) }
-            }
+            networkCameras.clear()
+            camResponse.forEach { networkCameras.add(it) }
         })
         exchangeViewModel.returnFavouritesCameras().observe(viewLifecycleOwner, { camResponse ->
+            favouritesCameras.clear()
             camResponse.forEach { favouritesCameras.add(it) }
+        })
+        exchangeViewModel.returnRovers().observe(viewLifecycleOwner, { roverResponse ->
+            roversList.clear()
+            roverResponse.forEach { roversList.add(it) }
         })
     }
 
@@ -110,9 +117,11 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
             var cameras: Array<CharSequence> = arrayOf()
             when (viewPager.currentItem) {
                 0 -> {
+                    cameras.dropWhile { true }
                     cameras = networkCameras.toTypedArray()
                 }
                 1 -> {
+                    cameras.dropWhile { true }
                     cameras = favouritesCameras.toTypedArray()
                 }
             }
@@ -144,13 +153,62 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
                         changeFab(fabIsOpen)
                     }
                 }
-                .setNegativeButton(R.string.cancel_button, null)
+                .setNeutralButton(getString(R.string.select_all)) { _, which ->
+                    val chooseList = mutableListOf<String>()
+                    cameras.forEach { _ ->
+                        checkedIndex.add(which)
+                    }
+                    when (viewPager.currentItem) {
+                        0 -> {
+                            exchangeViewModel.selectedChooseCam(chooseList)
+                        }
+                        1 -> {
+                            exchangeViewModel.selectedChooseFavCam(chooseList)
+                        }
+                    }
+                    if (binding.tvCamera.visibility == View.VISIBLE) {
+                        fabIsOpen = true
+                        changeFab(fabIsOpen)
+                    }
+                }
+                .setNegativeButton(R.string.cancel_button) { _, _ ->
+                    if (binding.tvCamera.visibility == View.VISIBLE) {
+                        fabIsOpen = true
+                        changeFab(fabIsOpen)
+                    }
+                }
                 .create()
                 .show()
         }
 
         binding.fabRover.setOnClickListener {
-            Toast.makeText(context, "Rover", Toast.LENGTH_SHORT).show()
+            var rovers: Array<CharSequence> = arrayOf()
+            rovers.dropWhile { true }
+            rovers = roversList.toTypedArray()
+            val checkedIndex = arrayListOf<Int>()
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle(R.string.choose_a_rover)
+            builder.setMultiChoiceItems(rovers, null) { _, which, isChecked ->
+                if (isChecked) {
+                    checkedIndex.add(which)
+                } else {
+                    checkedIndex.remove(Integer.valueOf(which))
+                }
+            }
+                .setPositiveButton(R.string.ok_button) { _, id ->
+                    val chooseList = mutableListOf<String>()
+                    checkedIndex.forEach {
+                        chooseList.add(rovers[it].toString())
+                    }
+                    exchangeViewModel.selectChoosedRovers(chooseList)
+                    if (binding.tvCamera.visibility == View.VISIBLE) {
+                        fabIsOpen = true
+                        changeFab(fabIsOpen)
+                    }
+                }
+                .setNegativeButton(R.string.cancel_button, null)
+                .create()
+                .show()
         }
     }
 
@@ -203,20 +261,20 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
         } else {
             when (viewPager.currentItem) {
                 1 -> {
-                    binding.tvRover.visibility = View.VISIBLE
                     binding.fabRover.startAnimation(fabOpen)
                     binding.fabRover.isClickable = true
+                    binding.tvRover.visibility = View.VISIBLE
                 }
                 0 -> {
-                    binding.tvDate.visibility = View.VISIBLE
                     binding.fabDate.startAnimation(fabOpen)
                     binding.fabDate.isClickable = true
+                    binding.tvDate.visibility = View.VISIBLE
                 }
             }
-            binding.tvCamera.visibility = View.VISIBLE
             binding.fabCamera.startAnimation(fabOpen)
             binding.fabSetting.startAnimation(fabRotateClock)
             binding.fabCamera.isClickable = true
+            binding.tvCamera.visibility = View.VISIBLE
             fabIsOpen = true
         }
     }

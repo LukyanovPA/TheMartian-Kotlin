@@ -60,9 +60,9 @@ class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
                 listPhotos.forEach {
                     cameras.add(it.camera)
                 }
-                Log.d("ttt", "cameras - ${cameras.size}")
                 exchangeViewModel.selectNetworkCameras(cameras)
             })
+
         exchangeViewModel.returnChooseCam().observe(viewLifecycleOwner, { choosedCam ->
             val filteredList = mutableListOf<DomainPhoto>()
             choosedCam.forEach { choos ->

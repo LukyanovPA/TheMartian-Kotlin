@@ -25,6 +25,7 @@ class FragmentFavourites : Fragment(R.layout.fragment_favourites) {
     private val exchangeViewModel: ExchangeViewModel by activityViewModels()
     private val favouritesAdapter by lazy { FavouritesAdapter(listOf(), deleteFavouriteOnClickListener) }
     private lateinit var binding: FragmentFavouritesBinding
+    private var favouritesList = mutableListOf<DomainPhoto>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,16 +36,48 @@ class FragmentFavourites : Fragment(R.layout.fragment_favourites) {
 
     private fun subscribeFavouritesData() {
         favouritesViewModel.getAllFavourites().observe(viewLifecycleOwner, { listPhoto ->
-            retrieveList(listPhoto)
+            favouritesList = listPhoto.toMutableList()
+            retrieveList(favouritesList)
             val cameras: HashSet<String> = hashSetOf()
+            val rovers: HashSet<String> = hashSetOf()
             listPhoto.forEach {
                 cameras.add(it.camera)
+                rovers.add(it.rover)
             }
-            Log.d("ttt", "cameras - ${cameras.size}")
             exchangeViewModel.selectFavouritesCameras(cameras)
+            exchangeViewModel.selectRovers(rovers)
         })
-        exchangeViewModel.returnChooseFavCam().observe(viewLifecycleOwner, {
-            Log.d("ttt", "choose - ${it.size}")
+
+        exchangeViewModel.returnChooseFavCam().observe(viewLifecycleOwner, { choosedCam ->
+            val filteredList = mutableListOf<DomainPhoto>()
+            choosedCam.forEach { choos ->
+                favouritesList.forEach { photo ->
+                    if (photo.camera == choos) {
+                        filteredList.add(photo)
+                    }
+                }
+            }
+            if (choosedCam.isEmpty()) {
+                retrieveList(favouritesList)
+            } else {
+                retrieveList(filteredList)
+            }
+        })
+
+        exchangeViewModel.returnChoosedRovers().observe(viewLifecycleOwner, { choosedRovers ->
+            val filteredList = mutableListOf<DomainPhoto>()
+            choosedRovers.forEach { choos ->
+                favouritesList.forEach { photo ->
+                    if (photo.rover == choos) {
+                        filteredList.add(photo)
+                    }
+                }
+            }
+            if (choosedRovers.isEmpty()) {
+                retrieveList(favouritesList)
+            } else {
+                retrieveList(filteredList)
+            }
         })
     }
 

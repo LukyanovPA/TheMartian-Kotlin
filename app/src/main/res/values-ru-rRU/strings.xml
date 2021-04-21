@@ -37,4 +37,5 @@
     <string name="choose_a_camera">Выберите камеру</string>
     <string name="ok_button">OK</string>
     <string name="cancel_button">CANCEL</string>
+    <string name="select_all">Выбрать все</string>
 </resources>
