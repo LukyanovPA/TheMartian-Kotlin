@@ -99,7 +99,10 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
     }
 
     private fun setupUI(roverInfo: RoverInfoEntity) {
-        binding.buttonBack.setOnClickListener { activity?.onBackPressed() }
+        binding.buttonBack.setOnClickListener {
+            exchangeViewModel.clearViewModel()
+            activity?.onBackPressed()
+        }
         binding.roverDetailsName.text = roverInfo.roverName
         binding.detailsLaunchDate.text = roverInfo.launchData
         binding.detailsTotalPhoto.text = roverInfo.totalPhotos

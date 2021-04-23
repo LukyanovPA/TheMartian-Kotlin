@@ -20,7 +20,8 @@ import java.util.*
 
 class GalleryAdapter(
     private var photos: List<DomainPhoto>,
-    private val favouriteClickListener: AddFavouriteOnClickListener
+    private val favouriteClickListener: AddFavouriteOnClickListener,
+    private val itemClickListener: ItemClickListener
 ) : RecyclerView.Adapter<DataViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
@@ -35,6 +36,13 @@ class GalleryAdapter(
             favouriteClickListener.addToFavouriteOnClicked(
                 getItem(holder.absoluteAdapterPosition)
             )
+        }
+        holder.itemView.setOnClickListener {
+            val photoList = arrayListOf<String>()
+            photos.forEach {
+                photoList.add(it.srcPhoto)
+            }
+            itemClickListener.onItemClicked(getItem(holder.absoluteAdapterPosition))
         }
     }
 

@@ -10,10 +10,7 @@ import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.api.models.Photo
 import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
 import com.pavellukyanov.themartian.databinding.FragmentMainBinding
-import com.pavellukyanov.themartian.ui.main.adapters.AddFavouriteOnClickListener
-import com.pavellukyanov.themartian.ui.main.adapters.ItemClickListener
-import com.pavellukyanov.themartian.ui.main.adapters.LinePagerIndicatorDecoration
-import com.pavellukyanov.themartian.ui.main.adapters.MainAdapter
+import com.pavellukyanov.themartian.ui.main.adapters.*
 import com.pavellukyanov.themartian.ui.main.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -53,8 +50,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
     }
 
-    private val clickListener = object : ItemClickListener {
-        override fun onItemClicked(roverInfoEntity: RoverInfoEntity) {
+    private val clickListener = object : RoverInfoClickListener {
+        override fun onRoverInfoItemClicked(roverInfoEntity: RoverInfoEntity) {
             showRoverDetailsFragment(roverInfoEntity)
         }
     }

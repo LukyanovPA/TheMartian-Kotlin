@@ -1,7 +1,6 @@
 package com.pavellukyanov.themartian.ui.main.view.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -9,11 +8,11 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.data.database.models.PhotoEntity
 import com.pavellukyanov.themartian.data.domain.DomainPhoto
 import com.pavellukyanov.themartian.databinding.FragmentFavouritesBinding
 import com.pavellukyanov.themartian.ui.main.adapters.DeleteFavouriteOnClickListener
 import com.pavellukyanov.themartian.ui.main.adapters.FavouritesAdapter
+import com.pavellukyanov.themartian.ui.main.adapters.ItemClickListener
 import com.pavellukyanov.themartian.ui.main.viewmodel.ExchangeViewModel
 import com.pavellukyanov.themartian.ui.main.viewmodel.FavouritesViewModel
 import com.pavellukyanov.themartian.utils.Constants.Companion.GRID_COLUMNS
@@ -23,7 +22,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class FragmentFavourites : Fragment(R.layout.fragment_favourites) {
     private val favouritesViewModel: FavouritesViewModel by viewModels()
     private val exchangeViewModel: ExchangeViewModel by activityViewModels()
-    private val favouritesAdapter by lazy { FavouritesAdapter(listOf(), deleteFavouriteOnClickListener) }
+    private val favouritesAdapter by lazy {
+        FavouritesAdapter(
+            listOf(),
+            deleteFavouriteOnClickListener,
+            itemClickListener
+        )
+    }
     private lateinit var binding: FragmentFavouritesBinding
     private var favouritesList = mutableListOf<DomainPhoto>()
 
@@ -91,7 +96,17 @@ class FragmentFavourites : Fragment(R.layout.fragment_favourites) {
     private val deleteFavouriteOnClickListener = object : DeleteFavouriteOnClickListener {
         override fun deleteFavouriteOnClicked(id: Long) {
             favouritesViewModel.deletePhoto(id)
-            Snackbar.make(binding.scrollLayoutFav, getString(R.string.snack_delete), Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(
+                binding.scrollLayoutFav,
+                getString(R.string.snack_delete),
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    private val itemClickListener = object : ItemClickListener {
+        override fun onItemClicked(domainPhoto: DomainPhoto) {
+            //доделать
         }
     }
 

@@ -16,7 +16,8 @@ import kotlinx.android.synthetic.main.favourite_item.view.*
 
 class FavouritesAdapter(
     private var photos: List<DomainPhoto>,
-    private val deleteFavouriteOnClickListener: DeleteFavouriteOnClickListener
+    private val deleteFavouriteOnClickListener: DeleteFavouriteOnClickListener,
+    private val itemClickListener: ItemClickListener
 ) : RecyclerView.Adapter<FavouritesAdapter.FavouriteViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteViewHolder {
@@ -31,6 +32,9 @@ class FavouritesAdapter(
             deleteFavouriteOnClickListener.deleteFavouriteOnClicked(
                 getItem(holder.absoluteAdapterPosition).id
             )
+        }
+        holder.itemView.setOnClickListener {
+            itemClickListener.onItemClicked(getItem(holder.absoluteAdapterPosition))
         }
     }
 

@@ -17,7 +17,7 @@ import com.pavellukyanov.themartian.utils.Constants.Companion.PERSEVERANCE
 
 class MainAdapter(
     private var roverInfo: List<RoverInfoEntity>,
-    private val clickListener: ItemClickListener
+    private val clickListener: RoverInfoClickListener
 ) : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
@@ -29,7 +29,7 @@ class MainAdapter(
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         holder.bind(getItem(position))
         holder.itemView.setOnClickListener {
-            clickListener.onItemClicked(
+            clickListener.onRoverInfoItemClicked(
                 getItem(holder.absoluteAdapterPosition)
             )
         }

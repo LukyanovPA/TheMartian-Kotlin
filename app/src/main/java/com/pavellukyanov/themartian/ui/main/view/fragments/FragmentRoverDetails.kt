@@ -1,7 +1,6 @@
 package com.pavellukyanov.themartian.ui.main.view.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -13,6 +12,7 @@ import com.pavellukyanov.themartian.data.domain.DomainPhoto
 import com.pavellukyanov.themartian.databinding.FragmentRoverDetailsBinding
 import com.pavellukyanov.themartian.ui.main.adapters.AddFavouriteOnClickListener
 import com.pavellukyanov.themartian.ui.main.adapters.GalleryAdapter
+import com.pavellukyanov.themartian.ui.main.adapters.ItemClickListener
 import com.pavellukyanov.themartian.ui.main.viewmodel.ExchangeViewModel
 import com.pavellukyanov.themartian.ui.main.viewmodel.RoverDetailsViewModel
 import com.pavellukyanov.themartian.utils.Constants.Companion.GRID_COLUMNS
@@ -26,7 +26,8 @@ class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
     private val galleryAdapter by lazy {
         GalleryAdapter(
             arrayListOf(),
-            addToFavouriteOnClickListener
+            addToFavouriteOnClickListener,
+            itemClickListener
         )
     }
     private var photosList = mutableListOf<DomainPhoto>()
@@ -88,6 +89,12 @@ class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
                 getString(R.string.snack_add_favourite),
                 Snackbar.LENGTH_SHORT
             ).show()
+        }
+    }
+
+    private val itemClickListener = object : ItemClickListener {
+        override fun onItemClicked(domainPhoto: DomainPhoto) {
+            //доделать
         }
     }
 

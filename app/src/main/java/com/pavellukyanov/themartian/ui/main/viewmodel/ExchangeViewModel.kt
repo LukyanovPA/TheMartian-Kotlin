@@ -63,4 +63,10 @@ class ExchangeViewModel @Inject constructor() : ViewModel() {
     }
 
     fun returnChoosedRovers(): LiveData<List<String>> = chooseRovers
+
+    fun clearViewModel() = onCleared()
+
+    override fun onCleared() {
+        super.onCleared()
+    }
 }
