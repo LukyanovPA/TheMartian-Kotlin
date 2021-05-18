@@ -1,4 +1,4 @@
-package com.pavellukyanov.themartian.worker
+package com.pavellukyanov.themartian.core.worker
 
 import android.content.Context
 import android.util.Log

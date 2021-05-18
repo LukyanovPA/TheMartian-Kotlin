@@ -62,6 +62,7 @@ class MainAdapter(
                             else -> null
                         }
                     )
+                    .circleCrop()
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .centerCrop()
                     .into(roverPicture)

@@ -1,11 +1,11 @@
-package com.pavellukyanov.themartian.di
+package com.pavellukyanov.themartian.core.application
 
 import android.app.Application
 import android.util.Log
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.*
 import com.pavellukyanov.themartian.utils.Constants
-import com.pavellukyanov.themartian.worker.RoverInfoUpdateWorker
+import com.pavellukyanov.themartian.core.worker.RoverInfoUpdateWorker
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.*
 import java.util.concurrent.TimeUnit

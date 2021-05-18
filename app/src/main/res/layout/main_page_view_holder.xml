@@ -6,13 +6,11 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/roverPicture"
         android:layout_width="96dp"
         android:layout_height="96dp"
         android:layout_marginEnd="237dp"
-        app:civ_border_color="@color/white"
-        app:civ_border_width="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

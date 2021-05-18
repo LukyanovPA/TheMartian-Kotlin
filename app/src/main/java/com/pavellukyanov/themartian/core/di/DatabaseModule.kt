@@ -1,4 +1,4 @@
-package com.pavellukyanov.themartian.di
+package com.pavellukyanov.themartian.core.di
 
 import android.content.Context
 import androidx.room.Room

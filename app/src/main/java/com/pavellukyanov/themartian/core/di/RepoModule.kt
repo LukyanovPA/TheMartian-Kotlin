@@ -1,4 +1,4 @@
-package com.pavellukyanov.themartian.di
+package com.pavellukyanov.themartian.core.di
 
 import com.pavellukyanov.themartian.data.repository.MainRepo
 import com.pavellukyanov.themartian.data.repository.MainRepoImpl
