@@ -10,5 +10,6 @@ class PhotoEntity(
     val srcPhoto: String,
     val dataEarth: String,
     val rover: String,
-    val camera: String
+    val camera: String,
+    val isFavourite: Int
 )

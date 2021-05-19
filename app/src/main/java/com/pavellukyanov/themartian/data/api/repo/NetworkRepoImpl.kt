@@ -4,6 +4,7 @@ import com.pavellukyanov.themartian.data.api.ApiNASA
 import com.pavellukyanov.themartian.data.api.models.MarsApi
 import com.pavellukyanov.themartian.data.api.models.RoverInfoApi
 import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
+import com.pavellukyanov.themartian.data.domain.Photo
 import com.pavellukyanov.themartian.data.domain.RoverInfo
 import com.pavellukyanov.themartian.data.mapper.PhotoPojoToDomain
 import com.pavellukyanov.themartian.data.mapper.RoverInfoEntityToDomain
@@ -23,9 +24,17 @@ class NetworkRepoImpl @Inject constructor(
             .map { RoverInfoPojoToDomain().invoke(it.photoManifest) }
     }
 
-    override fun getPhotoForEarthDate(roverName: String, earthData: String): Single<MarsApi> {
-       return apiService.getPhotoEarthData(roverName, earthData)
-           .subscribeOn(Schedulers.io())
-           .map { it }
+    override fun getPhotoForEarthDate(roverName: String, earthData: String): Single<List<Photo>> {
+        return apiService.getPhotoEarthData(roverName, earthData)
+            .subscribeOn(Schedulers.io())
+            .map { mappingPhotoPojoToDomain(it) }
+    }
+
+    private fun mappingPhotoPojoToDomain(marsApi: MarsApi): List<Photo> {
+        val listPhoto = mutableListOf<Photo>()
+        marsApi.photoApis.forEach {
+            listPhoto.add(PhotoPojoToDomain().invoke(it))
+        }
+        return listPhoto
     }
 }

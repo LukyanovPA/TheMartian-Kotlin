@@ -11,7 +11,8 @@ class PhotoPojoToDomain : Mapper<PhotoApi, Photo> {
             source.srcPhoto,
             source.dataEarth,
             source.sol,
-            source.roverApi.roverName
+            source.roverApi.roverName,
+            0
         )
     }
 }

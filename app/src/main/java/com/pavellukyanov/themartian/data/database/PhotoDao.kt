@@ -14,6 +14,15 @@ interface PhotoDao {
     @Query("SELECT * FROM favourites")
     fun getAllPhotos(): Single<List<PhotoEntity>>
 
+    @Query("SELECT * FROM favourites WHERE rover = :roverName AND dataEarth = :earthDate")
+    fun getPhotoWithRoverNameAndDate(
+        roverName: String,
+        earthDate: String
+    ): Single<List<PhotoEntity>>
+
+    @Query("SELECT * FROM favourites WHERE isFavourite = :isFavourites")
+    fun getFavouritesPhoto(isFavourites: Int): Single<List<PhotoEntity>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPhoto(photoEntity: PhotoEntity): Completable
 

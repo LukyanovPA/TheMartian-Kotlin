@@ -1,16 +1,26 @@
 package com.pavellukyanov.themartian.data.database.repo
 
-import androidx.lifecycle.LiveData
 import com.pavellukyanov.themartian.data.database.models.PhotoEntity
+import com.pavellukyanov.themartian.data.domain.Photo
+import io.reactivex.Completable
+import io.reactivex.Single
 
 interface PhotoDatabase {
-    suspend fun getPhoto(id: Long): PhotoEntity
+    fun getPhoto(id: Long): Single<Photo>
 
-    suspend fun getAllPhoto(): LiveData<List<PhotoEntity>>
+    fun getFavouritesPhoto(): Single<List<Photo>>
 
-    suspend fun insertPhoto(photoEntity: PhotoEntity)
+    fun getPhotoWithRoverNameAndDate(roverName: String, earthDate: String): Single<List<Photo>>
 
-    suspend fun updatePhoto(photoEntity: PhotoEntity)
+    fun insertPhoto(photoEntity: Photo): Completable
 
-    suspend fun deletePhoto(id: Long)
+    fun updatePhoto(photoEntity: Photo): Completable
+
+    fun deletePhoto(id: Long): Completable
+
+    fun addToFavourite(photo: Photo): Completable
+
+    fun deleteInFavourite(photo: Photo): Completable
+
+    fun chekFavourite(id: Long): Single<Boolean>
 }

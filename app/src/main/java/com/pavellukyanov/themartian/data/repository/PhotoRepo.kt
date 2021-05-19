@@ -10,9 +10,9 @@ interface PhotoRepo {
 
     fun getAllFavouritePhoto(): Single<List<Photo>>
 
-    fun insertPhotoToFavourite(photo: Photo): Completable
+    fun addPhotoToFavourite(photo: Photo): Completable
 
-    fun deletePhotoInFavourite(id: Long): Completable
+    fun deletePhotoInFavourite(photo: Photo): Completable
 
     fun checkFavourite(id: Long): Single<Boolean>
 }
