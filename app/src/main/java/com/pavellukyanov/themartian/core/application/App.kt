@@ -1,25 +1,38 @@
 package com.pavellukyanov.themartian.core.application
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
-import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.*
+import com.pavellukyanov.themartian.core.di.AppComponent
+import com.pavellukyanov.themartian.core.di.DaggerAppComponent
+import com.pavellukyanov.themartian.core.di.DaggerViewModelComponent
+import com.pavellukyanov.themartian.core.di.ViewModelComponent
 import com.pavellukyanov.themartian.utils.Constants
 import com.pavellukyanov.themartian.core.worker.RoverInfoUpdateWorker
-import dagger.hilt.android.HiltAndroidApp
-import kotlinx.coroutines.*
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-@HiltAndroidApp
-class App : Application(), Configuration.Provider {
-    private val scope = CoroutineScope(
-        Dispatchers.IO + SupervisorJob() + CoroutineExceptionHandler { _, e ->
-            Log.d("AppClass", "Exception - ${e.message}")
-        })
+class App : Application(), Configuration.Provider, HasAndroidInjector {
+    companion object {
+
+        lateinit var instance: App
+        lateinit var appComponent: AppComponent
+
+        fun applicationContext(): Context = instance
+    }
+
+    var viewModelComponent: ViewModelComponent? = null
+
+    @Inject lateinit var androidInjector : DispatchingAndroidInjector<Any>
+
+    override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
     @Inject
-    lateinit var workerFactory: HiltWorkerFactory
+    lateinit var workerFactory: WorkerFactory
 
     override fun getWorkManagerConfiguration(): Configuration =
         Configuration.Builder()
@@ -29,14 +42,19 @@ class App : Application(), Configuration.Provider {
 
     override fun onCreate() {
         super.onCreate()
+        viewModelComponent = DaggerViewModelComponent.create()
+        instance = this
+        DaggerAppComponent.builder()
+            .application(this)
+            .build()
+            .inject(this)
+
         initWorker()
     }
 
     private fun initWorker() {
-        scope.launch {
-            Log.d("ttt", "Worker")
-            setupWorker()
-        }
+        setupWorker()
+        Log.d("ttt", "Worker")
     }
 
     private fun setupWorker() {
@@ -54,5 +72,7 @@ class App : Application(), Configuration.Provider {
             ExistingPeriodicWorkPolicy.KEEP,
             repeatingRequest
         )
+
+//        WorkManager.initialize(this, workManagerConfiguration)
     }
 }

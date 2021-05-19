@@ -9,7 +9,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
@@ -85,22 +84,24 @@ dependencies {
 
     //Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     kapt "com.github.bumptech.glide:compiler:$glide_version"
 
     //Room
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
 
-    //Hilt
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    implementation "androidx.hilt:hilt-work:$hilt_submodule_version"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_submodule_version"
-    kapt "androidx.hilt:hilt-compiler:$hilt_submodule_version"
+    //Dagger2
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
 
     //Worker
     implementation "androidx.work:work-runtime-ktx:$worker_version"
+    implementation "androidx.work:work-rxjava2:$worker_version"
 
     //Navigation Components
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"

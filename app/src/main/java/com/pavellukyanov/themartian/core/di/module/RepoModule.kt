@@ -1,16 +1,14 @@
-package com.pavellukyanov.themartian.core.di
+package com.pavellukyanov.themartian.core.di.module
 
 import com.pavellukyanov.themartian.data.api.networkmonitor.NetworkMonitorImpl
 import com.pavellukyanov.themartian.data.database.repo.RoverInfoDatabaseImpl
 import com.pavellukyanov.themartian.data.api.repo.NetworkRepoImpl
+import com.pavellukyanov.themartian.data.database.repo.PhotoDatabaseImpl
 import com.pavellukyanov.themartian.data.repository.*
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-@InstallIn(SingletonComponent::class)
 @Module
 object RepoModule {
 
@@ -25,7 +23,7 @@ object RepoModule {
     @Singleton
     @Provides
     fun providePhotoRepo(
-        database: RoverInfoDatabaseImpl,
+        database: PhotoDatabaseImpl,
         networkRepo: NetworkRepoImpl,
         networkMonitorImpl: NetworkMonitorImpl
     ): PhotoRepo = PhotoRepoImpl(database, networkRepo, networkMonitorImpl)

@@ -1,15 +1,13 @@
-package com.pavellukyanov.themartian.core.di
+package com.pavellukyanov.themartian.core.di.module
 
 import android.util.Log
 import com.pavellukyanov.themartian.data.api.ApiNASA
 import com.pavellukyanov.themartian.utils.Constants.Companion.ALTERNATIVE_API_KEY_VALUE
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
 import com.pavellukyanov.themartian.utils.Constants.Companion.API_KEY_VALUE
 import com.pavellukyanov.themartian.utils.Constants.Companion.API_KEY
 import com.pavellukyanov.themartian.utils.Constants.Companion.BASE_URL
-import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.*
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -21,7 +19,6 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)
 object RouterModule {
 
     private val authInterceptor = Interceptor { chain ->

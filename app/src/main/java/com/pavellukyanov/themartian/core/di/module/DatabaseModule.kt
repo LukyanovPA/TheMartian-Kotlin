@@ -1,4 +1,4 @@
-package com.pavellukyanov.themartian.core.di
+package com.pavellukyanov.themartian.core.di.module
 
 import android.content.Context
 import androidx.room.Room
@@ -7,17 +7,13 @@ import com.pavellukyanov.themartian.data.database.dao.PhotoDao
 import com.pavellukyanov.themartian.data.database.dao.RoverInfoDao
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-@InstallIn(SingletonComponent::class)
 @Module
 object DatabaseModule {
     @Provides
     @Singleton
-    fun provideDatabase(@ApplicationContext context: Context): MartianDatabase {
+    fun provideDatabase(context: Context): MartianDatabase {
         return Room.databaseBuilder(
             context,
             MartianDatabase::class.java,

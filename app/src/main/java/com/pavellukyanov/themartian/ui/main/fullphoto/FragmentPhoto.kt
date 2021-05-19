@@ -10,14 +10,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.domain.Photo
-import com.pavellukyanov.themartian.data.domain.RoverInfo
 import com.pavellukyanov.themartian.data.repository.ResourceState
 import com.pavellukyanov.themartian.databinding.FragmentFullPhotoBinding
 import com.pavellukyanov.themartian.ui.main.roverdetails.AddFavouriteOnClickListener
 import com.pavellukyanov.themartian.ui.main.viewmodel.FavouritesViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class FragmentPhoto : Fragment(R.layout.fragment_full_photo) {
     private val favouritesViewModel: FavouritesViewModel by viewModels()
     private val args: FragmentPhotoArgs by navArgs()

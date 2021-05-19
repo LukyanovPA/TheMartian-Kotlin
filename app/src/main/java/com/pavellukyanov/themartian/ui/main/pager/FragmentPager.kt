@@ -12,18 +12,15 @@ import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
 import com.pavellukyanov.themartian.data.domain.RoverInfo
 import com.pavellukyanov.themartian.databinding.FragmentPagerBinding
 import com.pavellukyanov.themartian.ui.main.pager.adapter.ViewPageAdapter
 import com.pavellukyanov.themartian.ui.main.favourites.FragmentFavourites
 import com.pavellukyanov.themartian.ui.main.roverdetails.FragmentRoverDetails
 import com.pavellukyanov.themartian.ui.main.viewmodel.ExchangeViewModel
-import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
 
-@AndroidEntryPoint
 class FragmentPager : Fragment(R.layout.fragment_pager) {
     private val args: FragmentPagerArgs by navArgs()
     private val exchangeViewModel: ExchangeViewModel by activityViewModels()

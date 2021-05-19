@@ -3,20 +3,14 @@ package com.pavellukyanov.themartian.ui.main.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.pavellukyanov.themartian.data.domain.Photo
 import com.pavellukyanov.themartian.data.repository.PhotoRepo
 import com.pavellukyanov.themartian.data.repository.ResourceState
-import com.pavellukyanov.themartian.data.repository.RoverInfoRepo
-import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
 class FavouritesViewModel @Inject constructor(private val photoRepo: PhotoRepo) : ViewModel() {
     private var _favourites: MutableLiveData<ResourceState<List<Photo>>> = MutableLiveData()
     private val favourites: LiveData<ResourceState<List<Photo>>> get() = _favourites
