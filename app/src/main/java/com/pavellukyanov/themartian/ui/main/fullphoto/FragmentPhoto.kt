@@ -2,6 +2,7 @@ package com.pavellukyanov.themartian.ui.main.fullphoto
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -9,6 +10,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.domain.Photo
+import com.pavellukyanov.themartian.data.domain.RoverInfo
+import com.pavellukyanov.themartian.data.repository.ResourceState
 import com.pavellukyanov.themartian.databinding.FragmentFullPhotoBinding
 import com.pavellukyanov.themartian.ui.main.roverdetails.AddFavouriteOnClickListener
 import com.pavellukyanov.themartian.ui.main.viewmodel.FavouritesViewModel
@@ -29,7 +32,33 @@ class FragmentPhoto : Fragment(R.layout.fragment_full_photo) {
     }
 
     private fun checkIsFavourite(id: Long) {
-        isFavourite = favouritesViewModel.checkIsFavourite(id)
+        favouritesViewModel.checkIsFavourite(id).observe(viewLifecycleOwner, { onStateReceive(it) })
+    }
+
+    private fun onStateReceive(resourceState: ResourceState<Boolean>) {
+        when (resourceState) {
+            is ResourceState.Success -> handleSuccessState(resourceState.data)
+            is ResourceState.Loading -> handleLoadingState(true)
+            is ResourceState.Error -> handleErrorState(resourceState.error)
+        }
+    }
+
+    private fun handleSuccessState(state: Boolean) {
+        handleLoadingState(false)
+        isFavourite = state
+    }
+
+    private fun handleLoadingState(state: Boolean) {
+
+    }
+
+    private fun handleErrorState(error: Throwable?) {
+        handleLoadingState(false)
+        Toast.makeText(
+            requireContext(),
+            requireContext().getString(R.string.error_toast, error?.localizedMessage),
+            Toast.LENGTH_LONG
+        ).show()
     }
 
     private fun setupUI() {

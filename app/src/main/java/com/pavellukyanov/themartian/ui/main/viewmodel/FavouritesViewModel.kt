@@ -5,37 +5,63 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pavellukyanov.themartian.data.domain.Photo
+import com.pavellukyanov.themartian.data.repository.PhotoRepo
+import com.pavellukyanov.themartian.data.repository.ResourceState
 import com.pavellukyanov.themartian.data.repository.RoverInfoRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.Completable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FavouritesViewModel @Inject constructor(private val roverInfoRepo: RoverInfoRepo) : ViewModel() {
-    private var _favourites: MutableLiveData<List<Photo>> = MutableLiveData()
-    private val favourites: LiveData<List<Photo>> get() = _favourites
-    private var isFavourite = false
+class FavouritesViewModel @Inject constructor(private val photoRepo: PhotoRepo) : ViewModel() {
+    private var _favourites: MutableLiveData<ResourceState<List<Photo>>> = MutableLiveData()
+    private val favourites: LiveData<ResourceState<List<Photo>>> get() = _favourites
+    private var _isFavourite: MutableLiveData<ResourceState<Boolean>> = MutableLiveData()
+    private val isFavourite get() = _isFavourite
+    private val compositeDisposable by lazy { CompositeDisposable() }
 
     init {
-        viewModelScope.launch {
-            roverInfoRepo.getAllFavouritePhoto().observeForever {
-                _favourites.postValue(it)
-            }
-        }
+        _favourites.postValue(ResourceState.Loading)
+        compositeDisposable.add(photoRepo.getAllFavouritePhoto()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { _favourites.postValue(ResourceState.Loading) }
+            .subscribe(
+                { success ->
+                    _favourites.postValue(ResourceState.Success(success))
+                },
+                { error ->
+                    _favourites.postValue(ResourceState.Error(error))
+                }
+            )
+        )
     }
 
-    fun getAllFavourites(): LiveData<List<Photo>> = favourites
+    fun getAllFavourites(): LiveData<ResourceState<List<Photo>>> = favourites
 
-    fun deletePhoto(id: Long) {
-        viewModelScope.launch {
-            roverInfoRepo.deletePhotoInFavourite(id)
-        }
-    }
+    fun deletePhoto(photo: Photo) = photoRepo.deletePhotoInFavourite(photo)
 
-    fun checkIsFavourite(id: Long): Boolean {
-        viewModelScope.launch {
-            isFavourite = roverInfoRepo.checkFavourite(id)
-        }
+    fun checkIsFavourite(id: Long): LiveData<ResourceState<Boolean>> {
+        _isFavourite.postValue(ResourceState.Loading)
+        compositeDisposable.add(photoRepo.checkFavourite(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { _isFavourite.postValue(ResourceState.Loading) }
+            .subscribe(
+                { success ->
+                    _isFavourite.postValue(ResourceState.Success(success))
+                },
+                { error ->
+                    _isFavourite.postValue(ResourceState.Error(error))
+                }
+            )
+        )
         return isFavourite
     }
+
+    fun onDestroy() = compositeDisposable.dispose()
 }

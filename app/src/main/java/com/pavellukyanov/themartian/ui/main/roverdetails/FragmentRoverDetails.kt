@@ -2,6 +2,7 @@ package com.pavellukyanov.themartian.ui.main.roverdetails
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.domain.Photo
+import com.pavellukyanov.themartian.data.repository.ResourceState
 import com.pavellukyanov.themartian.databinding.FragmentRoverDetailsBinding
 import com.pavellukyanov.themartian.ui.main.roverdetails.adapter.GalleryAdapter
 import com.pavellukyanov.themartian.ui.main.viewmodel.ExchangeViewModel
@@ -33,11 +35,19 @@ class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRoverDetailsBinding.bind(view)
-        setupUI()
+        initRecycler()
         subscribeExchangeData()
     }
 
-    private fun setupUI() {
+    private fun onStateReceive(resourceState: ResourceState<List<Photo>>) {
+        when (resourceState) {
+            is ResourceState.Success -> handleSuccessState(resourceState.data)
+            is ResourceState.Loading -> handleLoadingState(true)
+            is ResourceState.Error -> handleErrorState(resourceState.error)
+        }
+    }
+
+    private fun initRecycler() {
         binding.rvDetails.apply {
             adapter = galleryAdapter
             layoutManager = GridLayoutManager(context, GRID_COLUMNS)
@@ -52,16 +62,10 @@ class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
 
     private fun subscribeMarsData(roverName: String, date: String) {
         detailViewModel.getPhotosForEarthData(roverName, date)
-            .observe(viewLifecycleOwner, { listPhotos ->
-                photosList = listPhotos.toMutableList()
-                retrieveList(photosList)
-                val cameras: HashSet<String> = hashSetOf()
-                listPhotos.forEach {
-                    cameras.add(it.camera)
-                }
-                exchangeViewModel.selectNetworkCameras(cameras)
-            })
+            .observe(viewLifecycleOwner, { onStateReceive(it) })
+    }
 
+    private fun changeRoverCamera() {
         exchangeViewModel.returnChooseCam().observe(viewLifecycleOwner, { choosedCam ->
             val filteredList = mutableListOf<Photo>()
             choosedCam.forEach { choos ->
@@ -77,6 +81,14 @@ class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
                 retrieveList(filteredList)
             }
         })
+    }
+
+    private fun setRoverCameras(listPhoto: List<Photo>): HashSet<String> {
+        val cameras: HashSet<String> = hashSetOf()
+        listPhoto.forEach {
+            cameras.add(it.camera)
+        }
+        return cameras
     }
 
     private val addToFavouriteOnClickListener = object : AddFavouriteOnClickListener {
@@ -96,9 +108,35 @@ class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
         }
     }
 
-    private fun retrieveList(photos: List<Photo>) {
+    private fun handleSuccessState(photos: List<Photo>) {
+        handleLoadingState(false)
+        exchangeViewModel.selectNetworkCameras(setRoverCameras(photos))
+        changeRoverCamera()
+        photosList = photos.toMutableList()
+        retrieveList(photosList)
+    }
+
+    private fun handleLoadingState(state: Boolean) {
+
+    }
+
+    private fun handleErrorState(error: Throwable?) {
+        handleLoadingState(false)
+        Toast.makeText(
+            requireContext(),
+            requireContext().getString(R.string.error_toast, error?.localizedMessage),
+            Toast.LENGTH_LONG
+        ).show()
+    }
+
+    private fun retrieveList(listPhoto: List<Photo>) {
         galleryAdapter.apply {
-            addPhotos(photos)
+            addPhotos(listPhoto)
         }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        detailViewModel.onDestroy()
     }
 }

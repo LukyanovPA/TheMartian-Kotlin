@@ -13,6 +13,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
+import com.pavellukyanov.themartian.data.domain.RoverInfo
 import com.pavellukyanov.themartian.databinding.FragmentPagerBinding
 import com.pavellukyanov.themartian.ui.main.pager.adapter.ViewPageAdapter
 import com.pavellukyanov.themartian.ui.main.favourites.FragmentFavourites
@@ -29,9 +30,9 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
     private lateinit var binding: FragmentPagerBinding
     private lateinit var pageAdapter: ViewPageAdapter
     private lateinit var viewPager: ViewPager2
-    private val roverName by lazy { args.roverInfoEntity.roverName }
-    private val photoDate by lazy { args.roverInfoEntity.maxDate }
-    private val minDate by lazy { args.roverInfoEntity.landingDate }
+    private val roverName by lazy { args.roverInfo.roverName }
+    private val photoDate by lazy { args.roverInfo.maxDate }
+    private val minDate by lazy { args.roverInfo.landingDate }
     private var fabIsOpen = false
     private var networkCameras = arrayListOf<String>()
     private var favouritesCameras = arrayListOf<String>()
@@ -41,7 +42,7 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPagerBinding.bind(view)
         initPageAdapter()
-        setupUI(args.roverInfoEntity)
+        setupUI(args.roverInfo)
         setupExchangeInformation(roverName, photoDate)
     }
 
@@ -96,7 +97,7 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
         })
     }
 
-    private fun setupUI(roverInfo: RoverInfoEntity) {
+    private fun setupUI(roverInfo: RoverInfo) {
         binding.buttonBack.setOnClickListener {
             exchangeViewModel.clearViewModel()
             activity?.onBackPressed()

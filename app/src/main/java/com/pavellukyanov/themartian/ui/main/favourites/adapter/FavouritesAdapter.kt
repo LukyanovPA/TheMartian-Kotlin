@@ -31,7 +31,7 @@ class FavouritesAdapter(
         holder.bind(getItem(position))
         holder.itemView.deleteFavourite.setOnClickListener {
             deleteFavouriteOnClickListener.deleteFavouriteOnClicked(
-                getItem(holder.absoluteAdapterPosition).id
+                getItem(holder.absoluteAdapterPosition)
             )
         }
         holder.itemView.setOnClickListener {

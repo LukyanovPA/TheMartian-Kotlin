@@ -17,15 +17,16 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
-    private lateinit var binding: FragmentMainBinding
+    private var _binding: FragmentMainBinding? = null
+    private val binding get() = _binding!!
     private val mainViewModel: MainViewModel by viewModels()
     private val mainAdapter by lazy { MainAdapter(mutableListOf(), clickListener) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentMainBinding.bind(view)
+        _binding = FragmentMainBinding.bind(view)
         subscribeLiveData()
-        setupUI()
+        initRecycler()
     }
 
     private fun subscribeLiveData() {
@@ -40,7 +41,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
     }
 
-    private fun setupUI() {
+    private fun initRecycler() {
+        //переделать адаптер на прием двух холдеров и показывать инфу о ровере в одном
         binding.mainRecycler.apply {
             adapter = mainAdapter
             layoutManager =
@@ -77,6 +79,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private fun showRoverDetailsFragment(roverInfo: RoverInfo) {
         val action = MainFragmentDirections.actionMainFragmentToFragmentPager(roverInfo)
         findNavController().navigate(action)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     override fun onDetach() {

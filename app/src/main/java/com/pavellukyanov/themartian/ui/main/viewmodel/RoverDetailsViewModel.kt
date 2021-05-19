@@ -3,47 +3,50 @@ package com.pavellukyanov.themartian.ui.main.viewmodel
 import androidx.lifecycle.*
 import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
 import com.pavellukyanov.themartian.data.domain.Photo
+import com.pavellukyanov.themartian.data.repository.PhotoRepo
 import com.pavellukyanov.themartian.data.repository.RoverInfoRepo
 import com.pavellukyanov.themartian.data.repository.ResourceState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
-class RoverDetailsViewModel @Inject constructor(private val roverInfoRepo: RoverInfoRepo) : ViewModel() {
-    private var _roverInfo: MutableLiveData<RoverInfoEntity> = MutableLiveData()
-    private val roverInfo: LiveData<RoverInfoEntity> get() = _roverInfo
-    private var _marsData: MutableLiveData<List<Photo>> = MutableLiveData()
-    private val marsData: LiveData<List<Photo>> get() = _marsData
+class RoverDetailsViewModel @Inject constructor(private val photoRepo: PhotoRepo) : ViewModel() {
+    private var _marsData: MutableLiveData<ResourceState<List<Photo>>> = MutableLiveData()
+    private val marsData: LiveData<ResourceState<List<Photo>>> get() = _marsData
+    private val compositeDisposable by lazy { CompositeDisposable() }
 
-    fun getPhotosForSol(roverName: String, sol: Long) = liveData(Dispatchers.IO) {
-        emit(ResourceState.loading(data = null))
-        try {
-            emit(ResourceState.success(data = roverInfoRepo.getPhotoForSol(roverName, sol)))
-        } catch (exception: Exception) {
-            emit(ResourceState.error(data = null, message = exception.message ?: "Error Occurred!"))
-        }
-    }
-
-    fun getPhotosForEarthData(roverName: String, earthData: String): LiveData<List<Photo>> {
-        viewModelScope.launch {
-            _marsData.postValue(roverInfoRepo.getPhotoForEarthDate(roverName, earthData))
-        }
+    fun getPhotosForEarthData(
+        roverName: String,
+        earthData: String
+    ): LiveData<ResourceState<List<Photo>>> {
+        _marsData.postValue(ResourceState.Loading)
+        compositeDisposable.add(photoRepo.loadPhotoForEarthDate(roverName, earthData)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { _marsData.postValue(ResourceState.Loading) }
+            .subscribe(
+                { success ->
+                    _marsData.postValue(ResourceState.Success(success))
+                },
+                { error ->
+                    _marsData.postValue(ResourceState.Error(error))
+                }
+            )
+        )
         return marsData
     }
 
-    fun getRoverInfo(roverName: String): LiveData<RoverInfoEntity> {
-        viewModelScope.launch {
-            _roverInfo.postValue(roverInfoRepo.loadAllRoverInfo(roverName))
-        }
-        return roverInfo
+    fun addPhotoToFavourite(photo: Photo) {
+        photoRepo.addPhotoToFavourite(photo)
     }
 
-    fun addPhotoToFavourite(photo: Photo) {
-        viewModelScope.launch {
-            roverInfoRepo.insertPhotoToFavourite(photo)
-        }
+    fun onDestroy() {
+        compositeDisposable.dispose()
     }
 }
