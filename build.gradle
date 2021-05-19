@@ -15,7 +15,7 @@ buildscript {
         live_dada_version = '2.3.1'
         legacy_version = '1.0.0'
         //Hilt
-        hilt_version = '2.33-beta'
+        hilt_version = '2.35.1'
         hilt_submodule_version = '1.0.0'
         //Room
         room_version = '2.3.0'
@@ -46,7 +46,6 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
-        def nav_version = "2.3.4"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
 
         // NOTE: Do not place your application dependencies here; they belong
