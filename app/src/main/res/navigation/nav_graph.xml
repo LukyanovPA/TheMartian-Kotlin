@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.pavellukyanov.themartian.ui.main.view.fragments.MainFragment"
+        android:name="com.pavellukyanov.themartian.ui.main.mainpage.MainFragment"
         android:label="MainFragment" >
         <action
             android:id="@+id/action_mainFragment_to_fragmentPager"
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentRoverDetails"
-        android:name="com.pavellukyanov.themartian.ui.main.view.fragments.FragmentRoverDetails"
+        android:name="com.pavellukyanov.themartian.ui.main.roverdetails.FragmentRoverDetails"
         android:label="FragmentRoverDetails" >
         <argument
             android:name="roverInfo"
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentPager"
-        android:name="com.pavellukyanov.themartian.ui.main.view.fragments.FragmentPager"
+        android:name="com.pavellukyanov.themartian.ui.main.pager.FragmentPager"
         android:label="fragment_pager"
         tools:layout="@layout/fragment_pager" >
         <action
@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentPhoto"
-        android:name="com.pavellukyanov.themartian.ui.main.view.fragments.FragmentPhoto"
+        android:name="com.pavellukyanov.themartian.ui.main.fullphoto.FragmentPhoto"
         android:label="FragmentPhoto" >
         <argument
             android:name="photo"

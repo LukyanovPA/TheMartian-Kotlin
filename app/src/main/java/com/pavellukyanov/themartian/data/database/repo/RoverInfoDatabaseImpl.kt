@@ -3,8 +3,8 @@ package com.pavellukyanov.themartian.data.database.repo
 import com.pavellukyanov.themartian.data.database.MartianDatabase
 import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
 import com.pavellukyanov.themartian.data.domain.RoverInfo
-import com.pavellukyanov.themartian.data.mapper.RoverInfoDomainToEntity
-import com.pavellukyanov.themartian.data.mapper.RoverInfoEntityToDomain
+import com.pavellukyanov.themartian.data.mapper.roverinfomapper.RoverInfoDomainToEntity
+import com.pavellukyanov.themartian.data.mapper.roverinfomapper.RoverInfoEntityToDomain
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers

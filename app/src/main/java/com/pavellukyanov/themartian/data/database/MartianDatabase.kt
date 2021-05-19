@@ -2,6 +2,8 @@ package com.pavellukyanov.themartian.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.pavellukyanov.themartian.data.database.dao.PhotoDao
+import com.pavellukyanov.themartian.data.database.dao.RoverInfoDao
 import com.pavellukyanov.themartian.data.database.models.PhotoEntity
 import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
 

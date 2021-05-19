@@ -2,14 +2,10 @@ package com.pavellukyanov.themartian.data.api.repo
 
 import com.pavellukyanov.themartian.data.api.ApiNASA
 import com.pavellukyanov.themartian.data.api.models.MarsApi
-import com.pavellukyanov.themartian.data.api.models.RoverInfoApi
-import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
 import com.pavellukyanov.themartian.data.domain.Photo
 import com.pavellukyanov.themartian.data.domain.RoverInfo
-import com.pavellukyanov.themartian.data.mapper.PhotoPojoToDomain
-import com.pavellukyanov.themartian.data.mapper.RoverInfoEntityToDomain
-import com.pavellukyanov.themartian.data.mapper.RoverInfoPojoToDomain
-import io.reactivex.Observable
+import com.pavellukyanov.themartian.data.mapper.photomapper.PhotoPojoToDomain
+import com.pavellukyanov.themartian.data.mapper.roverinfomapper.RoverInfoPojoToDomain
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject

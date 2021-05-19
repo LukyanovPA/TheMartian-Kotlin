@@ -1,8 +1,6 @@
 package com.pavellukyanov.themartian.data.repository
 
 import com.pavellukyanov.themartian.data.api.networkmonitor.NetworkMonitor
-import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
-import com.pavellukyanov.themartian.data.mapper.RoverInfoPojoToEntity
 import com.pavellukyanov.themartian.data.database.repo.RoverInfoDatabase
 import com.pavellukyanov.themartian.data.api.repo.NetworkRepo
 import com.pavellukyanov.themartian.data.domain.RoverInfo
@@ -10,11 +8,8 @@ import com.pavellukyanov.themartian.utils.Constants.Companion.ROVER_NAMES
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
-import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.*
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 

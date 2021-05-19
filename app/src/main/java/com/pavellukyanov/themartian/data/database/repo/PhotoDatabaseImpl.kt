@@ -3,8 +3,8 @@ package com.pavellukyanov.themartian.data.database.repo
 import com.pavellukyanov.themartian.data.database.MartianDatabase
 import com.pavellukyanov.themartian.data.database.models.PhotoEntity
 import com.pavellukyanov.themartian.data.domain.Photo
-import com.pavellukyanov.themartian.data.mapper.PhotoDomainToEntity
-import com.pavellukyanov.themartian.data.mapper.PhotoEntityToDomain
+import com.pavellukyanov.themartian.data.mapper.photomapper.PhotoDomainToEntity
+import com.pavellukyanov.themartian.data.mapper.photomapper.PhotoEntityToDomain
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers

@@ -3,8 +3,8 @@ package com.pavellukyanov.themartian.core.di
 import android.content.Context
 import androidx.room.Room
 import com.pavellukyanov.themartian.data.database.MartianDatabase
-import com.pavellukyanov.themartian.data.database.PhotoDao
-import com.pavellukyanov.themartian.data.database.RoverInfoDao
+import com.pavellukyanov.themartian.data.database.dao.PhotoDao
+import com.pavellukyanov.themartian.data.database.dao.RoverInfoDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
