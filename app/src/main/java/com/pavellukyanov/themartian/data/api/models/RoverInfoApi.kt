@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class RoverInfo(
+class RoverInfoApi(
     @SerializedName("name")
     var name: String,
     @SerializedName("landing_date")
@@ -21,5 +21,5 @@ class RoverInfo(
     @SerializedName("total_photos")
     var totalPhotos: Long,
     @SerializedName("photos")
-    var photos: List<PhotosInfo>
+    var photos: List<PhotosInfoApi>
 ) : Parcelable

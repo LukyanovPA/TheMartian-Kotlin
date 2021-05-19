@@ -1,23 +1,24 @@
 package com.pavellukyanov.themartian.data.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
+import io.reactivex.Completable
+import io.reactivex.Single
 
 @Dao
 interface RoverInfoDao {
     @Query("SELECT * FROM rover_info WHERE roverName = :roverName")
-    suspend fun getRoverInfo(roverName: String): RoverInfoEntity
+    fun getRoverInfo(roverName: String): Single<RoverInfoEntity>
 
     @Query("SELECT * FROM rover_info")
-    fun getAllRoverInfo(): LiveData<List<RoverInfoEntity>>
+    fun getAllRoverInfo(): Single<List<RoverInfoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRoverInfo(roverInfoEntity: RoverInfoEntity): Long
+    fun insertRoverInfo(roverInfoEntity: RoverInfoEntity): Completable
 
     @Update
-    suspend fun updateRoverInfo(roverInfoEntity: RoverInfoEntity)
+    fun updateRoverInfo(roverInfoEntity: RoverInfoEntity): Completable
 
     @Query("DELETE FROM rover_info WHERE roverName = :roverName")
-    suspend fun deleteRoverInfo(roverName: String)
+    fun deleteRoverInfo(roverName: String): Completable
 }

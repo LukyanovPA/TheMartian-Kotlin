@@ -7,8 +7,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.data.api.models.Photo
-import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
+import com.pavellukyanov.themartian.data.domain.RoverInfo
+import com.pavellukyanov.themartian.data.repository.ResourceState
 import com.pavellukyanov.themartian.databinding.FragmentMainBinding
 import com.pavellukyanov.themartian.ui.main.adapters.*
 import com.pavellukyanov.themartian.ui.main.viewmodel.MainViewModel
@@ -28,7 +28,15 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun subscribeLiveData() {
-        mainViewModel.getRoverManifest().observe(viewLifecycleOwner, { retrieveList(it) })
+        mainViewModel.getRoverManifest().observe(viewLifecycleOwner, { onStateReceive(it) })
+    }
+
+    private fun onStateReceive(resourceState: ResourceState<List<RoverInfo>>) {
+        when (resourceState) {
+            is ResourceState.Success -> handleSuccessState(resourceState.data)
+            is ResourceState.Loading -> handleLoadingState(true)
+            is ResourceState.Error -> handleErrorState(resourceState.error)
+        }
     }
 
     private fun setupUI() {
@@ -44,20 +52,34 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
     }
 
-    private fun retrieveList(roversInfo: List<RoverInfoEntity>) {
+    private fun handleSuccessState(roversInfo: List<RoverInfo>) {
+        handleLoadingState(false)
         mainAdapter.apply {
             addRoversInfo(roversInfo)
         }
     }
 
+    private fun handleLoadingState(state: Boolean) {
+
+    }
+
+    private fun handleErrorState(error: Throwable?) {
+
+    }
+
     private val clickListener = object : RoverInfoClickListener {
-        override fun onRoverInfoItemClicked(roverInfoEntity: RoverInfoEntity) {
-            showRoverDetailsFragment(roverInfoEntity)
+        override fun onRoverInfoItemClicked(roverInfo: RoverInfo) {
+            showRoverDetailsFragment(roverInfo)
         }
     }
 
-    private fun showRoverDetailsFragment(roverInfoEntity: RoverInfoEntity) {
-        val action = MainFragmentDirections.actionMainFragmentToFragmentPager(roverInfoEntity)
+    private fun showRoverDetailsFragment(roverInfo: RoverInfo) {
+        val action = MainFragmentDirections.actionMainFragmentToFragmentPager(roverInfo)
         findNavController().navigate(action)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        mainViewModel.onDestroy()
     }
 }

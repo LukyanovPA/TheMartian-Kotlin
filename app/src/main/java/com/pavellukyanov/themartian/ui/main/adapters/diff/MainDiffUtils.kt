@@ -1,11 +1,11 @@
 package com.pavellukyanov.themartian.ui.main.adapters.diff
 
 import androidx.recyclerview.widget.DiffUtil
-import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
+import com.pavellukyanov.themartian.data.domain.RoverInfo
 
 class MainDiffUtils(
-    private val oldList: List<RoverInfoEntity>,
-    private val newList: List<RoverInfoEntity>
+    private val oldList: List<RoverInfo>,
+    private val newList: List<RoverInfo>
 ) : DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldList.size
 

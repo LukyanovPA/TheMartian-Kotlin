@@ -36,8 +36,8 @@
             android:id="@+id/action_fragmentPager_to_fragmentPhoto"
             app:destination="@id/fragmentPhoto" />
         <argument
-            android:name="roverInfoEntity"
-            app:argType="com.pavellukyanov.themartian.data.database.models.RoverInfoEntity" />
+            android:name="roverInfo"
+            app:argType="com.pavellukyanov.themartian.data.domain.RoverInfo" />
     </fragment>
     <fragment
         android:id="@+id/fragmentPhoto"

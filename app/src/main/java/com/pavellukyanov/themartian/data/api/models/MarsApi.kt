@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class Mars(
+class MarsApi(
     @SerializedName("photos")
-    val photos: ArrayList<Photo>
+    val photoApis: ArrayList<PhotoApi>
 ): Parcelable

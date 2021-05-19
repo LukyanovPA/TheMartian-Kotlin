@@ -12,5 +12,6 @@ class Constants {
         const val API_KEY_VALUE = "f8FYngXOCFmWPVOgmcugDO5JwAsPB238oee4wh6V"
         const val API_KEY = "api_key"
         const val GRID_COLUMNS = 2
+        val ROVER_NAMES = listOf(CURIOSITY, OPPORTUNITY, SPIRIT, PERSEVERANCE)
     }
 }

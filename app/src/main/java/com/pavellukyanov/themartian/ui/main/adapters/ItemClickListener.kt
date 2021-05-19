@@ -1,7 +1,7 @@
 package com.pavellukyanov.themartian.ui.main.adapters
 
-import com.pavellukyanov.themartian.data.domain.DomainPhoto
+import com.pavellukyanov.themartian.data.domain.Photo
 
 interface ItemClickListener {
-    fun onItemClicked(domainPhoto: DomainPhoto)
+    fun onItemClicked(photo: Photo)
 }

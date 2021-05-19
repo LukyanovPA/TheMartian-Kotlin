@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.pavellukyanov.themartian.data.repository.MainRepo
+import com.pavellukyanov.themartian.data.repository.RoverInfoRepo
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import javax.inject.Inject
@@ -16,11 +16,11 @@ class RoverInfoUpdateWorker @AssistedInject constructor(
     @Assisted params: WorkerParameters
 ) : CoroutineWorker(appContext, params){
 
-    @Inject lateinit var mainRepo: MainRepo
+    @Inject lateinit var roverInfoRepo: RoverInfoRepo
 
     override suspend fun doWork(): Result {
         try {
-            mainRepo.setRoverInfoFromWorker()
+            roverInfoRepo.setRoverInfoFromWorker()
             Log.d("ttt", "Worker work!")
         } catch (e: Exception) {
             return Result.retry()

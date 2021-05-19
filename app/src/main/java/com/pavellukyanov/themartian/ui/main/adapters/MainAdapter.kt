@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
+import com.pavellukyanov.themartian.data.domain.RoverInfo
 import com.pavellukyanov.themartian.databinding.MainPageViewHolderBinding
 import com.pavellukyanov.themartian.ui.main.adapters.diff.MainDiffUtils
 import com.pavellukyanov.themartian.utils.Constants.Companion.CURIOSITY
@@ -16,7 +16,7 @@ import com.pavellukyanov.themartian.utils.Constants.Companion.SPIRIT
 import com.pavellukyanov.themartian.utils.Constants.Companion.PERSEVERANCE
 
 class MainAdapter(
-    private var roverInfo: List<RoverInfoEntity>,
+    private var roverInfo: List<RoverInfo>,
     private val clickListener: RoverInfoClickListener
 ) : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
@@ -35,11 +35,11 @@ class MainAdapter(
         }
     }
 
-    private fun getItem(position: Int): RoverInfoEntity = roverInfo[position]
+    private fun getItem(position: Int): RoverInfo = roverInfo[position]
 
     override fun getItemCount(): Int = roverInfo.size
 
-    fun addRoversInfo(rovers: List<RoverInfoEntity>) {
+    fun addRoversInfo(rovers: List<RoverInfo>) {
         val diffUtils = MainDiffUtils(roverInfo, rovers)
         val diffResult = DiffUtil.calculateDiff(diffUtils)
         roverInfo = rovers
@@ -49,7 +49,7 @@ class MainAdapter(
     class MainViewHolder(private val binding: MainPageViewHolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(roverInfo: RoverInfoEntity) {
+        fun bind(roverInfo: RoverInfo) {
             with(binding) {
                 Glide.with(itemView.context)
                     .asBitmap()

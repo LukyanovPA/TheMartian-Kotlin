@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 
 //Manifest Rover data class
 @Parcelize
-class RoverManifest(
+class RoverManifestApi(
     @SerializedName("photo_manifest")
-    val photoManifest: RoverInfo
+    val photoManifest: RoverInfoApi
 ): Parcelable

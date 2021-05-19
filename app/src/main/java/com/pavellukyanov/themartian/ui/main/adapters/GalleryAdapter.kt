@@ -2,24 +2,20 @@ package com.pavellukyanov.themartian.ui.main.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.pavellukyanov.themartian.data.api.models.Photo
-import com.pavellukyanov.themartian.data.domain.DomainPhoto
+import com.pavellukyanov.themartian.data.domain.Photo
 import com.pavellukyanov.themartian.databinding.RvGalleryItemBinding
 import com.pavellukyanov.themartian.ui.main.adapters.GalleryAdapter.DataViewHolder
 import com.pavellukyanov.themartian.ui.main.adapters.diff.GalleryDiffUtils
 import kotlinx.android.synthetic.main.rv_gallery_item.view.*
-import java.util.*
 
 class GalleryAdapter(
-    private var photos: List<DomainPhoto>,
+    private var photos: List<Photo>,
     private val favouriteClickListener: AddFavouriteOnClickListener,
     private val itemClickListener: ItemClickListener
 ) : RecyclerView.Adapter<DataViewHolder>() {
@@ -48,9 +44,9 @@ class GalleryAdapter(
 
     override fun getItemCount(): Int = photos.size
 
-    private fun getItem(position: Int): DomainPhoto = photos[position]
+    private fun getItem(position: Int): Photo = photos[position]
 
-    fun addPhotos(newPhotos: List<DomainPhoto>) {
+    fun addPhotos(newPhotos: List<Photo>) {
         val diffUtils = GalleryDiffUtils(photos, newPhotos)
         val diffResult = DiffUtil.calculateDiff(diffUtils)
         photos = newPhotos
@@ -60,7 +56,7 @@ class GalleryAdapter(
     class DataViewHolder(private val binding: RvGalleryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(photo: DomainPhoto) {
+        fun bind(photo: Photo) {
             with(itemView) {
                 Glide.with(context)
                     .asBitmap()

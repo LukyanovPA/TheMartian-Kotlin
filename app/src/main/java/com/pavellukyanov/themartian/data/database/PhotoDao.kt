@@ -3,21 +3,23 @@ package com.pavellukyanov.themartian.data.database
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.pavellukyanov.themartian.data.database.models.PhotoEntity
+import io.reactivex.Completable
+import io.reactivex.Single
 
 @Dao
 interface PhotoDao {
     @Query("SELECT * FROM favourites WHERE id = :id")
-    suspend fun getPhoto(id: Long): PhotoEntity
+    fun getPhoto(id: Long): Single<PhotoEntity>
 
     @Query("SELECT * FROM favourites")
-    fun getAllPhotos(): LiveData<List<PhotoEntity>>
+    fun getAllPhotos(): Single<List<PhotoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPhoto(photoEntity: PhotoEntity): Long
+    fun insertPhoto(photoEntity: PhotoEntity): Completable
 
     @Update
-    suspend fun updatePhoto(photoEntity: PhotoEntity)
+    fun updatePhoto(photoEntity: PhotoEntity): Completable
 
     @Query("DELETE FROM favourites WHERE id = :id")
-    suspend fun deletePhoto(id: Long)
+    fun deletePhoto(id: Long): Completable
 }

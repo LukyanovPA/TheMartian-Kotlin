@@ -7,11 +7,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.data.api.models.Photo
-import com.pavellukyanov.themartian.data.domain.DomainPhoto
+import com.pavellukyanov.themartian.data.domain.Photo
 import com.pavellukyanov.themartian.databinding.FragmentFullPhotoBinding
 import com.pavellukyanov.themartian.ui.main.adapters.AddFavouriteOnClickListener
 import com.pavellukyanov.themartian.ui.main.viewmodel.FavouritesViewModel
@@ -45,7 +42,7 @@ class FragmentPhoto : Fragment(R.layout.fragment_full_photo) {
     }
 
     private val addFavouriteOnClickListener = object : AddFavouriteOnClickListener {
-        override fun addToFavouriteOnClicked(photo: DomainPhoto) {
+        override fun addToFavouriteOnClicked(photo: Photo) {
             TODO("Not yet implemented")
         }
     }

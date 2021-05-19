@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.data.domain.DomainPhoto
+import com.pavellukyanov.themartian.data.domain.Photo
 import com.pavellukyanov.themartian.databinding.FragmentFavouritesBinding
 import com.pavellukyanov.themartian.ui.main.adapters.DeleteFavouriteOnClickListener
 import com.pavellukyanov.themartian.ui.main.adapters.FavouritesAdapter
@@ -30,7 +30,7 @@ class FragmentFavourites : Fragment(R.layout.fragment_favourites) {
         )
     }
     private lateinit var binding: FragmentFavouritesBinding
-    private var favouritesList = mutableListOf<DomainPhoto>()
+    private var favouritesList = mutableListOf<Photo>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,7 +54,7 @@ class FragmentFavourites : Fragment(R.layout.fragment_favourites) {
         })
 
         exchangeViewModel.returnChooseFavCam().observe(viewLifecycleOwner, { choosedCam ->
-            val filteredList = mutableListOf<DomainPhoto>()
+            val filteredList = mutableListOf<Photo>()
             choosedCam.forEach { choos ->
                 favouritesList.forEach { photo ->
                     if (photo.camera == choos) {
@@ -70,7 +70,7 @@ class FragmentFavourites : Fragment(R.layout.fragment_favourites) {
         })
 
         exchangeViewModel.returnChoosedRovers().observe(viewLifecycleOwner, { choosedRovers ->
-            val filteredList = mutableListOf<DomainPhoto>()
+            val filteredList = mutableListOf<Photo>()
             choosedRovers.forEach { choos ->
                 favouritesList.forEach { photo ->
                     if (photo.rover == choos) {
@@ -105,12 +105,12 @@ class FragmentFavourites : Fragment(R.layout.fragment_favourites) {
     }
 
     private val itemClickListener = object : ItemClickListener {
-        override fun onItemClicked(domainPhoto: DomainPhoto) {
+        override fun onItemClicked(photo: Photo) {
             //доделать
         }
     }
 
-    private fun retrieveList(list: List<DomainPhoto>) {
+    private fun retrieveList(list: List<Photo>) {
         favouritesAdapter.apply {
             addPhotos(list)
         }

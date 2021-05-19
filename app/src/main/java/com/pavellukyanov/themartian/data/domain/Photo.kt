@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class DomainPhoto(
+class Photo(
     val id: Long,
     val camera: String,
     val srcPhoto: String,

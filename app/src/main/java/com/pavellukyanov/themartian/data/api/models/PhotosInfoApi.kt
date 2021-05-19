@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class PhotosInfo(
+class PhotosInfoApi(
     @SerializedName("sol")
     val sol: Long,
     @SerializedName("earth_date")

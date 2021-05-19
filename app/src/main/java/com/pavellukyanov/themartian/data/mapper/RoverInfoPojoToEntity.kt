@@ -1,10 +1,11 @@
 package com.pavellukyanov.themartian.data.mapper
 
-import com.pavellukyanov.themartian.data.api.models.RoverInfo
+import com.pavellukyanov.themartian.data.api.models.RoverInfoApi
 import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
+import com.pavellukyanov.themartian.data.domain.RoverInfo
 
-class RoverInfoToEntity : Mapper<RoverInfo, RoverInfoEntity> {
-    override fun invoke(source: RoverInfo): RoverInfoEntity {
+class RoverInfoPojoToEntity : Mapper<RoverInfoApi, RoverInfoEntity> {
+    override fun invoke(source: RoverInfoApi): RoverInfoEntity {
         return RoverInfoEntity(
             source.name,
             source.landingDate,

@@ -1,8 +1,7 @@
 package com.pavellukyanov.themartian.ui.main.adapters
 
-import com.pavellukyanov.themartian.data.api.models.Photo
-import com.pavellukyanov.themartian.data.domain.DomainPhoto
+import com.pavellukyanov.themartian.data.domain.Photo
 
 interface AddFavouriteOnClickListener {
-    fun addToFavouriteOnClicked(photo: DomainPhoto)
+    fun addToFavouriteOnClicked(photo: Photo)
 }

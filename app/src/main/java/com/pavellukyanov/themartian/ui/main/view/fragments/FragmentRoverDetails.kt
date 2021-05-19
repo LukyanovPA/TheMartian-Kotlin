@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.data.domain.DomainPhoto
+import com.pavellukyanov.themartian.data.domain.Photo
 import com.pavellukyanov.themartian.databinding.FragmentRoverDetailsBinding
 import com.pavellukyanov.themartian.ui.main.adapters.AddFavouriteOnClickListener
 import com.pavellukyanov.themartian.ui.main.adapters.GalleryAdapter
@@ -30,7 +30,7 @@ class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
             itemClickListener
         )
     }
-    private var photosList = mutableListOf<DomainPhoto>()
+    private var photosList = mutableListOf<Photo>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,7 +65,7 @@ class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
             })
 
         exchangeViewModel.returnChooseCam().observe(viewLifecycleOwner, { choosedCam ->
-            val filteredList = mutableListOf<DomainPhoto>()
+            val filteredList = mutableListOf<Photo>()
             choosedCam.forEach { choos ->
                 photosList.forEach { photo ->
                     if (photo.camera == choos) {
@@ -82,7 +82,7 @@ class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
     }
 
     private val addToFavouriteOnClickListener = object : AddFavouriteOnClickListener {
-        override fun addToFavouriteOnClicked(photo: DomainPhoto) {
+        override fun addToFavouriteOnClicked(photo: Photo) {
             detailViewModel.addPhotoToFavourite(photo)
             Snackbar.make(
                 binding.scrollLayout,
@@ -93,12 +93,12 @@ class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
     }
 
     private val itemClickListener = object : ItemClickListener {
-        override fun onItemClicked(domainPhoto: DomainPhoto) {
+        override fun onItemClicked(photo: Photo) {
             //доделать
         }
     }
 
-    private fun retrieveList(photos: List<DomainPhoto>) {
+    private fun retrieveList(photos: List<Photo>) {
         galleryAdapter.apply {
             addPhotos(photos)
         }
