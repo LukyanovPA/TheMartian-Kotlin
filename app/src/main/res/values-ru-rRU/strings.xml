@@ -4,7 +4,7 @@
     <string name="the_martian">The Martian</string>
     <string name="slogan">Путешествие по красной планете</string>
     <string name="choose_a_rover">Выберите ровер</string>
-    <string name="rover_name">Curiosity</string>
+    <string name="gallery_title">Галерея</string>
     <string name="launch_date_title">Дата запуска:</string>
     <string name="details_launch_date_title">ДАТА ЗАПУСКА</string>
     <string name="latest_photo_title">Последнее фото:</string>
@@ -39,4 +39,5 @@
     <string name="cancel_button">CANCEL</string>
     <string name="select_all">Выбрать все</string>
     <string name="error_toast">Что-то пошло не так: %1s</string>
+    <string name="temp_rover_name">Curiosity</string>
 </resources>

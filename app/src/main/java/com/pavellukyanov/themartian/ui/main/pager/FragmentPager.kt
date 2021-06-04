@@ -18,9 +18,11 @@ import com.pavellukyanov.themartian.ui.main.pager.adapter.ViewPageAdapter
 import com.pavellukyanov.themartian.ui.main.favourites.FragmentFavourites
 import com.pavellukyanov.themartian.ui.main.roverdetails.FragmentRoverDetails
 import com.pavellukyanov.themartian.ui.main.viewmodel.ExchangeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
 
+@AndroidEntryPoint
 class FragmentPager : Fragment(R.layout.fragment_pager) {
     private val args: FragmentPagerArgs by navArgs()
     private val exchangeViewModel: ExchangeViewModel by activityViewModels()
@@ -39,7 +41,7 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPagerBinding.bind(view)
         initPageAdapter()
-        setupUI(args.roverInfo)
+        setupUI()
         setupExchangeInformation(roverName, photoDate)
     }
 
@@ -94,15 +96,15 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
         })
     }
 
-    private fun setupUI(roverInfo: RoverInfo) {
+    private fun setupUI() {
         binding.buttonBack.setOnClickListener {
             exchangeViewModel.clearViewModel()
             activity?.onBackPressed()
         }
-        binding.roverDetailsName.text = roverInfo.roverName
-        binding.detailsLaunchDate.text = roverInfo.launchData
-        binding.detailsTotalPhoto.text = roverInfo.totalPhotos
-        binding.detailsLatestPhoto.text = roverInfo.maxDate
+//        binding.roverDetailsName.text = roverInfo.roverName
+//        binding.detailsLaunchDate.text = roverInfo.launchData
+//        binding.detailsTotalPhoto.text = roverInfo.totalPhotos
+//        binding.detailsLatestPhoto.text = roverInfo.maxDate
 
         binding.fabSetting.setOnClickListener {
             changeFab(fabIsOpen)

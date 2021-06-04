@@ -4,11 +4,13 @@ import androidx.lifecycle.*
 import com.pavellukyanov.themartian.data.domain.Photo
 import com.pavellukyanov.themartian.data.repository.PhotoRepo
 import com.pavellukyanov.themartian.data.repository.ResourceState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
+@HiltViewModel
 class RoverDetailsViewModel @Inject constructor(private val photoRepo: PhotoRepo) : ViewModel() {
     private var _marsData: MutableLiveData<ResourceState<List<Photo>>> = MutableLiveData()
     private val marsData: LiveData<ResourceState<List<Photo>>> get() = _marsData

@@ -10,13 +10,13 @@ import io.reactivex.Observable
 import io.reactivex.Single
 
 interface RoverInfoDatabase {
-    fun getRoverInfo(roverName: String): Single<RoverInfo>
+    fun getRoverInfo(roverName: String): Observable<RoverInfo>
 
-    fun getAllRoverInfo(): Single<List<RoverInfo>>
+    fun getAllRoverInfo(): Observable<List<RoverInfo>>
 
-    fun insertRoverInfo(roverInfo: RoverInfo): Completable
+    fun insertRoverInfo(roverInfo: RoverInfo)
 
-    fun updateRoverInfo(roverInfoEntity: RoverInfoEntity): Completable
+    fun updateRoverInfo(roverInfoEntity: RoverInfoEntity)
 
-    fun deleteRoverInfo(roverName: String): Completable
+    fun deleteRoverInfo(roverName: String)
 }

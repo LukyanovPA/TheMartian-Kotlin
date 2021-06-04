@@ -14,7 +14,9 @@ import com.pavellukyanov.themartian.data.repository.ResourceState
 import com.pavellukyanov.themartian.databinding.FragmentFullPhotoBinding
 import com.pavellukyanov.themartian.ui.main.roverdetails.AddFavouriteOnClickListener
 import com.pavellukyanov.themartian.ui.main.viewmodel.FavouritesViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FragmentPhoto : Fragment(R.layout.fragment_full_photo) {
     private val favouritesViewModel: FavouritesViewModel by viewModels()
     private val args: FragmentPhotoArgs by navArgs()

@@ -42,82 +42,15 @@
                     app:srcCompat="@drawable/abc_vector_test" />
 
                 <TextView
-                    android:id="@+id/roverDetailsName"
+                    android:id="@+id/galleryTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/rover_name"
+                    android:text="@string/gallery_title"
                     android:textAppearance="@style/roverName"
                     app:layout_constraintBottom_toBottomOf="@+id/buttonBack"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/buttonBack"
-                    app:layout_constraintTop_toTopOf="@+id/buttonBack" />
-
-                <TextView
-                    android:id="@+id/detailsLaunchDateTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:textAppearance="@style/roverInformationTitle"
-                    android:text="@string/details_launch_date_title"
-                    app:layout_constraintEnd_toStartOf="@+id/detailsTotalPhotoTitle"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/roverDetailsName"
-                    tools:ignore="SmallSp" />
-
-                <TextView
-                    android:id="@+id/detailsTotalPhotoTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/details_total_photo_title"
-                    android:textAppearance="@style/roverInformationTitle"
-                    app:layout_constraintEnd_toStartOf="@+id/detailsLatestPhotoTitle"
-                    app:layout_constraintStart_toEndOf="@id/detailsLaunchDateTitle"
-                    app:layout_constraintTop_toBottomOf="@+id/roverDetailsName"
-                    tools:ignore="SmallSp" />
-
-                <TextView
-                    android:id="@+id/detailsLatestPhotoTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/details_latest_photo_title"
-                    android:textAppearance="@style/roverInformationTitle"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/detailsTotalPhotoTitle"
-                    app:layout_constraintTop_toBottomOf="@+id/roverDetailsName"
-                    tools:ignore="SmallSp" />
-
-                <TextView
-                    android:id="@+id/detailsLaunchDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/launch_date"
-                    android:textAppearance="@style/roverInformation"
-                    app:layout_constraintEnd_toEndOf="@+id/detailsLaunchDateTitle"
-                    app:layout_constraintStart_toStartOf="@+id/detailsLaunchDateTitle"
-                    app:layout_constraintTop_toBottomOf="@+id/detailsLaunchDateTitle" />
-
-                <TextView
-                    android:id="@+id/detailsTotalPhoto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/total_photos"
-                    android:textAppearance="@style/roverInformation"
-                    app:layout_constraintEnd_toEndOf="@+id/detailsTotalPhotoTitle"
-                    app:layout_constraintStart_toStartOf="@+id/detailsTotalPhotoTitle"
-                    app:layout_constraintTop_toBottomOf="@+id/detailsTotalPhotoTitle" />
-
-                <TextView
-                    android:id="@+id/detailsLatestPhoto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/latest_photo"
-                    android:textAppearance="@style/roverInformation"
-                    app:layout_constraintEnd_toEndOf="@+id/detailsLatestPhotoTitle"
-                    app:layout_constraintStart_toStartOf="@+id/detailsLatestPhotoTitle"
-                    app:layout_constraintTop_toBottomOf="@+id/detailsLatestPhotoTitle" />
+                    app:layout_constraintTop_toTopOf="@+id/buttonBack" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

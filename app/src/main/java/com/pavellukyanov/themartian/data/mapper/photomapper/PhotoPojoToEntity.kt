@@ -12,7 +12,6 @@ class PhotoPojoToEntity : Mapper<PhotoApi, PhotoEntity> {
             source.srcPhoto,
             source.dataEarth,
             source.roverApi.roverName,
-            source.cameraApi.name,
-            0
+            source.cameraApi.name
         )
 }

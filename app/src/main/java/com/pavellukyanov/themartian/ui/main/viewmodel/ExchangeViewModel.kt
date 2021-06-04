@@ -1,8 +1,11 @@
 package com.pavellukyanov.themartian.ui.main.viewmodel
 
 import androidx.lifecycle.*
+import com.pavellukyanov.themartian.data.domain.RoverInfo
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class ExchangeViewModel @Inject constructor() : ViewModel() {
     private var _camerasNetworkData: MutableLiveData<HashSet<String>> = MutableLiveData()
     private val camerasNetworkData: LiveData<HashSet<String>> get() = _camerasNetworkData

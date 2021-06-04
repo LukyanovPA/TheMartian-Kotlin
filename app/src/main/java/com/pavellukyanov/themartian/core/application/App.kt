@@ -1,38 +1,20 @@
 package com.pavellukyanov.themartian.core.application
 
 import android.app.Application
-import android.content.Context
 import android.util.Log
 import androidx.work.*
-import com.pavellukyanov.themartian.core.di.AppComponent
-import com.pavellukyanov.themartian.core.di.DaggerAppComponent
-import com.pavellukyanov.themartian.core.di.DaggerViewModelComponent
-import com.pavellukyanov.themartian.core.di.ViewModelComponent
+import androidx.hilt.work.HiltWorkerFactory
 import com.pavellukyanov.themartian.utils.Constants
 import com.pavellukyanov.themartian.core.worker.RoverInfoUpdateWorker
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
+import dagger.hilt.android.HiltAndroidApp
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class App : Application(), Configuration.Provider, HasAndroidInjector {
-    companion object {
-
-        lateinit var instance: App
-        lateinit var appComponent: AppComponent
-
-        fun applicationContext(): Context = instance
-    }
-
-    var viewModelComponent: ViewModelComponent? = null
-
-    @Inject lateinit var androidInjector : DispatchingAndroidInjector<Any>
-
-    override fun androidInjector(): AndroidInjector<Any> = androidInjector
+@HiltAndroidApp
+class App : Application(), Configuration.Provider {
 
     @Inject
-    lateinit var workerFactory: WorkerFactory
+    lateinit var workerFactory: HiltWorkerFactory
 
     override fun getWorkManagerConfiguration(): Configuration =
         Configuration.Builder()
@@ -42,13 +24,6 @@ class App : Application(), Configuration.Provider, HasAndroidInjector {
 
     override fun onCreate() {
         super.onCreate()
-        viewModelComponent = DaggerViewModelComponent.create()
-        instance = this
-        DaggerAppComponent.builder()
-            .application(this)
-            .build()
-            .inject(this)
-
         initWorker()
     }
 
@@ -72,7 +47,5 @@ class App : Application(), Configuration.Provider, HasAndroidInjector {
             ExistingPeriodicWorkPolicy.KEEP,
             repeatingRequest
         )
-
-//        WorkManager.initialize(this, workManagerConfiguration)
     }
 }

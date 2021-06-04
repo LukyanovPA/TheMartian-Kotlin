@@ -1,26 +1,23 @@
 package com.pavellukyanov.themartian.data.database.repo
 
-import com.pavellukyanov.themartian.data.database.models.PhotoEntity
 import com.pavellukyanov.themartian.data.domain.Photo
-import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 
 interface PhotoDatabase {
-    fun getPhoto(id: Long): Single<Photo>
+    fun getPhoto(id: Long): Observable<Photo>
 
-    fun getFavouritesPhoto(): Single<List<Photo>>
+    fun getFavouritesPhoto(): Observable<List<Photo>>
 
-    fun getPhotoWithRoverNameAndDate(roverName: String, earthDate: String): Single<List<Photo>>
+    fun getPhotoWithRoverNameAndDate(roverName: String, earthDate: String): Observable<List<Photo>>
 
-    fun insertPhoto(photoEntity: Photo): Completable
+    fun insertPhoto(photoEntity: Photo)
 
-    fun updatePhoto(photoEntity: Photo): Completable
+    fun deletePhoto(id: Long)
 
-    fun deletePhoto(id: Long): Completable
+    fun addToFavourite(photo: Photo)
 
-    fun addToFavourite(photo: Photo): Completable
+    fun deleteInFavourite(photo: Photo)
 
-    fun deleteInFavourite(photo: Photo): Completable
-
-    fun chekFavourite(id: Long): Single<Boolean>
+    fun chekFavourite(id: Long): Observable<Boolean>
 }

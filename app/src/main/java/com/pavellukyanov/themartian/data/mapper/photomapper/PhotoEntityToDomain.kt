@@ -12,8 +12,7 @@ class PhotoEntityToDomain : Mapper<PhotoEntity, Photo> {
             source.srcPhoto,
             source.dataEarth,
             source.sol,
-            source.rover,
-            source.isFavourite
+            source.rover
         )
     }
 }

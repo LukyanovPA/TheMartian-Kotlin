@@ -1,13 +1,12 @@
 package com.pavellukyanov.themartian.data.repository
 
+import android.util.Log
 import com.pavellukyanov.themartian.data.api.networkmonitor.NetworkMonitor
 import com.pavellukyanov.themartian.data.database.repo.RoverInfoDatabase
 import com.pavellukyanov.themartian.data.api.repo.NetworkRepo
 import com.pavellukyanov.themartian.data.domain.RoverInfo
-import com.pavellukyanov.themartian.utils.Constants.Companion.ROVER_NAMES
 import io.reactivex.Completable
 import io.reactivex.Single
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.*
 import javax.inject.Inject
@@ -22,12 +21,11 @@ class RoverInfoRepoImpl @Inject constructor(
         private const val LOG_TAG = "MainRepo"
     }
 
-    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     private var tempRoverInfoList = mutableListOf<RoverInfo>()
 
     override fun setRoverInfoFromWorker(): Completable {
         return Completable.fromAction {
-            setupAllRoverNamesInApi()
+            getAllRoverInfoInApi()
                 .subscribe { listRoverInfo ->
                     insertRoverInfoInDatabase(listRoverInfo)
                 }
@@ -35,8 +33,16 @@ class RoverInfoRepoImpl @Inject constructor(
     }
 
     override fun getRoverInfo(roverName: String): Single<RoverInfo> {
-        return roverInfoDatabase.getRoverInfo(roverName)
-            .map { it }
+        return Single.just(networkMonitor.isNetworkAvailable())
+            .flatMap { networkAvailable ->
+                if (!networkAvailable) {
+                    return@flatMap Single.fromObservable(
+                        roverInfoDatabase.getRoverInfo(roverName)
+                    )
+                } else {
+                    return@flatMap networkRepo.getRoverInfo(roverName)
+                }
+            }
     }
 
     override fun loadAllRoverInfo(): Single<List<RoverInfo>> {
@@ -47,10 +53,14 @@ class RoverInfoRepoImpl @Inject constructor(
         return Single.just(networkMonitor.isNetworkAvailable())
             .flatMap { networkAvailable ->
                 if (!networkAvailable) {
-                    return@flatMap roverInfoDatabase.getAllRoverInfo()
+                    Log.d("ttt", "baza")
+                    return@flatMap Single.fromObservable(
+                        roverInfoDatabase.getAllRoverInfo()
+                    )
                 } else {
-                    return@flatMap setupAllRoverNamesInApi()
+                    return@flatMap getAllRoverInfoInApi()
                         .doOnSuccess { success ->
+                            Log.d("ttt", "network ${success.size}")
                             insertRoverInfoInDatabase(success)
                         }
                 }
@@ -63,21 +73,28 @@ class RoverInfoRepoImpl @Inject constructor(
         }
     }
 
-    private fun setupAllRoverNamesInApi(): Single<List<RoverInfo>> {
-        ROVER_NAMES.forEach {
-            getRoverInfoInApi(it)
+    private fun getAllRoverInfoInApi(): Single<List<RoverInfo>> {
+        return Single.zip(
+            networkRepo.getPerseverance().subscribeOn(Schedulers.io()),
+            networkRepo.getCuriosity().subscribeOn(Schedulers.io()),
+            networkRepo.getOpportunity().subscribeOn(Schedulers.io()),
+            networkRepo.getSpirit().subscribeOn(Schedulers.io())
+        ) { pers, cur, oppo, spirit ->
+            addRoverInfoToList(pers, cur, oppo, spirit)
         }
-        return Single.just(tempRoverInfoList)
     }
 
-    private fun getRoverInfoInApi(roverName: String) {
-        compositeDisposable.add(networkRepo.getRoverInfo(roverName)
-            .observeOn(Schedulers.io())
-            .subscribeOn(Schedulers.io())
-            .subscribe { response ->
-                tempRoverInfoList.add(response)
-            }
-        )
-        compositeDisposable.dispose()
+    private fun addRoverInfoToList(
+        one: RoverInfo,
+        two: RoverInfo,
+        three: RoverInfo,
+        four: RoverInfo
+    ): List<RoverInfo> {
+        tempRoverInfoList.add(one)
+        tempRoverInfoList.add(two)
+        tempRoverInfoList.add(three)
+        tempRoverInfoList.add(four)
+        Log.d("ttt", "addList - ${tempRoverInfoList.size}")
+        return tempRoverInfoList
     }
 }

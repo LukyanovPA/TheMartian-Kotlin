@@ -3,10 +3,12 @@ package com.pavellukyanov.themartian.data.api.networkmonitor
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 class NetworkMonitorImpl @Inject constructor(
-    private val context: Context
+    @ApplicationContext private val context: Context
 ) : NetworkMonitor {
     override fun isNetworkAvailable(): Boolean {
         val connectivityManager =

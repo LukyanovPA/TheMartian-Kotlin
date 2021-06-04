@@ -1,11 +1,13 @@
 package com.pavellukyanov.themartian.data.database.repo
 
+import android.util.Log
 import com.pavellukyanov.themartian.data.database.MartianDatabase
 import com.pavellukyanov.themartian.data.database.models.RoverInfoEntity
 import com.pavellukyanov.themartian.data.domain.RoverInfo
 import com.pavellukyanov.themartian.data.mapper.roverinfomapper.RoverInfoDomainToEntity
 import com.pavellukyanov.themartian.data.mapper.roverinfomapper.RoverInfoEntityToDomain
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -13,16 +15,14 @@ import javax.inject.Inject
 class RoverInfoDatabaseImpl @Inject constructor(
     private val database: MartianDatabase
 ) : RoverInfoDatabase {
-    override fun getRoverInfo(roverName: String): Single<RoverInfo> {
+    override fun getRoverInfo(roverName: String): Observable<RoverInfo> {
         return database.roverInfoDao().getRoverInfo(roverName)
-            .subscribeOn(Schedulers.io())
             .map { RoverInfoEntityToDomain().invoke(it) }
     }
 
-    override fun getAllRoverInfo(): Single<List<RoverInfo>> {
+    override fun getAllRoverInfo(): Observable<List<RoverInfo>> {
 //        database.clearAllTables()
         return database.roverInfoDao().getAllRoverInfo()
-            .subscribeOn(Schedulers.io())
             .map { mappingEntityToDomain(it) }
     }
 
@@ -34,17 +34,17 @@ class RoverInfoDatabaseImpl @Inject constructor(
         return returnList
     }
 
-    override fun insertRoverInfo(roverInfo: RoverInfo): Completable {
-        return database.roverInfoDao().insertRoverInfo(
+    override fun insertRoverInfo(roverInfo: RoverInfo) {
+        database.roverInfoDao().insertRoverInfo(
             RoverInfoDomainToEntity().invoke(roverInfo)
         )
     }
 
-    override fun updateRoverInfo(roverInfoEntity: RoverInfoEntity): Completable {
-        return database.roverInfoDao().updateRoverInfo(roverInfoEntity)
+    override fun updateRoverInfo(roverInfoEntity: RoverInfoEntity) {
+        database.roverInfoDao().updateRoverInfo(roverInfoEntity)
     }
 
-    override fun deleteRoverInfo(roverName: String): Completable {
-        return database.roverInfoDao().deleteRoverInfo(roverName)
+    override fun deleteRoverInfo(roverName: String) {
+        database.roverInfoDao().deleteRoverInfo(roverName)
     }
 }

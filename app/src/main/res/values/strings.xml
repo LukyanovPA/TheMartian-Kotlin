@@ -3,7 +3,7 @@
     <string name="the_martian">The Martian</string>
     <string name="slogan">THE ENTRY TO THE RED PLANET</string>
     <string name="choose_a_rover">Choose a Rover</string>
-    <string name="rover_name">Curiosity</string>
+    <string name="gallery_title">Gallery</string>
     <string name="launch_date_title">Launch date:</string>
     <string name="details_launch_date_title">LAUNCH DATE</string>
     <string name="launch_date">2011-11-26</string>
@@ -38,4 +38,5 @@
     <string name="cancel_button">CANCEL</string>
     <string name="select_all">Select All</string>
     <string name="error_toast">Something went wrong: %1s</string>
+    <string name="temp_rover_name">Curiosity</string>
 </resources>

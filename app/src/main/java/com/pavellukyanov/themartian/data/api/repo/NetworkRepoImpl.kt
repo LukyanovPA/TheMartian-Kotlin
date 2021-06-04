@@ -6,25 +6,40 @@ import com.pavellukyanov.themartian.data.domain.Photo
 import com.pavellukyanov.themartian.data.domain.RoverInfo
 import com.pavellukyanov.themartian.data.mapper.photomapper.PhotoPojoToDomain
 import com.pavellukyanov.themartian.data.mapper.roverinfomapper.RoverInfoPojoToDomain
+import com.pavellukyanov.themartian.utils.Constants.Companion.CURIOSITY
+import com.pavellukyanov.themartian.utils.Constants.Companion.OPPORTUNITY
+import com.pavellukyanov.themartian.utils.Constants.Companion.PERSEVERANCE
+import com.pavellukyanov.themartian.utils.Constants.Companion.SPIRIT
 import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class NetworkRepoImpl @Inject constructor(
     private val apiService: ApiNASA
 ) : NetworkRepo {
 
-    override fun getRoverInfo(roverName: String): Single<RoverInfo> {
-        return apiService.getRoverManifest(roverName)
-            .subscribeOn(Schedulers.io())
+    override fun getRoverInfo(roverName: String): Single<RoverInfo> =
+        apiService.getRoverManifest(roverName)
             .map { RoverInfoPojoToDomain().invoke(it.photoManifest) }
-    }
 
-    override fun getPhotoForEarthDate(roverName: String, earthData: String): Single<List<Photo>> {
-        return apiService.getPhotoEarthData(roverName, earthData)
-            .subscribeOn(Schedulers.io())
+    override fun getCuriosity(): Single<RoverInfo> =
+        apiService.getRoverManifest(CURIOSITY)
+            .map { RoverInfoPojoToDomain().invoke(it.photoManifest) }
+
+    override fun getPerseverance(): Single<RoverInfo> =
+        apiService.getRoverManifest(PERSEVERANCE)
+            .map { RoverInfoPojoToDomain().invoke(it.photoManifest) }
+
+    override fun getSpirit(): Single<RoverInfo> =
+        apiService.getRoverManifest(SPIRIT)
+            .map { RoverInfoPojoToDomain().invoke(it.photoManifest) }
+
+    override fun getOpportunity(): Single<RoverInfo> =
+        apiService.getRoverManifest(OPPORTUNITY)
+            .map { RoverInfoPojoToDomain().invoke(it.photoManifest) }
+
+    override fun getPhotoForEarthDate(roverName: String, earthData: String): Single<List<Photo>> =
+        apiService.getPhotoEarthData(roverName, earthData)
             .map { mappingPhotoPojoToDomain(it) }
-    }
 
     private fun mappingPhotoPojoToDomain(marsApi: MarsApi): List<Photo> {
         val listPhoto = mutableListOf<Photo>()

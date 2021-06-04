@@ -2,6 +2,8 @@ package com.pavellukyanov.themartian.core.worker
 
 import android.content.Context
 import android.util.Log
+import androidx.hilt.work.HiltWorker
+import androidx.work.CoroutineWorker
 import androidx.work.ListenableWorker
 import androidx.work.Worker
 import androidx.work.WorkerParameters
@@ -10,15 +12,15 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import javax.inject.Inject
 
+@HiltWorker
 class RoverInfoUpdateWorker @AssistedInject constructor(
     @Assisted appContext: Context,
     @Assisted params: WorkerParameters
-) : Worker(appContext, params) {
+) : CoroutineWorker(appContext, params){
 
-    @Inject
-    lateinit var roverInfoRepo: RoverInfoRepo
+    @Inject lateinit var roverInfoRepo: RoverInfoRepo
 
-    override fun doWork(): Result {
+    override suspend fun doWork(): Result {
         try {
             roverInfoRepo.setRoverInfoFromWorker()
             Log.d("ttt", "Worker work!")
@@ -26,16 +28,5 @@ class RoverInfoUpdateWorker @AssistedInject constructor(
             return Result.retry()
         }
         return Result.success()
-    }
-
-    class Factory @Inject constructor(
-    ) : ChildWorkerFactory {
-
-        override fun create(appContext: Context, params: WorkerParameters): ListenableWorker {
-            return RoverInfoUpdateWorker(
-                appContext,
-                params
-            )
-        }
     }
 }

@@ -1,12 +1,12 @@
 package com.pavellukyanov.themartian.data.mapper.photomapper
 
-import com.pavellukyanov.themartian.data.database.models.PhotoEntity
+import com.pavellukyanov.themartian.data.database.models.FavouriteEntity
 import com.pavellukyanov.themartian.data.domain.Photo
 import com.pavellukyanov.themartian.data.mapper.Mapper
 
-class PhotoDomainToEntity : Mapper<Photo, PhotoEntity> {
-    override fun invoke(source: Photo): PhotoEntity {
-        return PhotoEntity(
+class PhotoDomainToFavourites : Mapper<Photo, FavouriteEntity> {
+    override fun invoke(source: Photo): FavouriteEntity =
+        FavouriteEntity(
             source.id,
             source.sol,
             source.srcPhoto,
@@ -14,5 +14,4 @@ class PhotoDomainToEntity : Mapper<Photo, PhotoEntity> {
             source.rover,
             source.camera
         )
-    }
 }

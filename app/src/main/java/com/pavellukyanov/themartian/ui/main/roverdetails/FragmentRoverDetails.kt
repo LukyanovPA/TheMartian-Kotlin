@@ -16,7 +16,9 @@ import com.pavellukyanov.themartian.ui.main.roverdetails.adapter.GalleryAdapter
 import com.pavellukyanov.themartian.ui.main.viewmodel.ExchangeViewModel
 import com.pavellukyanov.themartian.ui.main.viewmodel.RoverDetailsViewModel
 import com.pavellukyanov.themartian.utils.Constants.Companion.GRID_COLUMNS
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
     private val exchangeViewModel: ExchangeViewModel by activityViewModels()
     private val detailViewModel: RoverDetailsViewModel by viewModels()

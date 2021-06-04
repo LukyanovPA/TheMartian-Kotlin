@@ -10,6 +10,5 @@ class Photo(
     val srcPhoto: String,
     val dataEarth: String,
     val sol: Long,
-    val rover: String,
-    var isFavourite: Int
+    val rover: String
 ): Parcelable

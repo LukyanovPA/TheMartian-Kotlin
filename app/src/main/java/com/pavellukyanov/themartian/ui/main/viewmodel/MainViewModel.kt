@@ -1,14 +1,17 @@
 package com.pavellukyanov.themartian.ui.main.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.pavellukyanov.themartian.data.domain.RoverInfo
 import com.pavellukyanov.themartian.data.repository.ResourceState
 import com.pavellukyanov.themartian.data.repository.RoverInfoRepo
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
+@HiltViewModel
 class MainViewModel @Inject constructor(private val roverInfoRepo: RoverInfoRepo) : ViewModel() {
     private var _roverInfo: MutableLiveData<ResourceState<List<RoverInfo>>> = MutableLiveData()
     private val roverInfo: LiveData<ResourceState<List<RoverInfo>>> get() = _roverInfo
@@ -22,6 +25,7 @@ class MainViewModel @Inject constructor(private val roverInfoRepo: RoverInfoRepo
             .doOnSubscribe { _roverInfo.postValue(ResourceState.Loading) }
             .subscribe(
                 { listRoverInfo ->
+                    Log.d("ttt", "viewModel - ${listRoverInfo.size}")
                     _roverInfo.postValue(ResourceState.Success(listRoverInfo))
                 },
                 { error ->

@@ -5,6 +5,7 @@ import com.pavellukyanov.themartian.data.api.repo.NetworkRepo
 import com.pavellukyanov.themartian.data.database.repo.PhotoDatabase
 import com.pavellukyanov.themartian.data.domain.Photo
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.*
@@ -24,7 +25,12 @@ class PhotoRepoImpl @Inject constructor(
         return Single.just(networkMonitor.isNetworkAvailable())
             .flatMap { networkAvailable ->
                 if (!networkAvailable) {
-                    return@flatMap photoDatabase.getPhotoWithRoverNameAndDate(roverName, earthData)
+                    return@flatMap Single.fromObservable(
+                        photoDatabase.getPhotoWithRoverNameAndDate(
+                            roverName,
+                            earthData
+                        )
+                    )
                 } else {
                     return@flatMap networkRepo.getPhotoForEarthDate(roverName, earthData)
                         .doOnSuccess { success ->
@@ -40,23 +46,19 @@ class PhotoRepoImpl @Inject constructor(
         }
     }
 
-    override fun getAllFavouritePhoto(): Single<List<Photo>> =
+    override fun getAllFavouritePhoto(): Observable<List<Photo>> =
         photoDatabase.getFavouritesPhoto()
-            .subscribeOn(Schedulers.io())
             .map { it }
 
-    override fun addPhotoToFavourite(photo: Photo): Completable =
-        Completable.fromAction {
-            photoDatabase.addToFavourite(photo)
-        }
+    override fun addPhotoToFavourite(photo: Photo) {
+        photoDatabase.addToFavourite(photo)
+    }
 
-    override fun deletePhotoInFavourite(photo: Photo): Completable =
-        Completable.fromAction {
-            photoDatabase.deleteInFavourite(photo)
-        }
+    override fun deletePhotoInFavourite(photo: Photo) {
+        photoDatabase.deleteInFavourite(photo)
+    }
 
-    override fun checkFavourite(id: Long): Single<Boolean> =
+    override fun checkFavourite(id: Long): Observable<Boolean> =
         photoDatabase.chekFavourite(id)
-            .subscribeOn(Schedulers.io())
             .map { it }
 }

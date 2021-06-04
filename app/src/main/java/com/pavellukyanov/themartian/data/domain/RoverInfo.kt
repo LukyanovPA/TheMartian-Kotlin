@@ -12,4 +12,6 @@ class RoverInfo(
     val maxSol: String,
     val maxDate: String,
     val totalPhotos: String
-) : Parcelable
+) : Parcelable {
+    constructor(): this("", "", "", "", "", "", "")
+}

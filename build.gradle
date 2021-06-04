@@ -14,8 +14,8 @@ buildscript {
         cardview_version = '1.0.0'
         live_dada_version = '2.3.1'
         legacy_version = '1.0.0'
-        //Dagger2
-        dagger_version = '2.35.1'
+        //Hilt
+        hilt_version = '2.35'
         //Room
         room_version = '2.3.0'
         //Glide
@@ -45,6 +45,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

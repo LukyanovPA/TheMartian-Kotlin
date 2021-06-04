@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="slogan">#BF3030</color>
     <color name="fab_text_background">#212121</color>
+    <color name="rover_info_card_bac">#3a3b40</color>
 </resources>

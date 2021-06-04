@@ -17,7 +17,9 @@ import com.pavellukyanov.themartian.ui.main.roverdetails.ItemClickListener
 import com.pavellukyanov.themartian.ui.main.viewmodel.ExchangeViewModel
 import com.pavellukyanov.themartian.ui.main.viewmodel.FavouritesViewModel
 import com.pavellukyanov.themartian.utils.Constants.Companion.GRID_COLUMNS
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FragmentFavourites : Fragment(R.layout.fragment_favourites) {
     private var _binding: FragmentFavouritesBinding? = null
     private val binding get() = _binding!!
