@@ -1,17 +1,19 @@
 package com.pavellukyanov.themartian.data.api.models
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 @Parcelize
 class PhotosInfoApi(
-    @SerializedName("sol")
+    @SerialName("sol")
     val sol: Long,
-    @SerializedName("earth_date")
+    @SerialName("earth_date")
     val earthDate: String,
-    @SerializedName("total_photos")
+    @SerialName("total_photos")
     val totalPhotos: Long,
-    @SerializedName("cameras")
+    @SerialName("cameras")
     val cameras: MutableList<String>
 ) : Parcelable

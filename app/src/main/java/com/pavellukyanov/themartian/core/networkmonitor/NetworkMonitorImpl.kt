@@ -1,9 +1,8 @@
-package com.pavellukyanov.themartian.data.api.networkmonitor
+package com.pavellukyanov.themartian.core.networkmonitor
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 

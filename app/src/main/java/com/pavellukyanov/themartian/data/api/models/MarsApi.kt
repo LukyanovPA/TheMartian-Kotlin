@@ -1,11 +1,13 @@
 package com.pavellukyanov.themartian.data.api.models
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 @Parcelize
 class MarsApi(
-    @SerializedName("photos")
+    @SerialName("photos")
     val photoApis: ArrayList<PhotoApi>
-): Parcelable
+) : Parcelable

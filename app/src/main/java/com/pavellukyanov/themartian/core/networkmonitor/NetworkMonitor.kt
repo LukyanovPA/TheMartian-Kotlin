@@ -1,4 +1,4 @@
-package com.pavellukyanov.themartian.data.api.networkmonitor
+package com.pavellukyanov.themartian.core.networkmonitor
 
 interface NetworkMonitor {
     fun isNetworkAvailable(): Boolean

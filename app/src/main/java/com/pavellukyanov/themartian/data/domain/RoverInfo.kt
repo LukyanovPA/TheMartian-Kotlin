@@ -1,7 +1,7 @@
 package com.pavellukyanov.themartian.data.domain
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class RoverInfo(
@@ -13,5 +13,5 @@ class RoverInfo(
     val maxDate: String,
     val totalPhotos: String
 ) : Parcelable {
-    constructor(): this("", "", "", "", "", "", "")
+    constructor() : this("", "", "", "", "", "", "")
 }

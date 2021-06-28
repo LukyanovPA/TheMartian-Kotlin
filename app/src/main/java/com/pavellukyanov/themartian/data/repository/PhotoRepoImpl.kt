@@ -1,13 +1,11 @@
 package com.pavellukyanov.themartian.data.repository
 
-import com.pavellukyanov.themartian.data.api.networkmonitor.NetworkMonitor
+import com.pavellukyanov.themartian.core.networkmonitor.NetworkMonitor
 import com.pavellukyanov.themartian.data.api.repo.NetworkRepo
 import com.pavellukyanov.themartian.data.database.repo.PhotoDatabase
 import com.pavellukyanov.themartian.data.domain.Photo
-import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.*
 import javax.inject.Inject
 

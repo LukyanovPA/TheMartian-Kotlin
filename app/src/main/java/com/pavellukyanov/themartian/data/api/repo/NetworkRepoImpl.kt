@@ -39,13 +39,13 @@ class NetworkRepoImpl @Inject constructor(
 
     override fun getPhotoForEarthDate(roverName: String, earthData: String): Single<List<Photo>> =
         apiService.getPhotoEarthData(roverName, earthData)
-            .map { mappingPhotoPojoToDomain(it) }
+            .map { it.toListPhoto() }
+}
 
-    private fun mappingPhotoPojoToDomain(marsApi: MarsApi): List<Photo> {
-        val listPhoto = mutableListOf<Photo>()
-        marsApi.photoApis.forEach {
-            listPhoto.add(PhotoPojoToDomain().invoke(it))
-        }
-        return listPhoto
+fun MarsApi.toListPhoto(): List<Photo> {
+    val listPhoto = mutableListOf<Photo>()
+    this.photoApis.forEach {
+        listPhoto.add(PhotoPojoToDomain().invoke(it))
     }
+    return listPhoto
 }

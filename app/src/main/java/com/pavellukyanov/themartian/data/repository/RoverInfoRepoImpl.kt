@@ -1,7 +1,7 @@
 package com.pavellukyanov.themartian.data.repository
 
 import android.util.Log
-import com.pavellukyanov.themartian.data.api.networkmonitor.NetworkMonitor
+import com.pavellukyanov.themartian.core.networkmonitor.NetworkMonitor
 import com.pavellukyanov.themartian.data.database.repo.RoverInfoDatabase
 import com.pavellukyanov.themartian.data.api.repo.NetworkRepo
 import com.pavellukyanov.themartian.data.domain.RoverInfo

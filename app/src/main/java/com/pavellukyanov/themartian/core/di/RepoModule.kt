@@ -1,7 +1,7 @@
-package com.pavellukyanov.themartian.core.di.module
+package com.pavellukyanov.themartian.core.di
 
 import com.pavellukyanov.themartian.data.api.ApiNASA
-import com.pavellukyanov.themartian.data.api.networkmonitor.NetworkMonitorImpl
+import com.pavellukyanov.themartian.core.networkmonitor.NetworkMonitorImpl
 import com.pavellukyanov.themartian.data.api.repo.NetworkRepo
 import com.pavellukyanov.themartian.data.database.repo.RoverInfoDatabaseImpl
 import com.pavellukyanov.themartian.data.api.repo.NetworkRepoImpl

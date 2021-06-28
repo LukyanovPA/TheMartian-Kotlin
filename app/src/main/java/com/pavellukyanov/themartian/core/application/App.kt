@@ -25,6 +25,9 @@ class App : Application(), Configuration.Provider {
     override fun onCreate() {
         super.onCreate()
         initWorker()
+
+        //удалить все таблицы из базы
+//        this.applicationContext.deleteDatabase("MovieDatabase.db")
     }
 
     private fun initWorker() {

@@ -7,7 +7,7 @@ plugins {
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: "androidx.navigation.safeargs.kotlin"
@@ -75,13 +75,15 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$interceptor_version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rxjava_adapter_version"
     implementation "com.squareup.retrofit2:converter-scalars:$converter_scalars_version"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:$serialization_version"
 
     //RxJava2
     implementation "io.reactivex.rxjava2:rxjava:$rx_version"
     implementation "io.reactivex.rxjava2:rxandroid:$rx_android_version"
 
     //Kotlin Serialization
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-core:$serial_json_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$serial_json_version"
 
     //Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"

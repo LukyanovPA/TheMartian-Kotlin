@@ -1,12 +1,13 @@
 package com.pavellukyanov.themartian.data.api.models
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-//Manifest Rover data class
+@Serializable
 @Parcelize
 class RoverManifestApi(
-    @SerializedName("photo_manifest")
+    @SerialName("photo_manifest")
     val photoManifest: RoverInfoApi
-): Parcelable
+) : Parcelable

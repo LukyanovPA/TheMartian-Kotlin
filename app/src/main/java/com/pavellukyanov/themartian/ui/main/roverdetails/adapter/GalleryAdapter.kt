@@ -10,27 +10,27 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.pavellukyanov.themartian.data.domain.Photo
 import com.pavellukyanov.themartian.databinding.RvGalleryItemBinding
-import com.pavellukyanov.themartian.ui.main.roverdetails.adapter.GalleryAdapter.DataViewHolder
 import com.pavellukyanov.themartian.ui.main.decoration.diff.GalleryDiffUtils
 import com.pavellukyanov.themartian.ui.main.roverdetails.AddFavouriteOnClickListener
 import com.pavellukyanov.themartian.ui.main.roverdetails.ItemClickListener
-import kotlinx.android.synthetic.main.rv_gallery_item.view.*
+import com.pavellukyanov.themartian.ui.main.roverdetails.adapter.GalleryAdapter.DataViewHolder
 
 class GalleryAdapter(
     private var photos: List<Photo>,
     private val favouriteClickListener: AddFavouriteOnClickListener,
     private val itemClickListener: ItemClickListener
 ) : RecyclerView.Adapter<DataViewHolder>() {
+    private lateinit var binding: RvGalleryItemBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
-        val binding =
+        binding =
             RvGalleryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DataViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
         holder.bind(getItem(position))
-        holder.itemView.favourite.setOnClickListener {
+        binding.favourite.setOnClickListener {
             favouriteClickListener.addToFavouriteOnClicked(
                 getItem(holder.absoluteAdapterPosition)
             )
@@ -59,16 +59,16 @@ class GalleryAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(photo: Photo) {
-            with(itemView) {
-                Glide.with(context)
+            with(binding) {
+                Glide.with(itemView.context)
                     .asBitmap()
                     .load(photo.srcPhoto)
                     .transform(CenterCrop(), RoundedCorners(20))
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                    .into(binding.ivPhotoItem)
+                    .into(ivPhotoItem)
 
-                binding.tvEarthDate.text = photo.dataEarth
-                binding.cameraName.text = photo.camera
+                tvEarthDate.text = photo.dataEarth
+                cameraName.text = photo.camera
             }
         }
     }

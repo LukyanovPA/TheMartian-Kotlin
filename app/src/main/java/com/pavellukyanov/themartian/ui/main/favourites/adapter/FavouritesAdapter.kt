@@ -10,26 +10,27 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.pavellukyanov.themartian.data.domain.Photo
 import com.pavellukyanov.themartian.databinding.FavouriteItemBinding
+import com.pavellukyanov.themartian.ui.main.decoration.diff.FavouritesDiffUtils
 import com.pavellukyanov.themartian.ui.main.favourites.DeleteFavouriteOnClickListener
 import com.pavellukyanov.themartian.ui.main.roverdetails.ItemClickListener
-import com.pavellukyanov.themartian.ui.main.decoration.diff.FavouritesDiffUtils
-import kotlinx.android.synthetic.main.favourite_item.view.*
 
 class FavouritesAdapter(
     private var photos: List<Photo>,
     private val deleteFavouriteOnClickListener: DeleteFavouriteOnClickListener,
     private val itemClickListener: ItemClickListener
 ) : RecyclerView.Adapter<FavouritesAdapter.FavouriteViewHolder>() {
+    private lateinit var binding: FavouriteItemBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteViewHolder {
-        val binding =
+        binding =
             FavouriteItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FavouriteViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: FavouriteViewHolder, position: Int) {
         holder.bind(getItem(position))
-        holder.itemView.deleteFavourite.setOnClickListener {
+
+        binding.deleteFavourite.setOnClickListener {
             deleteFavouriteOnClickListener.deleteFavouriteOnClicked(
                 getItem(holder.absoluteAdapterPosition)
             )
@@ -54,16 +55,16 @@ class FavouritesAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(photoEntity: Photo) {
-            with(itemView) {
-                Glide.with(context)
+            with(binding) {
+                Glide.with(itemView.context)
                     .asBitmap()
                     .load(photoEntity.srcPhoto)
                     .transform(CenterCrop(), RoundedCorners(20))
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                    .into(binding.ivPhotoItem)
+                    .into(ivPhotoItem)
 
-                binding.tvEarthDate.text = photoEntity.dataEarth
-                binding.roverName.text = photoEntity.rover
+                tvEarthDate.text = photoEntity.dataEarth
+                roverName.text = photoEntity.rover
             }
         }
     }
