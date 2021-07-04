@@ -3,7 +3,8 @@ package com.pavellukyanov.themartian.data.repository
 import com.pavellukyanov.themartian.core.networkmonitor.NetworkMonitor
 import com.pavellukyanov.themartian.data.api.repo.NetworkRepo
 import com.pavellukyanov.themartian.data.database.repo.PhotoDatabase
-import com.pavellukyanov.themartian.data.domain.Photo
+import com.pavellukyanov.themartian.domain.Photo
+import com.pavellukyanov.themartian.domain.PhotoRepo
 import io.reactivex.Observable
 import io.reactivex.Single
 import kotlinx.coroutines.*

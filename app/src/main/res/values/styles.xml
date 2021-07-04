@@ -1,48 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="roverName">
-        <item name="android:textSize">28sp</item>
-        <item name="android:fontFamily">@font/gotham_pro_light</item>
+
+    <style name="TextAppearance.TheMartian" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/mark_regular</item>
+    </style>
+
+    <style name="TextAppearance.TheMartian.RoverName">
+        <item name="android:textSize">43sp</item>
         <item name="android:textColor">@color/white</item>
     </style>
-    <style name="tabLayout">
-        <item name="android:textSize">28sp</item>
-        <item name="android:fontFamily">@font/gotham_pro_medium</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
-    <style name="roverInformationTitle">
-        <item name="android:textSize">10sp</item>
-        <item name="android:fontFamily">@font/gotham_pro_light</item>
-        <item name="android:textColor">@color/slogan</item>
-    </style>
-    <style name="roverInformation">
-        <item name="android:textSize">18sp</item>
-        <item name="android:fontFamily">@font/gotham_pro_light</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
-    <style name="itemInformation">
-        <item name="android:textSize">10sp</item>
-        <item name="android:fontFamily">@font/gotham_pro_light</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
-    <style name="appTitle">
-        <item name="android:textSize">48sp</item>
-        <item name="android:fontFamily">@font/gotham_pro_light</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
-    <style name="appSlogan">
-        <item name="android:textSize">18sp</item>
-        <item name="android:fontFamily">@font/gotham_pro_light</item>
-        <item name="android:textColor">@color/slogan</item>
-    </style>
-    <style name="roverNameMain">
-        <item name="android:textSize">18sp</item>
-        <item name="android:fontFamily">@font/gotham_pro_medium</item>
-        <item name="android:textColor">@color/slogan</item>
-    </style>
-    <style name="roverInfoMain">
+
+    <style name="TextAppearance.TheMartian.IaActive">
         <item name="android:textSize">14sp</item>
-        <item name="android:fontFamily">@font/gotham_pro_medium</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextAppearance.TheMartian.TabLayout">
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextAppearance.TheMartian.RoverInfoTitle">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/slogan</item>
+    </style>
+
+    <style name="TextAppearance.TheMartian.RoverInfo">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextAppearance.TheMartian.ItemInfo">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextAppearance.TheMartian.AppTitle">
+        <item name="android:textSize">48sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextAppearance.TheMartian.AppSlogan">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextAppearance.TheMartian.RoverNameMain">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/slogan</item>
+    </style>
+
+    <style name="TextAppearance.TheMartian.RoverInfoMain">
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/white</item>
     </style>
 </resources>

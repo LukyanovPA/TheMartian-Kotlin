@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
-        android:textAppearance="@style/roverInformationTitle"
+        android:textAppearance="@style/TextAppearance.TheMartian.RoverInfoTitle"
         android:text="@string/date"
         app:layout_constraintBottom_toTopOf="@+id/date"
         app:layout_constraintEnd_toEndOf="@+id/date"
@@ -58,7 +58,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginBottom="15dp"
         android:text="@string/date_temp"
-        android:textAppearance="@style/itemInformation"
+        android:textAppearance="@style/TextAppearance.TheMartian.ItemInfo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -67,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
-        android:textAppearance="@style/itemInformation"
+        android:textAppearance="@style/TextAppearance.TheMartian.ItemInfo"
         android:text="@string/gallery_title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/camera"
@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
-        android:textAppearance="@style/itemInformation"
+        android:textAppearance="@style/TextAppearance.TheMartian.ItemInfo"
         android:text="@string/camera_temp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -90,7 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
         android:text="@string/rover"
-        android:textAppearance="@style/roverInformationTitle"
+        android:textAppearance="@style/TextAppearance.TheMartian.RoverInfoTitle"
         app:layout_constraintBottom_toTopOf="@+id/rover"
         app:layout_constraintEnd_toEndOf="@+id/rover"
         app:layout_constraintStart_toStartOf="@+id/rover" />
@@ -100,7 +100,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
-        android:textAppearance="@style/roverInformationTitle"
+        android:textAppearance="@style/TextAppearance.TheMartian.RoverInfoTitle"
         android:text="@string/camera"
         app:layout_constraintBottom_toTopOf="@+id/camera"
         app:layout_constraintEnd_toEndOf="@+id/camera"

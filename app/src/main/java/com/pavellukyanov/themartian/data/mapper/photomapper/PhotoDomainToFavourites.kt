@@ -1,7 +1,7 @@
 package com.pavellukyanov.themartian.data.mapper.photomapper
 
 import com.pavellukyanov.themartian.data.database.models.FavouriteEntity
-import com.pavellukyanov.themartian.data.domain.Photo
+import com.pavellukyanov.themartian.domain.Photo
 import com.pavellukyanov.themartian.data.mapper.Mapper
 
 class PhotoDomainToFavourites : Mapper<Photo, FavouriteEntity> {

@@ -1,4 +1,4 @@
-package com.pavellukyanov.themartian.data.domain
+package com.pavellukyanov.themartian.domain
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

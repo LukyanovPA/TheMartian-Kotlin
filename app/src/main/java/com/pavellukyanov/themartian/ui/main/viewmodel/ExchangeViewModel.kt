@@ -1,7 +1,6 @@
 package com.pavellukyanov.themartian.ui.main.viewmodel
 
 import androidx.lifecycle.*
-import com.pavellukyanov.themartian.data.domain.RoverInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -39,4 +39,6 @@
     <string name="select_all">Select All</string>
     <string name="error_toast">Something went wrong: %1s</string>
     <string name="temp_rover_name">Curiosity</string>
+    <string name="is_active">Active</string>
+    <string name="is_no_active">No Active</string>
 </resources>

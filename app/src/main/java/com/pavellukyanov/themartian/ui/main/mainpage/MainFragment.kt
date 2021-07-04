@@ -2,23 +2,22 @@ package com.pavellukyanov.themartian.ui.main.mainpage
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.data.domain.RoverInfo
-import com.pavellukyanov.themartian.data.repository.ResourceState
 import com.pavellukyanov.themartian.databinding.FragmentMainBinding
-import com.pavellukyanov.themartian.ui.main.decoration.*
+import com.pavellukyanov.themartian.databinding.ItemTabRoverInfoBinding
+import com.pavellukyanov.themartian.domain.RoverInfo
+import com.pavellukyanov.themartian.ui.base.BaseFragment
 import com.pavellukyanov.themartian.ui.main.mainpage.adapter.MainAdapter
-import com.pavellukyanov.themartian.ui.main.viewmodel.MainViewModel
+import com.pavellukyanov.themartian.utils.bindRoverInfo
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainFragment : Fragment(R.layout.fragment_main) {
+class MainFragment : BaseFragment<List<RoverInfo>>(R.layout.fragment_main) {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
@@ -29,48 +28,28 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMainBinding.bind(view)
         subscribeLiveData()
-        initRecycler()
     }
 
     private fun subscribeLiveData() {
-        mainViewModel.getRoverManifest().observe(viewLifecycleOwner, { onStateReceive(it) })
+        mainViewModel.getRoverManifest()
+            .observe(viewLifecycleOwner, (::onStateReceive))
     }
 
-    private fun onStateReceive(resourceState: ResourceState<List<RoverInfo>>) {
-        when (resourceState) {
-            is ResourceState.Success -> handleSuccessState(resourceState.data)
-            is ResourceState.Loading -> handleLoadingState(true)
-            is ResourceState.Error -> handleErrorState(resourceState.error)
+    override fun handleSuccessStateMovies(data: List<RoverInfo>) {
+        super.handleSuccessStateMovies(data)
+        with(binding) {
+            pagerMain.bindRoverInfo(
+                data.size,
+                roverTabIndicators,
+                requireContext(),
+                mainAdapter
+            )
+            bindTabMediator(
+                roverTabIndicators,
+                pagerMain
+            )
         }
-    }
-
-    private fun initRecycler() {
-        //переделать адаптер на прием двух холдеров и показывать инфу о ровере в одном
-        binding.mainRecycler.apply {
-            adapter = mainAdapter
-            layoutManager =
-                LinearLayoutManager(
-                    context,
-                    LinearLayoutManager.HORIZONTAL,
-                    false
-                )
-            addItemDecoration(LinePagerIndicatorDecoration())
-        }
-    }
-
-    private fun handleSuccessState(roversInfo: List<RoverInfo>) {
-        handleLoadingState(false)
-        mainAdapter.apply {
-            addRoversInfo(roversInfo)
-        }
-    }
-
-    private fun handleLoadingState(state: Boolean) {
-
-    }
-
-    private fun handleErrorState(error: Throwable?) {
-
+        mainAdapter.addRoversInfo(data)
     }
 
     private val clickListener = object : RoverInfoClickListener {
@@ -82,6 +61,14 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private fun showRoverDetailsFragment(roverInfo: RoverInfo) {
         val action = MainFragmentDirections.actionMainFragmentToFragmentPager(roverInfo)
         findNavController().navigate(action)
+    }
+
+    private fun bindTabMediator(tabLayout: TabLayout, viewPager: ViewPager2) {
+        TabLayoutMediator(tabLayout, viewPager) { tab, _ ->
+            tab.view.isClickable = false
+            tab.customView =
+                ItemTabRoverInfoBinding.inflate(layoutInflater).tabLayoutItem
+        }.attach()
     }
 
     override fun onDestroy() {

@@ -40,4 +40,6 @@
     <string name="select_all">Выбрать все</string>
     <string name="error_toast">Что-то пошло не так: %1s</string>
     <string name="temp_rover_name">Curiosity</string>
+    <string name="is_active">Действующий</string>
+    <string name="is_no_active">Не действующий</string>
 </resources>

@@ -3,13 +3,12 @@ package com.pavellukyanov.themartian.data.database.repo
 import com.pavellukyanov.themartian.data.database.MartianDatabase
 import com.pavellukyanov.themartian.data.database.models.FavouriteEntity
 import com.pavellukyanov.themartian.data.database.models.PhotoEntity
-import com.pavellukyanov.themartian.data.domain.Photo
+import com.pavellukyanov.themartian.domain.Photo
 import com.pavellukyanov.themartian.data.mapper.photomapper.FavouritesToDomain
 import com.pavellukyanov.themartian.data.mapper.photomapper.PhotoDomainToEntity
 import com.pavellukyanov.themartian.data.mapper.photomapper.PhotoDomainToFavourites
 import com.pavellukyanov.themartian.data.mapper.photomapper.PhotoEntityToDomain
 import io.reactivex.Observable
-import io.reactivex.Single
 import javax.inject.Inject
 
 class PhotoDatabaseImpl @Inject constructor(

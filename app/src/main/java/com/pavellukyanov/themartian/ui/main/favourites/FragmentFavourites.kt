@@ -2,25 +2,22 @@ package com.pavellukyanov.themartian.ui.main.favourites
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.data.domain.Photo
-import com.pavellukyanov.themartian.data.repository.ResourceState
 import com.pavellukyanov.themartian.databinding.FragmentFavouritesBinding
+import com.pavellukyanov.themartian.domain.Photo
+import com.pavellukyanov.themartian.ui.base.BaseFragment
 import com.pavellukyanov.themartian.ui.main.favourites.adapter.FavouritesAdapter
 import com.pavellukyanov.themartian.ui.main.roverdetails.ItemClickListener
 import com.pavellukyanov.themartian.ui.main.viewmodel.ExchangeViewModel
-import com.pavellukyanov.themartian.ui.main.viewmodel.FavouritesViewModel
 import com.pavellukyanov.themartian.utils.Constants.Companion.GRID_COLUMNS
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FragmentFavourites : Fragment(R.layout.fragment_favourites) {
+class FragmentFavourites : BaseFragment<List<Photo>>(R.layout.fragment_favourites) {
     private var _binding: FragmentFavouritesBinding? = null
     private val binding get() = _binding!!
     private val favouritesViewModel: FavouritesViewModel by viewModels()
@@ -42,7 +39,7 @@ class FragmentFavourites : Fragment(R.layout.fragment_favourites) {
     }
 
     private fun subscribeFavouritesData() {
-        favouritesViewModel.getAllFavourites().observe(viewLifecycleOwner, { onStateReceiveAllFavouritePhoto(it) })
+        favouritesViewModel.getAllFavourites().observe(viewLifecycleOwner, (::onStateReceive))
     }
 
     private fun exchangeCameraAndRoverNameInformation() {
@@ -79,38 +76,17 @@ class FragmentFavourites : Fragment(R.layout.fragment_favourites) {
         })
     }
 
-    private fun onStateReceiveAllFavouritePhoto(resourceState: ResourceState<List<Photo>>) {
-        when (resourceState) {
-            is ResourceState.Success -> handleSuccessStateAllPhoto(resourceState.data)
-            is ResourceState.Loading -> handleLoadingStateAllPhoto(true)
-            is ResourceState.Error -> handleErrorStateAllPhoto(resourceState.error)
-        }
-    }
-
-    private fun handleSuccessStateAllPhoto(listPhoto: List<Photo>) {
-        handleLoadingStateAllPhoto(false)
-        favouritesList = listPhoto.toMutableList()
+    override fun handleSuccessStateMovies(data: List<Photo>) {
+        super.handleSuccessStateMovies(data)
+        favouritesList = data.toMutableList()
         exchangeViewModel.selectFavouritesCameras(
-            convertRoverCameraToHashSet(listPhoto)
+            convertRoverCameraToHashSet(data)
         )
         exchangeViewModel.selectRovers(
-            convertRoverNameToHashSet(listPhoto)
+            convertRoverNameToHashSet(data)
         )
         exchangeCameraAndRoverNameInformation()
         retrieveList(favouritesList)
-    }
-
-    private fun handleLoadingStateAllPhoto(state: Boolean) {
-
-    }
-
-    private fun handleErrorStateAllPhoto(error: Throwable?) {
-        handleLoadingStateAllPhoto(false)
-        Toast.makeText(
-            requireContext(),
-            requireContext().getString(R.string.error_toast, error?.localizedMessage),
-            Toast.LENGTH_LONG
-        ).show()
     }
 
     private fun initRecycler() {

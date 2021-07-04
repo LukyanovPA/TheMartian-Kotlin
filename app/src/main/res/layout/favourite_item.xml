@@ -39,7 +39,7 @@
             android:layout_margin="5dp"
             android:padding="2dp"
             android:text="@string/date_temp"
-            android:textAppearance="@style/itemInformation"
+            android:textAppearance="@style/TextAppearance.TheMartian.ItemInfo"
             app:layout_constraintBottom_toTopOf="@+id/roverName"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:padding="2dp"
             android:layout_margin="5dp"
-            android:textAppearance="@style/itemInformation"
+            android:textAppearance="@style/TextAppearance.TheMartian.ItemInfo"
             android:text="@string/rover_name_temp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>

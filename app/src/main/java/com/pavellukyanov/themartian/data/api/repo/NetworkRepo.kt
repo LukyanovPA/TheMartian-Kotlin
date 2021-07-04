@@ -1,7 +1,7 @@
 package com.pavellukyanov.themartian.data.api.repo
 
-import com.pavellukyanov.themartian.data.domain.Photo
-import com.pavellukyanov.themartian.data.domain.RoverInfo
+import com.pavellukyanov.themartian.domain.Photo
+import com.pavellukyanov.themartian.domain.RoverInfo
 import io.reactivex.Single
 
 interface NetworkRepo {

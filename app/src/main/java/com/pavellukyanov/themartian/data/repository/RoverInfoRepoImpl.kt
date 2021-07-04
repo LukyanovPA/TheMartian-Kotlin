@@ -4,7 +4,8 @@ import android.util.Log
 import com.pavellukyanov.themartian.core.networkmonitor.NetworkMonitor
 import com.pavellukyanov.themartian.data.database.repo.RoverInfoDatabase
 import com.pavellukyanov.themartian.data.api.repo.NetworkRepo
-import com.pavellukyanov.themartian.data.domain.RoverInfo
+import com.pavellukyanov.themartian.domain.RoverInfo
+import com.pavellukyanov.themartian.domain.RoverInfoRepo
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -20,8 +21,6 @@ class RoverInfoRepoImpl @Inject constructor(
     companion object {
         private const val LOG_TAG = "MainRepo"
     }
-
-    private var tempRoverInfoList = mutableListOf<RoverInfo>()
 
     override fun setRoverInfoFromWorker(): Completable {
         return Completable.fromAction {
@@ -89,12 +88,5 @@ class RoverInfoRepoImpl @Inject constructor(
         two: RoverInfo,
         three: RoverInfo,
         four: RoverInfo
-    ): List<RoverInfo> {
-        tempRoverInfoList.add(one)
-        tempRoverInfoList.add(two)
-        tempRoverInfoList.add(three)
-        tempRoverInfoList.add(four)
-        Log.d("ttt", "addList - ${tempRoverInfoList.size}")
-        return tempRoverInfoList
-    }
+    ) = listOf(one, two, three, four)
 }

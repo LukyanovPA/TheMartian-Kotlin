@@ -1,8 +1,7 @@
 package com.pavellukyanov.themartian.data.database.repo
 
-import com.pavellukyanov.themartian.data.domain.Photo
+import com.pavellukyanov.themartian.domain.Photo
 import io.reactivex.Observable
-import io.reactivex.Single
 
 interface PhotoDatabase {
     fun getPhoto(id: Long): Observable<Photo>

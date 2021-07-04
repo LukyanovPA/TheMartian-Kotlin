@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/mainLine"
+        android:id="@+id/main_line"
         android:layout_width="1dp"
         android:layout_height="57dp"
         android:layout_marginStart="18dp"
@@ -31,72 +31,72 @@
         android:id="@+id/roverNameMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/roverNameMain"
+        android:textAppearance="@style/TextAppearance.TheMartian.RoverNameMain"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/mainLine"
+        app:layout_constraintStart_toEndOf="@+id/main_line"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/launchDateTitle"
+        android:id="@+id/launch_date_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginTop="6dp"
-        android:textAppearance="@style/itemInformation"
+        android:textAppearance="@style/TextAppearance.TheMartian.ItemInfo"
         android:text="@string/launch_date_title"
-        app:layout_constraintStart_toStartOf="@id/mainLine"
+        app:layout_constraintStart_toStartOf="@id/main_line"
         app:layout_constraintTop_toBottomOf="@id/roverNameMain" />
 
     <TextView
-        android:id="@+id/launchDate"
+        android:id="@+id/launch_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="6dp"
-        android:textAppearance="@style/roverInfoMain"
-        app:layout_constraintStart_toEndOf="@id/launchDateTitle"
+        android:textAppearance="@style/TextAppearance.TheMartian.RoverInfoMain"
+        app:layout_constraintStart_toEndOf="@id/launch_date_title"
         app:layout_constraintTop_toBottomOf="@id/roverNameMain" />
 
     <TextView
-        android:id="@+id/latestPhotoDateTitle"
+        android:id="@+id/latest_photo_date_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginTop="6dp"
-        android:textAppearance="@style/itemInformation"
+        android:textAppearance="@style/TextAppearance.TheMartian.ItemInfo"
         android:text="@string/latest_photo_title"
-        app:layout_constraintStart_toStartOf="@id/mainLine"
-        app:layout_constraintTop_toBottomOf="@id/launchDateTitle" />
+        app:layout_constraintStart_toStartOf="@id/main_line"
+        app:layout_constraintTop_toBottomOf="@id/launch_date_title" />
 
     <TextView
-        android:id="@+id/latestPhotoDate"
+        android:id="@+id/latest_photo_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="6dp"
-        android:textAppearance="@style/roverInfoMain"
-        app:layout_constraintStart_toEndOf="@id/latestPhotoDateTitle"
-        app:layout_constraintTop_toBottomOf="@id/launchDate" />
+        android:textAppearance="@style/TextAppearance.TheMartian.RoverInfoMain"
+        app:layout_constraintStart_toEndOf="@id/latest_photo_date_title"
+        app:layout_constraintTop_toBottomOf="@id/launch_date" />
 
     <TextView
-        android:id="@+id/totalPhotosTitle"
+        android:id="@+id/total_photos_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginTop="6dp"
         android:text="@string/total_photos_title"
-        android:textAppearance="@style/itemInformation"
-        app:layout_constraintStart_toStartOf="@id/mainLine"
-        app:layout_constraintTop_toBottomOf="@id/latestPhotoDateTitle" />
+        android:textAppearance="@style/TextAppearance.TheMartian.ItemInfo"
+        app:layout_constraintStart_toStartOf="@id/main_line"
+        app:layout_constraintTop_toBottomOf="@id/latest_photo_date_title" />
 
     <TextView
-        android:id="@+id/totalPhotos"
+        android:id="@+id/total_photos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="6dp"
-        android:textAppearance="@style/roverInfoMain"
-        app:layout_constraintStart_toEndOf="@id/totalPhotosTitle"
-        app:layout_constraintTop_toBottomOf="@id/latestPhotoDate" />
+        android:textAppearance="@style/TextAppearance.TheMartian.RoverInfoMain"
+        app:layout_constraintStart_toEndOf="@id/total_photos_title"
+        app:layout_constraintTop_toBottomOf="@id/latest_photo_date" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

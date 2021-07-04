@@ -37,7 +37,7 @@
             app:destination="@id/fragmentPhoto" />
         <argument
             android:name="roverInfo"
-            app:argType="com.pavellukyanov.themartian.data.domain.RoverInfo" />
+            app:argType="com.pavellukyanov.themartian.domain.RoverInfo" />
     </fragment>
     <fragment
         android:id="@+id/fragmentPhoto"
@@ -45,6 +45,6 @@
         android:label="FragmentPhoto" >
         <argument
             android:name="photo"
-            app:argType="com.pavellukyanov.themartian.data.domain.Photo" />
+            app:argType="com.pavellukyanov.themartian.domain.Photo" />
     </fragment>
 </navigation>

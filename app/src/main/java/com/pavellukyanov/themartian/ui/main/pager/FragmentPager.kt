@@ -12,7 +12,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.data.domain.RoverInfo
 import com.pavellukyanov.themartian.databinding.FragmentPagerBinding
 import com.pavellukyanov.themartian.ui.main.pager.adapter.ViewPageAdapter
 import com.pavellukyanov.themartian.ui.main.favourites.FragmentFavourites
@@ -64,7 +63,7 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
     private fun initPageAdapter() {
         viewPager = binding.pager
 
-        val fragmentList = arrayListOf(
+        val fragmentList = listOf(
             FragmentRoverDetails(),
             FragmentFavourites()
         )

@@ -1,7 +1,5 @@
-package com.pavellukyanov.themartian.data.repository
+package com.pavellukyanov.themartian.domain
 
-import com.pavellukyanov.themartian.data.domain.Photo
-import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 

@@ -1,4 +1,4 @@
-package com.pavellukyanov.themartian.data.repository
+package com.pavellukyanov.themartian.domain
 
 sealed class ResourceState<out T>{
     data class Success<out T>(val data: T) : ResourceState<T>()

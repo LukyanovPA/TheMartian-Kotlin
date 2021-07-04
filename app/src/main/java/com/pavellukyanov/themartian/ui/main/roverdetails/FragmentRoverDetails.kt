@@ -2,24 +2,21 @@ package com.pavellukyanov.themartian.ui.main.roverdetails
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.data.domain.Photo
-import com.pavellukyanov.themartian.data.repository.ResourceState
 import com.pavellukyanov.themartian.databinding.FragmentRoverDetailsBinding
+import com.pavellukyanov.themartian.domain.Photo
+import com.pavellukyanov.themartian.ui.base.BaseFragment
 import com.pavellukyanov.themartian.ui.main.roverdetails.adapter.GalleryAdapter
 import com.pavellukyanov.themartian.ui.main.viewmodel.ExchangeViewModel
-import com.pavellukyanov.themartian.ui.main.viewmodel.RoverDetailsViewModel
 import com.pavellukyanov.themartian.utils.Constants.Companion.GRID_COLUMNS
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
+class FragmentRoverDetails : BaseFragment<List<Photo>>(R.layout.fragment_rover_details) {
     private val exchangeViewModel: ExchangeViewModel by activityViewModels()
     private val detailViewModel: RoverDetailsViewModel by viewModels()
     private lateinit var binding: FragmentRoverDetailsBinding
@@ -39,14 +36,6 @@ class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
         subscribeExchangeData()
     }
 
-    private fun onStateReceive(resourceState: ResourceState<List<Photo>>) {
-        when (resourceState) {
-            is ResourceState.Success -> handleSuccessState(resourceState.data)
-            is ResourceState.Loading -> handleLoadingState(true)
-            is ResourceState.Error -> handleErrorState(resourceState.error)
-        }
-    }
-
     private fun initRecycler() {
         binding.rvDetails.apply {
             adapter = galleryAdapter
@@ -62,7 +51,7 @@ class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
 
     private fun subscribeMarsData(roverName: String, date: String) {
         detailViewModel.getPhotosForEarthData(roverName, date)
-            .observe(viewLifecycleOwner, { onStateReceive(it) })
+            .observe(viewLifecycleOwner, (this::onStateReceive))
     }
 
     private fun changeRoverCamera() {
@@ -108,25 +97,12 @@ class FragmentRoverDetails : Fragment(R.layout.fragment_rover_details) {
         }
     }
 
-    private fun handleSuccessState(photos: List<Photo>) {
-        handleLoadingState(false)
-        exchangeViewModel.selectNetworkCameras(setRoverCameras(photos))
+    override fun handleSuccessStateMovies(data: List<Photo>) {
+        super.handleSuccessStateMovies(data)
+        exchangeViewModel.selectNetworkCameras(setRoverCameras(data))
         changeRoverCamera()
-        photosList = photos.toMutableList()
+        photosList = data.toMutableList()
         retrieveList(photosList)
-    }
-
-    private fun handleLoadingState(state: Boolean) {
-
-    }
-
-    private fun handleErrorState(error: Throwable?) {
-        handleLoadingState(false)
-        Toast.makeText(
-            requireContext(),
-            requireContext().getString(R.string.error_toast, error?.localizedMessage),
-            Toast.LENGTH_LONG
-        ).show()
     }
 
     private fun retrieveList(listPhoto: List<Photo>) {

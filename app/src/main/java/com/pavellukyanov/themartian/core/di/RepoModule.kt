@@ -10,6 +10,8 @@ import com.pavellukyanov.themartian.data.database.repo.PhotoDatabase
 import com.pavellukyanov.themartian.data.database.repo.PhotoDatabaseImpl
 import com.pavellukyanov.themartian.data.database.repo.RoverInfoDatabase
 import com.pavellukyanov.themartian.data.repository.*
+import com.pavellukyanov.themartian.domain.PhotoRepo
+import com.pavellukyanov.themartian.domain.RoverInfoRepo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
