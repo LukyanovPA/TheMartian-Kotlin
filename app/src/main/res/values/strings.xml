@@ -41,4 +41,5 @@
     <string name="temp_rover_name">Curiosity</string>
     <string name="is_active">Active</string>
     <string name="is_no_active">No Active</string>
+    <string name="progress_text">Download Rover Data...</string>
 </resources>

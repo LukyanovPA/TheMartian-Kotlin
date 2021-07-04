@@ -22,7 +22,7 @@ fun ViewPager2.bindRoverInfo(
             .setImageDrawable(
                 ContextCompat.getDrawable(
                     context,
-                    R.drawable.ic_swipe_indicator
+                    R.drawable.ic_swipe_indicator_fill
                 )
             )
     }, onSelected = { tab ->
@@ -30,7 +30,7 @@ fun ViewPager2.bindRoverInfo(
             .setImageDrawable(
                 ContextCompat.getDrawable(
                     context,
-                    R.drawable.ic_swipe_indicator_fill
+                    R.drawable.ic_swipe_indicator
                 )
             )
     })

@@ -42,4 +42,5 @@
     <string name="temp_rover_name">Curiosity</string>
     <string name="is_active">Действующий</string>
     <string name="is_no_active">Не действующий</string>
+    <string name="progress_text">Загружаю данные роверов...</string>
 </resources>

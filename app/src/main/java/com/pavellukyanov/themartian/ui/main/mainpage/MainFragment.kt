@@ -2,6 +2,7 @@ package com.pavellukyanov.themartian.ui.main.mainpage
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
@@ -50,6 +51,14 @@ class MainFragment : BaseFragment<List<RoverInfo>>(R.layout.fragment_main) {
             )
         }
         mainAdapter.addRoversInfo(data)
+    }
+
+    override fun handleLoadingStateMovies(state: Boolean) {
+        super.handleLoadingStateMovies(state)
+        with(binding) {
+            progressBar.isVisible = state
+            progressText.isVisible = state
+        }
     }
 
     private val clickListener = object : RoverInfoClickListener {
