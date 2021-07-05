@@ -57,6 +57,7 @@ dependencies {
     //Moshi
     implementation("com.squareup.moshi:moshi:1.11.0")
 
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.5.20"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "androidx.legacy:legacy-support-v4:$legacy_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$live_dada_version"

@@ -36,8 +36,8 @@ class MainFragment : BaseFragment<List<RoverInfo>>(R.layout.fragment_main) {
             .observe(viewLifecycleOwner, (::onStateReceive))
     }
 
-    override fun handleSuccessStateMovies(data: List<RoverInfo>) {
-        super.handleSuccessStateMovies(data)
+    override fun handleSuccessState(data: List<RoverInfo>) {
+        super.handleSuccessState(data)
         with(binding) {
             pagerMain.bindRoverInfo(
                 data.size,
@@ -53,8 +53,8 @@ class MainFragment : BaseFragment<List<RoverInfo>>(R.layout.fragment_main) {
         mainAdapter.addRoversInfo(data)
     }
 
-    override fun handleLoadingStateMovies(state: Boolean) {
-        super.handleLoadingStateMovies(state)
+    override fun handleLoadingState(state: Boolean) {
+        super.handleLoadingState(state)
         with(binding) {
             progressBar.isVisible = state
             progressText.isVisible = state
@@ -82,11 +82,12 @@ class MainFragment : BaseFragment<List<RoverInfo>>(R.layout.fragment_main) {
 
     override fun onDestroy() {
         super.onDestroy()
+        mainViewModel.onDestroy()
         _binding = null
     }
 
     override fun onDetach() {
         super.onDetach()
-        mainViewModel.onDestroy()
+//        mainViewModel.onDestroy()
     }
 }

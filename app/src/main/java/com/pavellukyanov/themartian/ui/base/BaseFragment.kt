@@ -11,22 +11,22 @@ abstract class BaseFragment<T : Any>(
 
     open fun onStateReceive(resourceState: ResourceState<T>) {
         when (resourceState) {
-            is ResourceState.Success -> handleSuccessStateMovies(resourceState.data)
-            is ResourceState.Loading -> handleLoadingStateMovies(true)
-            is ResourceState.Error -> handleErrorStateMovies(resourceState.error)
+            is ResourceState.Success -> handleSuccessState(resourceState.data)
+            is ResourceState.Loading -> handleLoadingState(true)
+            is ResourceState.Error -> handleErrorState(resourceState.error)
         }
     }
 
-    open fun handleSuccessStateMovies(data: T) {
-        handleLoadingStateMovies(false)
+    open fun handleSuccessState(data: T) {
+        handleLoadingState(false)
     }
 
-    open fun handleLoadingStateMovies(state: Boolean) {
+    open fun handleLoadingState(state: Boolean) {
 
     }
 
-    open fun handleErrorStateMovies(error: Throwable?) {
-        handleLoadingStateMovies(false)
+    open fun handleErrorState(error: Throwable?) {
+        handleLoadingState(false)
         Toast.makeText(
             requireContext(),
             requireContext().getString(R.string.error_toast, error?.localizedMessage),

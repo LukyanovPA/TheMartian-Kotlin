@@ -31,8 +31,8 @@ class FragmentPhoto : BaseFragment<Boolean>(R.layout.fragment_full_photo) {
         favouritesViewModel.checkIsFavourite(id).observe(viewLifecycleOwner, { onStateReceive(it) })
     }
 
-    override fun handleSuccessStateMovies(data: Boolean) {
-        super.handleSuccessStateMovies(data)
+    override fun handleSuccessState(data: Boolean) {
+        super.handleSuccessState(data)
         isFavourite = data
     }
 

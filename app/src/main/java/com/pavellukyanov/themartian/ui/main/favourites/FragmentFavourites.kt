@@ -76,8 +76,8 @@ class FragmentFavourites : BaseFragment<List<Photo>>(R.layout.fragment_favourite
         })
     }
 
-    override fun handleSuccessStateMovies(data: List<Photo>) {
-        super.handleSuccessStateMovies(data)
+    override fun handleSuccessState(data: List<Photo>) {
+        super.handleSuccessState(data)
         favouritesList = data.toMutableList()
         exchangeViewModel.selectFavouritesCameras(
             convertRoverCameraToHashSet(data)

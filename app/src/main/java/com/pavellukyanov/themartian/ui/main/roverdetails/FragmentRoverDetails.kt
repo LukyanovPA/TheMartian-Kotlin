@@ -97,8 +97,8 @@ class FragmentRoverDetails : BaseFragment<List<Photo>>(R.layout.fragment_rover_d
         }
     }
 
-    override fun handleSuccessStateMovies(data: List<Photo>) {
-        super.handleSuccessStateMovies(data)
+    override fun handleSuccessState(data: List<Photo>) {
+        super.handleSuccessState(data)
         exchangeViewModel.selectNetworkCameras(setRoverCameras(data))
         changeRoverCamera()
         photosList = data.toMutableList()
