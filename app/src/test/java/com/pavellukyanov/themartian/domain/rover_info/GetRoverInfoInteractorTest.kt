@@ -22,7 +22,7 @@ class GetRoverInfoInteractorTest : BaseTest<RoverInfo>() {
 
     @Test
     fun `response complete`() {
-        every { roverInfoRepo.getRoverInfo(roverName) } returns Single.just(roverInfo)
+        every { roverInfoRepo.getRoverInfo(any()) } returns Single.just(roverInfo)
 
         underTest.invoke(roverName)
             .subscribe(testObserver)

@@ -1,5 +1,8 @@
 package com.pavellukyanov.themartian.core.di
 
+import com.pavellukyanov.themartian.domain.photo.LoadPhotoForEarthDateInteractor
+import com.pavellukyanov.themartian.domain.photo.LoadPhotoForEarthDateInteractorImpl
+import com.pavellukyanov.themartian.domain.photo.PhotoRepo
 import com.pavellukyanov.themartian.domain.rover_info.*
 import dagger.Module
 import dagger.Provides
@@ -21,4 +24,10 @@ object InteractorModule {
     fun provideGetRoverInfoInteractor(
         roverInfoRepo: RoverInfoRepo
     ): GetRoverInfoInteractor = GetRoverInfoInteractorImpl(roverInfoRepo)
+
+    @Singleton
+    @Provides
+    fun provideLoadPhotoForEarthDateInteractor(
+        photoRepo: PhotoRepo
+    ): LoadPhotoForEarthDateInteractor = LoadPhotoForEarthDateInteractorImpl(photoRepo)
 }
