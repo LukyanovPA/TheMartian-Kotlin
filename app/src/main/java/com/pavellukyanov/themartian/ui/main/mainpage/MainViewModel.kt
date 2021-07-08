@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.pavellukyanov.themartian.domain.ResourceState
-import com.pavellukyanov.themartian.domain.RoverInfo
-import com.pavellukyanov.themartian.domain.RoverInfoRepo
+import com.pavellukyanov.themartian.domain.rover_info.RoverInfo
+import com.pavellukyanov.themartian.domain.rover_info.RoverInfoRepo
 import com.pavellukyanov.themartian.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers

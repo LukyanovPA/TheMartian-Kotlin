@@ -1,7 +1,7 @@
 package com.pavellukyanov.themartian.ui.main.decoration.diff
 
 import androidx.recyclerview.widget.DiffUtil
-import com.pavellukyanov.themartian.domain.Photo
+import com.pavellukyanov.themartian.domain.photo.Photo
 
 class FavouritesDiffUtils(
     private val oldList: List<Photo>,

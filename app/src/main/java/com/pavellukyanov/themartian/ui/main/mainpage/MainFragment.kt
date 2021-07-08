@@ -11,7 +11,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.databinding.FragmentMainBinding
 import com.pavellukyanov.themartian.databinding.ItemTabRoverInfoBinding
-import com.pavellukyanov.themartian.domain.RoverInfo
+import com.pavellukyanov.themartian.domain.rover_info.RoverInfo
 import com.pavellukyanov.themartian.ui.base.BaseFragment
 import com.pavellukyanov.themartian.ui.main.mainpage.adapter.MainAdapter
 import com.pavellukyanov.themartian.utils.bindRoverInfo

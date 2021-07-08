@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
@@ -13,10 +14,11 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.databinding.FragmentPagerBinding
-import com.pavellukyanov.themartian.ui.main.pager.adapter.ViewPageAdapter
 import com.pavellukyanov.themartian.ui.main.favourites.FragmentFavourites
+import com.pavellukyanov.themartian.ui.main.pager.adapter.ViewPageAdapter
 import com.pavellukyanov.themartian.ui.main.roverdetails.FragmentRoverDetails
 import com.pavellukyanov.themartian.ui.main.viewmodel.ExchangeViewModel
+import com.pavellukyanov.themartian.utils.bindGalleryPager
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -39,7 +41,7 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPagerBinding.bind(view)
-        initPageAdapter()
+        initViewPager()
         setupUI()
         setupExchangeInformation(roverName, photoDate)
     }
@@ -60,39 +62,41 @@ class FragmentPager : Fragment(R.layout.fragment_pager) {
         })
     }
 
-    private fun initPageAdapter() {
-        viewPager = binding.pager
-
+    private fun initViewPager() {
         val fragmentList = listOf(
             FragmentRoverDetails(),
             FragmentFavourites()
         )
 
         pageAdapter = ViewPageAdapter(
-            requireContext(),
             fragmentList,
             childFragmentManager,
             viewLifecycleOwner.lifecycle
         )
 
-        binding.pager.adapter = pageAdapter
-
-        TabLayoutMediator(binding.tabLayout, viewPager) { tab, position ->
-            when (position) {
-                0 -> tab.text = getString(R.string.photo_list)
-                1 -> tab.text = getString(R.string.favourites_title)
-            }
-        }.attach()
-
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageScrollStateChanged(state: Int) {
-                super.onPageScrollStateChanged(state)
-                if (binding.tvCamera.visibility == View.VISIBLE) {
-                    fabIsOpen = true
-                    changeFab(fabIsOpen)
+        with(binding) {
+            pager.bindGalleryPager(
+                fragmentList.size,
+                requireContext(),
+                pageAdapter
+            )
+            TabLayoutMediator(tabLayout, pager) { tab, position ->
+                when (position) {
+                    0 -> tab.text = getString(R.string.photo_list)
+                    1 -> tab.text = getString(R.string.favourites_title)
                 }
-            }
-        })
+            }.attach()
+
+            pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageScrollStateChanged(state: Int) {
+                    super.onPageScrollStateChanged(state)
+                    if (tvCamera.isVisible) {
+                        fabIsOpen = true
+                        changeFab(fabIsOpen)
+                    }
+                }
+            })
+        }
     }
 
     private fun setupUI() {

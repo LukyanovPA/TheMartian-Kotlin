@@ -1,13 +1,11 @@
 package com.pavellukyanov.themartian.ui.main.pager.adapter
 
-import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class ViewPageAdapter(
-    context: Context,
     listFragment: List<Fragment>,
     fm: FragmentManager,
     lifecycle: Lifecycle

@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.hilt.work.HiltWorker
 import androidx.work.RxWorker
 import androidx.work.WorkerParameters
-import com.pavellukyanov.themartian.domain.RoverInfoRepo
+import com.pavellukyanov.themartian.domain.rover_info.RoverInfoRepo
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import io.reactivex.Single

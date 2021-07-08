@@ -1,7 +1,7 @@
 package com.pavellukyanov.themartian.ui.main.decoration.diff
 
 import androidx.recyclerview.widget.DiffUtil
-import com.pavellukyanov.themartian.domain.RoverInfo
+import com.pavellukyanov.themartian.domain.rover_info.RoverInfo
 
 class MainDiffUtils(
     private val oldList: List<RoverInfo>,

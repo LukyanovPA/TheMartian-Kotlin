@@ -1,8 +1,8 @@
 package com.pavellukyanov.themartian.ui.main.roverdetails
 
 import androidx.lifecycle.*
-import com.pavellukyanov.themartian.domain.Photo
-import com.pavellukyanov.themartian.domain.PhotoRepo
+import com.pavellukyanov.themartian.domain.photo.Photo
+import com.pavellukyanov.themartian.domain.photo.PhotoRepo
 import com.pavellukyanov.themartian.domain.ResourceState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers

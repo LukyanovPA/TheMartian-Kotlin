@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.domain.Photo
+import com.pavellukyanov.themartian.domain.photo.Photo
 import com.pavellukyanov.themartian.databinding.FragmentFullPhotoBinding
 import com.pavellukyanov.themartian.ui.base.BaseFragment
 import com.pavellukyanov.themartian.ui.main.roverdetails.AddFavouriteOnClickListener

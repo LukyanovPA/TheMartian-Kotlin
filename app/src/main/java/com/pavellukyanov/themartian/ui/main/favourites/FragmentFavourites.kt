@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.databinding.FragmentFavouritesBinding
-import com.pavellukyanov.themartian.domain.Photo
+import com.pavellukyanov.themartian.domain.photo.Photo
 import com.pavellukyanov.themartian.ui.base.BaseFragment
 import com.pavellukyanov.themartian.ui.main.favourites.adapter.FavouritesAdapter
 import com.pavellukyanov.themartian.ui.main.roverdetails.ItemClickListener

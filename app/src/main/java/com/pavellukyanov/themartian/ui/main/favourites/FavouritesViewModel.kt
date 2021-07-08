@@ -2,13 +2,12 @@ package com.pavellukyanov.themartian.ui.main.favourites
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.pavellukyanov.themartian.domain.Photo
-import com.pavellukyanov.themartian.domain.PhotoRepo
+import com.pavellukyanov.themartian.domain.photo.Photo
+import com.pavellukyanov.themartian.domain.photo.PhotoRepo
 import com.pavellukyanov.themartian.domain.ResourceState
 import com.pavellukyanov.themartian.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 

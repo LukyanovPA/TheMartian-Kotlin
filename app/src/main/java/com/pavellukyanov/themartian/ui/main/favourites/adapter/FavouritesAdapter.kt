@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.pavellukyanov.themartian.domain.Photo
+import com.pavellukyanov.themartian.domain.photo.Photo
 import com.pavellukyanov.themartian.databinding.FavouriteItemBinding
 import com.pavellukyanov.themartian.ui.main.decoration.diff.FavouritesDiffUtils
 import com.pavellukyanov.themartian.ui.main.favourites.DeleteFavouriteOnClickListener

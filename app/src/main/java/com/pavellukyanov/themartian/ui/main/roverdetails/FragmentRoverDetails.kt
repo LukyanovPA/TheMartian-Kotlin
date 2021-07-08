@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.databinding.FragmentRoverDetailsBinding
-import com.pavellukyanov.themartian.domain.Photo
+import com.pavellukyanov.themartian.domain.photo.Photo
 import com.pavellukyanov.themartian.ui.base.BaseFragment
 import com.pavellukyanov.themartian.ui.main.roverdetails.adapter.GalleryAdapter
 import com.pavellukyanov.themartian.ui.main.viewmodel.ExchangeViewModel

@@ -7,6 +7,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.ui.main.mainpage.adapter.MainAdapter
+import com.pavellukyanov.themartian.ui.main.pager.adapter.ViewPageAdapter
 
 fun ViewPager2.bindRoverInfo(
     itemListSize: Int,
@@ -64,4 +65,15 @@ fun TabLayout.onTableSelected(
             onSelected?.invoke(tab)
         }
     })
+}
+
+fun ViewPager2.bindGalleryPager(
+    itemListSize: Int,
+    context: Context,
+    pagerAdapter: ViewPageAdapter
+) {
+    adapter = pagerAdapter
+    setPageTransformer()
+    offscreenPageLimit = itemListSize
+    overScrollMode = ViewPager2.OVER_SCROLL_NEVER
 }

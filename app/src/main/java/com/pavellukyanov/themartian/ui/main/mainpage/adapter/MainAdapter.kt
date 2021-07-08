@@ -8,14 +8,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.databinding.ItemRoverInfoBinding
-import com.pavellukyanov.themartian.domain.RoverInfo
+import com.pavellukyanov.themartian.domain.rover_info.RoverInfo
 import com.pavellukyanov.themartian.ui.main.decoration.diff.MainDiffUtils
 import com.pavellukyanov.themartian.ui.main.mainpage.RoverInfoClickListener
 import com.pavellukyanov.themartian.utils.Constants.Companion.CURIOSITY
 import com.pavellukyanov.themartian.utils.Constants.Companion.OPPORTUNITY
 import com.pavellukyanov.themartian.utils.Constants.Companion.PERSEVERANCE
 import com.pavellukyanov.themartian.utils.Constants.Companion.SPIRIT
-import com.pavellukyanov.themartian.utils.loadCircle
 
 class MainAdapter(
     private var roverInfo: List<RoverInfo>,
