@@ -44,20 +44,4 @@ class PhotoRepoImpl @Inject constructor(
             photoDatabase.insertPhoto(it)
         }
     }
-
-    override fun getAllFavouritePhoto(): Observable<List<Photo>> =
-        photoDatabase.getFavouritesPhoto()
-            .map { it }
-
-    override fun addPhotoToFavourite(photo: Photo) {
-        photoDatabase.addToFavourite(photo)
-    }
-
-    override fun deletePhotoInFavourite(photo: Photo) {
-        photoDatabase.deleteInFavourite(photo)
-    }
-
-    override fun checkFavourite(id: Long): Observable<Boolean> =
-        photoDatabase.chekFavourite(id)
-            .map { it }
 }

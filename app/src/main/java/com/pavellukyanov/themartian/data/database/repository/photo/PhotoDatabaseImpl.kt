@@ -3,11 +3,12 @@ package com.pavellukyanov.themartian.data.database.repository.photo
 import com.pavellukyanov.themartian.data.database.MartianDatabase
 import com.pavellukyanov.themartian.data.database.models.FavouriteEntity
 import com.pavellukyanov.themartian.data.database.models.PhotoEntity
-import com.pavellukyanov.themartian.domain.photo.Photo
 import com.pavellukyanov.themartian.data.mapper.photo.FavouritesToDomain
 import com.pavellukyanov.themartian.data.mapper.photo.PhotoDomainToEntity
 import com.pavellukyanov.themartian.data.mapper.photo.PhotoDomainToFavourites
 import com.pavellukyanov.themartian.data.mapper.photo.PhotoEntityToDomain
+import com.pavellukyanov.themartian.domain.photo.Photo
+import io.reactivex.Completable
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -55,14 +56,18 @@ class PhotoDatabaseImpl @Inject constructor(
         database.photoDao().deletePhoto(id)
     }
 
-    override fun addToFavourite(photo: Photo) {
-        database.favouritesDao().insertPhoto(
-            PhotoDomainToFavourites().invoke(photo)
-        )
+    override fun addToFavourite(photo: Photo): Completable {
+        return Completable.fromAction {
+            database.favouritesDao().insertPhoto(
+                PhotoDomainToFavourites().invoke(photo)
+            )
+        }
     }
 
-    override fun deleteInFavourite(photo: Photo) {
-        database.favouritesDao().deletePhoto(photo.id)
+    override fun deleteInFavourite(photo: Photo): Completable {
+        return Completable.fromAction {
+            database.favouritesDao().deletePhoto(photo.id)
+        }
     }
 
     override fun chekFavourite(id: Long): Observable<Boolean> =

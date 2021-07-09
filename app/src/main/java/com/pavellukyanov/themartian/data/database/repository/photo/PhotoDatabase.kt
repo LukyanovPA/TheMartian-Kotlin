@@ -1,6 +1,7 @@
 package com.pavellukyanov.themartian.data.database.repository.photo
 
 import com.pavellukyanov.themartian.domain.photo.Photo
+import io.reactivex.Completable
 import io.reactivex.Observable
 
 interface PhotoDatabase {
@@ -14,9 +15,9 @@ interface PhotoDatabase {
 
     fun deletePhoto(id: Long)
 
-    fun addToFavourite(photo: Photo)
+    fun addToFavourite(photo: Photo): Completable
 
-    fun deleteInFavourite(photo: Photo)
+    fun deleteInFavourite(photo: Photo): Completable
 
     fun chekFavourite(id: Long): Observable<Boolean>
 }

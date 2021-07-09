@@ -14,9 +14,11 @@ import com.pavellukyanov.themartian.ui.main.roverdetails.adapter.GalleryAdapter
 import com.pavellukyanov.themartian.ui.main.viewmodel.ExchangeViewModel
 import com.pavellukyanov.themartian.utils.Constants.Companion.GRID_COLUMNS
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.Single
 
 @AndroidEntryPoint
-class FragmentRoverDetails : BaseFragment<List<Photo>>(R.layout.fragment_rover_details) {
+class FragmentRoverDetails :
+    BaseFragment<List<Photo>, RoverDetailsViewModel>(R.layout.fragment_rover_details) {
     private val exchangeViewModel: ExchangeViewModel by activityViewModels()
     private val detailViewModel: RoverDetailsViewModel by viewModels()
     private lateinit var binding: FragmentRoverDetailsBinding
@@ -29,11 +31,14 @@ class FragmentRoverDetails : BaseFragment<List<Photo>>(R.layout.fragment_rover_d
     }
     private var photosList = mutableListOf<Photo>()
 
+    //полностью переписать логику, убрать exchangeViewModel
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRoverDetailsBinding.bind(view)
         initRecycler()
         subscribeExchangeData()
+        onSubscribeVewModel(detailViewModel)
     }
 
     private fun initRecycler() {
@@ -50,8 +55,9 @@ class FragmentRoverDetails : BaseFragment<List<Photo>>(R.layout.fragment_rover_d
     }
 
     private fun subscribeMarsData(roverName: String, date: String) {
-        detailViewModel.getPhotosForEarthData(roverName, date)
-            .observe(viewLifecycleOwner, (this::onStateReceive))
+//        detailViewModel.getPhotosForEarthData(roverName, date)
+//            .observe(viewLifecycleOwner, (this::onStateReceive))
+        detailViewModel.doChangePhotoDate(roverName, Single.just(date))
     }
 
     private fun changeRoverCamera() {

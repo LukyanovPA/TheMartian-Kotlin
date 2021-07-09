@@ -18,22 +18,16 @@ import com.pavellukyanov.themartian.utils.bindRoverInfo
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainFragment : BaseFragment<List<RoverInfo>>(R.layout.fragment_main) {
+class MainFragment : BaseFragment<List<RoverInfo>, MainViewModel>(R.layout.fragment_main) {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
-
     private val mainViewModel: MainViewModel by viewModels()
     private val mainAdapter by lazy { MainAdapter(mutableListOf(), clickListener) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMainBinding.bind(view)
-        subscribeLiveData()
-    }
-
-    private fun subscribeLiveData() {
-        mainViewModel.getRoverManifest()
-            .observe(viewLifecycleOwner, (::onStateReceive))
+        onSubscribeVewModel(mainViewModel)
     }
 
     override fun handleSuccessState(data: List<RoverInfo>) {
@@ -84,10 +78,5 @@ class MainFragment : BaseFragment<List<RoverInfo>>(R.layout.fragment_main) {
         super.onDestroy()
         mainViewModel.onDestroy()
         _binding = null
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-//        mainViewModel.onDestroy()
     }
 }

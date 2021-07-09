@@ -1,47 +1,73 @@
 package com.pavellukyanov.themartian.ui.main.roverdetails
 
-import androidx.lifecycle.*
+import com.pavellukyanov.themartian.domain.favourites.AddPhotoToFavouriteInteractor
+import com.pavellukyanov.themartian.domain.favourites.DeletePhotoInFavouriteInteractor
+import com.pavellukyanov.themartian.domain.photo.LoadPhotoForEarthDateInteractor
 import com.pavellukyanov.themartian.domain.photo.Photo
-import com.pavellukyanov.themartian.domain.photo.PhotoRepo
-import com.pavellukyanov.themartian.domain.ResourceState
+import com.pavellukyanov.themartian.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.observers.DisposableCompletableObserver
 import javax.inject.Inject
 
 @HiltViewModel
-class RoverDetailsViewModel @Inject constructor(private val photoRepo: PhotoRepo) : ViewModel() {
-    private var _marsData: MutableLiveData<ResourceState<List<Photo>>> = MutableLiveData()
-    private val marsData: LiveData<ResourceState<List<Photo>>> get() = _marsData
-    private val compositeDisposable by lazy { CompositeDisposable() }
+class RoverDetailsViewModel @Inject constructor(
+    private val photoInteractor: LoadPhotoForEarthDateInteractor,
+    private val addFavouriteInteractor: AddPhotoToFavouriteInteractor,
+    private val deletePhotoInFavouriteInteractor: DeletePhotoInFavouriteInteractor
+) : BaseViewModel<List<Photo>>() {
 
-    fun getPhotosForEarthData(
+    private val dispose = CompositeDisposable()
+
+    fun doChangePhotoDate(
         roverName: String,
-        earthData: String
-    ): LiveData<ResourceState<List<Photo>>> {
-        _marsData.postValue(ResourceState.Loading)
-        compositeDisposable.add(photoRepo.loadPhotoForEarthDate(roverName, earthData)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { _marsData.postValue(ResourceState.Loading) }
-            .subscribe(
-                { success ->
-                    _marsData.postValue(ResourceState.Success(success))
-                },
-                { error ->
-                    _marsData.postValue(ResourceState.Error(error))
+        earthData: Single<String>
+    ) {
+        dispose.add(
+            earthData
+                .subscribe { date ->
+                    onSetResource(photoInteractor.invoke(roverName, date))
                 }
-            )
         )
-        return marsData
     }
 
-    fun addPhotoToFavourite(photo: Photo) {
-        photoRepo.addPhotoToFavourite(photo)
+    fun addPhotoToFavourite(photo: Photo): Boolean {
+        var status = false
+        dispose.add(
+            addFavouriteInteractor.invoke(photo)
+                .subscribeWith(object : DisposableCompletableObserver() {
+                    override fun onComplete() {
+                        status = true
+                    }
+
+                    override fun onError(e: Throwable) {
+                        status = false
+                    }
+                })
+        )
+        return status
     }
 
-    fun onDestroy() {
-        compositeDisposable.dispose()
+    fun deletePhotoToFavourite(photo: Photo): Boolean {
+        var status = false
+        dispose.add(
+            deletePhotoInFavouriteInteractor.invoke(photo)
+                .subscribeWith(object : DisposableCompletableObserver() {
+                    override fun onComplete() {
+                        status = true
+                    }
+
+                    override fun onError(e: Throwable) {
+                        status = false
+                    }
+                })
+        )
+        return status
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        dispose.dispose()
     }
 }

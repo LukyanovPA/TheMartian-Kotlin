@@ -2,9 +2,8 @@ package com.pavellukyanov.themartian.data.database.dao
 
 import androidx.room.*
 import com.pavellukyanov.themartian.data.database.models.FavouriteEntity
-import com.pavellukyanov.themartian.data.database.models.PhotoEntity
+import io.reactivex.Completable
 import io.reactivex.Observable
-import io.reactivex.Single
 
 @Dao
 interface FavouritesDao {
@@ -16,11 +15,11 @@ interface FavouritesDao {
     fun getAllFavouritesPhotos(): Observable<List<FavouriteEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPhoto(photoEntity: FavouriteEntity)
+    fun insertPhoto(photoEntity: FavouriteEntity): Completable
 
     @Update
-    fun updatePhoto(photoEntity: FavouriteEntity)
+    fun updatePhoto(photoEntity: FavouriteEntity): Completable
 
     @Query("DELETE FROM favourites_photo WHERE id = :id")
-    fun deletePhoto(id: Long)
+    fun deletePhoto(id: Long): Completable
 }

@@ -1,5 +1,9 @@
 package com.pavellukyanov.themartian.core.di
 
+import com.pavellukyanov.themartian.data.database.repository.photo.PhotoDatabase
+import com.pavellukyanov.themartian.domain.favourites.FavouritePhotoRepo
+import com.pavellukyanov.themartian.domain.favourites.GetAllFavouritesPhotoInteractor
+import com.pavellukyanov.themartian.domain.favourites.GetAllFavouritesPhotoInteractorImpl
 import com.pavellukyanov.themartian.domain.photo.LoadPhotoForEarthDateInteractor
 import com.pavellukyanov.themartian.domain.photo.LoadPhotoForEarthDateInteractorImpl
 import com.pavellukyanov.themartian.domain.photo.PhotoRepo
@@ -30,4 +34,10 @@ object InteractorModule {
     fun provideLoadPhotoForEarthDateInteractor(
         photoRepo: PhotoRepo
     ): LoadPhotoForEarthDateInteractor = LoadPhotoForEarthDateInteractorImpl(photoRepo)
+
+    @Singleton
+    @Provides
+    fun provideGetAllFavouritesPhotoInteractor(
+        favouritePhotoRepo: FavouritePhotoRepo
+    ): GetAllFavouritesPhotoInteractor = GetAllFavouritesPhotoInteractorImpl(favouritePhotoRepo)
 }

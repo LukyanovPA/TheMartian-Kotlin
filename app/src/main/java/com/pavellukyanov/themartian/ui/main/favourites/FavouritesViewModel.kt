@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.pavellukyanov.themartian.domain.photo.Photo
 import com.pavellukyanov.themartian.domain.photo.PhotoRepo
 import com.pavellukyanov.themartian.domain.ResourceState
+import com.pavellukyanov.themartian.domain.favourites.GetAllFavouritesPhotoInteractor
 import com.pavellukyanov.themartian.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -12,7 +13,10 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
-class FavouritesViewModel @Inject constructor(private val photoRepo: PhotoRepo) : BaseViewModel() {
+class FavouritesViewModel @Inject constructor(
+    private val getAllFavouritesPhotoInteractor: GetAllFavouritesPhotoInteractor
+    ) :
+    BaseViewModel() {
     private var _favourites: MutableLiveData<ResourceState<List<Photo>>> = MutableLiveData()
     private val favourites: LiveData<ResourceState<List<Photo>>> get() = _favourites
     private var _isFavourite: MutableLiveData<ResourceState<Boolean>> = MutableLiveData()
@@ -20,7 +24,7 @@ class FavouritesViewModel @Inject constructor(private val photoRepo: PhotoRepo) 
 
     fun getAllFavourites(): LiveData<ResourceState<List<Photo>>> {
         _favourites.postValue(ResourceState.Loading)
-        dispose.add(photoRepo.getAllFavouritePhoto()
+        dispose.add(getAllFavouritesPhotoInteractor.invoke()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { _favourites.postValue(ResourceState.Loading) }

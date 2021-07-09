@@ -4,10 +4,19 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.domain.ResourceState
+import io.reactivex.disposables.CompositeDisposable
 
-abstract class BaseFragment<T : Any>(
+abstract class BaseFragment<T : Any, VM : BaseViewModel<T>>(
     resourceId: Int
 ) : Fragment(resourceId) {
+    private val dispose: CompositeDisposable = CompositeDisposable()
+
+    open fun onSubscribeVewModel(vm: VM) {
+        dispose.add(
+            vm.onSubscribeViewModel()
+                .subscribe(this::onStateReceive)
+        )
+    }
 
     open fun onStateReceive(resourceState: ResourceState<T>) {
         when (resourceState) {
@@ -32,5 +41,10 @@ abstract class BaseFragment<T : Any>(
             requireContext().getString(R.string.error_toast, error?.localizedMessage),
             Toast.LENGTH_LONG
         ).show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        dispose.dispose()
     }
 }
