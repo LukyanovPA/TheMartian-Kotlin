@@ -10,7 +10,8 @@ import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.databinding.FragmentRoverDetailsBinding
 import com.pavellukyanov.themartian.domain.photo.Photo
 import com.pavellukyanov.themartian.ui.base.BaseFragment
-import com.pavellukyanov.themartian.ui.main.roverdetails.adapter.GalleryAdapter
+import com.pavellukyanov.themartian.ui.main.gallery.GalleryViewModel
+import com.pavellukyanov.themartian.ui.main.gallery.adapter.GalleryAdapter
 import com.pavellukyanov.themartian.ui.main.viewmodel.ExchangeViewModel
 import com.pavellukyanov.themartian.utils.Constants.Companion.GRID_COLUMNS
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,9 +19,9 @@ import io.reactivex.Single
 
 @AndroidEntryPoint
 class FragmentRoverDetails :
-    BaseFragment<List<Photo>, RoverDetailsViewModel>(R.layout.fragment_rover_details) {
+    BaseFragment<List<Photo>, GalleryViewModel>(R.layout.fragment_rover_details) {
     private val exchangeViewModel: ExchangeViewModel by activityViewModels()
-    private val detailViewModel: RoverDetailsViewModel by viewModels()
+    private val detailViewModel: GalleryViewModel by viewModels()
     private lateinit var binding: FragmentRoverDetailsBinding
     private val galleryAdapter by lazy {
         GalleryAdapter(
@@ -57,7 +58,7 @@ class FragmentRoverDetails :
     private fun subscribeMarsData(roverName: String, date: String) {
 //        detailViewModel.getPhotosForEarthData(roverName, date)
 //            .observe(viewLifecycleOwner, (this::onStateReceive))
-        detailViewModel.doChangePhotoDate(roverName, Single.just(date))
+//        detailViewModel.doChangePhotoDate(roverName, Single.just(date))
     }
 
     private fun changeRoverCamera() {

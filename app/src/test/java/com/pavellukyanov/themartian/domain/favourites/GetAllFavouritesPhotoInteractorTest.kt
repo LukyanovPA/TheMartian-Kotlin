@@ -1,9 +1,6 @@
-package com.pavellukyanov.themartian.favourites
+package com.pavellukyanov.themartian.domain.favourites
 
 import com.pavellukyanov.themartian.base.BaseTest
-import com.pavellukyanov.themartian.domain.favourites.FavouritePhotoRepo
-import com.pavellukyanov.themartian.domain.favourites.GetAllFavouritesPhotoInteractor
-import com.pavellukyanov.themartian.domain.favourites.GetAllFavouritesPhotoInteractorImpl
 import com.pavellukyanov.themartian.domain.photo.Photo
 import io.mockk.every
 import io.mockk.mockk

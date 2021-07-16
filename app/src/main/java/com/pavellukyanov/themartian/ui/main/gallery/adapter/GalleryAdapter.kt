@@ -1,4 +1,4 @@
-package com.pavellukyanov.themartian.ui.main.roverdetails.adapter
+package com.pavellukyanov.themartian.ui.main.gallery.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,16 +8,18 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.pavellukyanov.themartian.domain.photo.Photo
 import com.pavellukyanov.themartian.databinding.RvGalleryItemBinding
+import com.pavellukyanov.themartian.domain.photo.Photo
 import com.pavellukyanov.themartian.ui.main.decoration.diff.GalleryDiffUtils
+import com.pavellukyanov.themartian.ui.main.favourites.DeleteFavouriteOnClickListener
+import com.pavellukyanov.themartian.ui.main.gallery.adapter.GalleryAdapter.DataViewHolder
 import com.pavellukyanov.themartian.ui.main.roverdetails.AddFavouriteOnClickListener
 import com.pavellukyanov.themartian.ui.main.roverdetails.ItemClickListener
-import com.pavellukyanov.themartian.ui.main.roverdetails.adapter.GalleryAdapter.DataViewHolder
 
 class GalleryAdapter(
     private var photos: List<Photo>,
     private val favouriteClickListener: AddFavouriteOnClickListener,
+    private val deleteFavouriteOnClickListener: DeleteFavouriteOnClickListener,
     private val itemClickListener: ItemClickListener
 ) : RecyclerView.Adapter<DataViewHolder>() {
     private lateinit var binding: RvGalleryItemBinding
@@ -53,6 +55,20 @@ class GalleryAdapter(
         val diffResult = DiffUtil.calculateDiff(diffUtils)
         photos = newPhotos
         diffResult.dispatchUpdatesTo(this)
+    }
+
+    fun chooseCamera(cameras: List<String>) {
+        val filteredList = mutableListOf<Photo>()
+        if (cameras.isNotEmpty()) {
+            cameras.forEach { choosed ->
+                photos.forEach { photo ->
+                    if (photo.camera == choosed) {
+                        filteredList.add(photo)
+                    }
+                }
+            }
+            photos = filteredList
+        }
     }
 
     class DataViewHolder(private val binding: RvGalleryItemBinding) :

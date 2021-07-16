@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentPager"
-        android:name="com.pavellukyanov.themartian.ui.main.pager.FragmentPager"
+        android:name="com.pavellukyanov.themartian.ui.main.gallery.FragmentPager"
         android:label="fragment_pager"
         tools:layout="@layout/fragment_pager" >
         <action

@@ -5,7 +5,7 @@
     android:layout_marginTop="25dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.pager.FragmentPager">
+    tools:context=".ui.main.gallery.FragmentPager">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/linerViewPager"

@@ -16,6 +16,7 @@ import com.pavellukyanov.themartian.ui.base.BaseFragment
 import com.pavellukyanov.themartian.ui.main.mainpage.adapter.MainAdapter
 import com.pavellukyanov.themartian.utils.bindRoverInfo
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.Single
 
 @AndroidEntryPoint
 class MainFragment : BaseFragment<List<RoverInfo>, MainViewModel>(R.layout.fragment_main) {

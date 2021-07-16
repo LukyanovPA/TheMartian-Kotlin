@@ -1,9 +1,7 @@
-package com.pavellukyanov.themartian.favourites
+package com.pavellukyanov.themartian.domain.favourites
 
 import com.pavellukyanov.themartian.base.BaseTest
 import com.pavellukyanov.themartian.data.database.repository.photo.PhotoDatabase
-import com.pavellukyanov.themartian.domain.favourites.DeletePhotoInFavouriteInteractor
-import com.pavellukyanov.themartian.domain.favourites.DeletePhotoInFavouriteInteractorImpl
 import com.pavellukyanov.themartian.domain.photo.Photo
 import io.mockk.every
 import io.mockk.mockk

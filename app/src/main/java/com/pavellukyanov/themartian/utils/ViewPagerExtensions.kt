@@ -6,8 +6,8 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.pavellukyanov.themartian.R
+import com.pavellukyanov.themartian.ui.main.gallery.adapter.GalleryAdapter
 import com.pavellukyanov.themartian.ui.main.mainpage.adapter.MainAdapter
-import com.pavellukyanov.themartian.ui.main.pager.adapter.ViewPageAdapter
 
 fun ViewPager2.bindRoverInfo(
     itemListSize: Int,
@@ -70,7 +70,7 @@ fun TabLayout.onTableSelected(
 fun ViewPager2.bindGalleryPager(
     itemListSize: Int,
     context: Context,
-    pagerAdapter: ViewPageAdapter
+    pagerAdapter: GalleryAdapter
 ) {
     adapter = pagerAdapter
     setPageTransformer()
