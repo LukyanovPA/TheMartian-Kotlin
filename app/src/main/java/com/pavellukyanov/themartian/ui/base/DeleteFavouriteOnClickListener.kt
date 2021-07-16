@@ -1,4 +1,4 @@
-package com.pavellukyanov.themartian.ui.main.favourites
+package com.pavellukyanov.themartian.ui.base
 
 import com.pavellukyanov.themartian.domain.photo.Photo
 

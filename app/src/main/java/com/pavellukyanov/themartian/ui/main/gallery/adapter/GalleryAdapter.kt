@@ -11,10 +11,10 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.pavellukyanov.themartian.databinding.RvGalleryItemBinding
 import com.pavellukyanov.themartian.domain.photo.Photo
 import com.pavellukyanov.themartian.ui.main.decoration.diff.GalleryDiffUtils
-import com.pavellukyanov.themartian.ui.main.favourites.DeleteFavouriteOnClickListener
+import com.pavellukyanov.themartian.ui.base.DeleteFavouriteOnClickListener
 import com.pavellukyanov.themartian.ui.main.gallery.adapter.GalleryAdapter.DataViewHolder
-import com.pavellukyanov.themartian.ui.main.roverdetails.AddFavouriteOnClickListener
-import com.pavellukyanov.themartian.ui.main.roverdetails.ItemClickListener
+import com.pavellukyanov.themartian.ui.base.AddFavouriteOnClickListener
+import com.pavellukyanov.themartian.ui.base.ItemClickListener
 
 class GalleryAdapter(
     private var photos: List<Photo>,

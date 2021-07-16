@@ -15,12 +15,10 @@ import javax.inject.Inject
 @HiltViewModel
 class GalleryViewModel @Inject constructor(
     private val photoInteractor: LoadPhotoForEarthDateInteractor,
-    private val favouriteInteractor: GetAllFavouritesPhotoInteractor,
     private val addFavouriteInteractor: AddPhotoToFavouriteInteractor,
     private val deletePhotoInFavouriteInteractor: DeletePhotoInFavouriteInteractor
 ) : BaseViewModel<List<Photo>>() {
     private var networkCameras = arrayListOf<String>()
-    private var favouritesCameras = arrayListOf<String>()
     private val dispose = CompositeDisposable()
 
     fun doChangePhotoDate(
@@ -34,14 +32,6 @@ class GalleryViewModel @Inject constructor(
         )
     }
 
-    fun getFavouritePhotos() {
-        onSetResource(favouriteInteractor.invoke())
-        dispose.add(
-            onSubscribeViewModel()
-                .subscribe(this::setupFavouritesCameras)
-        )
-    }
-
     private fun setupNetworkCameras(listPhoto: ResourceState<List<Photo>>) {
         if (listPhoto is ResourceState.Success) {
             val cameras: HashSet<String> = hashSetOf()
@@ -50,19 +40,6 @@ class GalleryViewModel @Inject constructor(
                 networkCameras.clear()
                 cameras.forEach { camera ->
                     networkCameras.add(camera)
-                }
-            }
-        }
-    }
-
-    private fun setupFavouritesCameras(listPhoto: ResourceState<List<Photo>>) {
-        if (listPhoto is ResourceState.Success) {
-            val cameras: HashSet<String> = hashSetOf()
-            listPhoto.data.forEach { photo ->
-                cameras.add(photo.camera)
-                favouritesCameras.clear()
-                cameras.forEach { camera ->
-                    favouritesCameras.add(camera)
                 }
             }
         }
@@ -102,9 +79,7 @@ class GalleryViewModel @Inject constructor(
         return status
     }
 
-    fun availableNetworkCameras(): ArrayList<String> = networkCameras
-
-    fun availableFavouriteCameras(): ArrayList<String> = favouritesCameras
+    fun availableNetworkCameras(): Array<CharSequence> = networkCameras.toTypedArray()
 
     override fun onDestroy() {
         super.onDestroy()

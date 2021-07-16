@@ -29,9 +29,9 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentPager"
-        android:name="com.pavellukyanov.themartian.ui.main.gallery.FragmentPager"
+        android:name="com.pavellukyanov.themartian.ui.main.gallery.FragmentGallery"
         android:label="fragment_pager"
-        tools:layout="@layout/fragment_pager" >
+        tools:layout="@layout/fragment_gallery" >
         <action
             android:id="@+id/action_fragmentPager_to_fragmentPhoto"
             app:destination="@id/fragmentPhoto" />

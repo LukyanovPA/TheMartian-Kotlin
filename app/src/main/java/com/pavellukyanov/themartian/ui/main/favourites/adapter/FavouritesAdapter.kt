@@ -11,8 +11,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.pavellukyanov.themartian.domain.photo.Photo
 import com.pavellukyanov.themartian.databinding.FavouriteItemBinding
 import com.pavellukyanov.themartian.ui.main.decoration.diff.FavouritesDiffUtils
-import com.pavellukyanov.themartian.ui.main.favourites.DeleteFavouriteOnClickListener
-import com.pavellukyanov.themartian.ui.main.roverdetails.ItemClickListener
+import com.pavellukyanov.themartian.ui.base.DeleteFavouriteOnClickListener
+import com.pavellukyanov.themartian.ui.base.ItemClickListener
 
 class FavouritesAdapter(
     private var photos: List<Photo>,

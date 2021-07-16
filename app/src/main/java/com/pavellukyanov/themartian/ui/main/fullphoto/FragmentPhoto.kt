@@ -2,13 +2,11 @@ package com.pavellukyanov.themartian.ui.main.fullphoto
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.navArgs
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.domain.photo.Photo
 import com.pavellukyanov.themartian.databinding.FragmentFullPhotoBinding
 import com.pavellukyanov.themartian.ui.base.BaseFragment
-import com.pavellukyanov.themartian.ui.main.roverdetails.AddFavouriteOnClickListener
+import com.pavellukyanov.themartian.ui.base.AddFavouriteOnClickListener
 import com.pavellukyanov.themartian.ui.main.favourites.FavouritesViewModel
 import com.pavellukyanov.themartian.utils.loadCircle
 import dagger.hilt.android.AndroidEntryPoint

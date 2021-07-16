@@ -1,20 +1,21 @@
 package com.pavellukyanov.themartian.ui.main.gallery
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import androidx.viewpager2.widget.ViewPager2
+import androidx.core.view.isVisible
 import com.pavellukyanov.themartian.R
-import com.pavellukyanov.themartian.databinding.FragmentPagerBinding
+import com.pavellukyanov.themartian.databinding.FragmentGalleryBinding
+import com.pavellukyanov.themartian.ui.main.gallery.adapter.GalleryAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 
-fun FragmentPagerBinding.changeFab(
+fun FragmentGalleryBinding.changeFab(
     isOpen: Boolean,
-    context: Context,
-    viewPager: ViewPager2
+    context: Context
 ) {
     val fabClose: Animation = AnimationUtils.loadAnimation(context, R.anim.fab_close)
     val fabOpen: Animation = AnimationUtils.loadAnimation(context, R.anim.fab_open)
@@ -24,35 +25,19 @@ fun FragmentPagerBinding.changeFab(
         AnimationUtils.loadAnimation(context, R.anim.fab_rotate_clock)
 
     if (isOpen) {
-        when (viewPager.currentItem) {
-            1 -> {
-                tvRover.visibility = View.INVISIBLE
-                fabRover.startAnimation(fabClose)
-                fabRover.isClickable = false
-            }
-            0 -> {
-                tvDate.visibility = View.INVISIBLE
-                fabDate.startAnimation(fabClose)
-                fabDate.isClickable = false
-            }
-        }
+        tvDate.visibility = View.INVISIBLE
+        fabDate.startAnimation(fabClose)
+        fabDate.isClickable = false
+
         tvCamera.visibility = View.INVISIBLE
         fabCamera.startAnimation(fabClose)
         fabSetting.startAnimation(fabRotateAnticlock)
         fabCamera.isClickable = false
     } else {
-        when (viewPager.currentItem) {
-            1 -> {
-                fabRover.startAnimation(fabOpen)
-                fabRover.isClickable = true
-                tvRover.visibility = View.VISIBLE
-            }
-            0 -> {
-                fabDate.startAnimation(fabOpen)
-                fabDate.isClickable = true
-                tvDate.visibility = View.VISIBLE
-            }
-        }
+        fabDate.startAnimation(fabOpen)
+        fabDate.isClickable = true
+        tvDate.visibility = View.VISIBLE
+
         fabCamera.startAnimation(fabOpen)
         fabSetting.startAnimation(fabRotateClock)
         fabCamera.isClickable = true
@@ -60,7 +45,7 @@ fun FragmentPagerBinding.changeFab(
     }
 }
 
-fun FragmentPagerBinding.chooseDate(
+fun FragmentGalleryBinding.chooseDate(
     photoDate: String,
     minDate: String,
     context: Context
@@ -77,10 +62,54 @@ fun FragmentPagerBinding.chooseDate(
     val dpd = DatePickerDialog(context, { _, year, month, dayOfMonth ->
         val _newDate = "$year-${month + 1}-$dayOfMonth"
         newDate = _newDate
-        changeFab(true, context, this.pager)
+        changeFab(true, context)
     }, year, month, day)
     dpd.datePicker.maxDate = maxDate.time
     dpd.datePicker.minDate = minDate.time
     dpd.show()
     return newDate
+}
+
+fun FragmentGalleryBinding.chooseCamera(
+    context: Context,
+    cameras: Array<CharSequence>,
+    adapter: GalleryAdapter
+) {
+    val checkedIndex = arrayListOf<Int>()
+    val builder = AlertDialog.Builder(context)
+    builder.setTitle(R.string.choose_a_camera)
+    builder.setMultiChoiceItems(cameras, null) { _, which, isChecked ->
+        if (isChecked) {
+            checkedIndex.add(which)
+        } else {
+            checkedIndex.remove(Integer.valueOf(which))
+        }
+    }
+        .setPositiveButton(R.string.ok_button) { _, id ->
+            val chooseList = mutableListOf<String>()
+            checkedIndex.forEach {
+                chooseList.add(cameras[it].toString())
+            }
+            adapter.chooseCamera(chooseList)
+            if (tvCamera.isVisible) {
+                this.changeFab(true, context)
+            }
+        }
+        .setNeutralButton(context.getText(R.string.select_all)) { _, which ->
+            val chooseList = mutableListOf<String>()
+            cameras.forEach { _ ->
+                checkedIndex.add(which)
+            }
+            adapter.chooseCamera(chooseList)
+            if (tvCamera.isVisible) {
+                this.changeFab(true, context)
+            }
+        }
+        .setNegativeButton(R.string.cancel_button) { _, _ ->
+            if (tvCamera.isVisible) {
+                this.changeFab(true, context)
+            }
+        }
+        .create()
+        .show()
 }
