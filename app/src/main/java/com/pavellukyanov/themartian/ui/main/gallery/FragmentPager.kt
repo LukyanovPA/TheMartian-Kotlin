@@ -1,11 +1,8 @@
 package com.pavellukyanov.themartian.ui.main.gallery
 
 import android.app.AlertDialog
-import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -21,7 +18,6 @@ import com.pavellukyanov.themartian.ui.main.roverdetails.AddFavouriteOnClickList
 import com.pavellukyanov.themartian.ui.main.roverdetails.ItemClickListener
 import com.pavellukyanov.themartian.utils.bindGalleryPager
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
@@ -52,10 +48,10 @@ class FragmentPager : BaseFragment<List<Photo>, GalleryViewModel>(R.layout.fragm
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentPagerBinding.bind(view)
-        setupExchangeInformation(roverName, photoDate)
+        getNetworkPhotos(roverName, photoDate)
     }
 
-    private fun setupExchangeInformation(roverName: String, date: String) {
+    private fun getNetworkPhotos(roverName: String, date: String) {
         viewModel.doChangePhotoDate(roverName, date)
 //        exchangeViewModel.selectActualDate(roverName, date)
 //        exchangeViewModel.returnNetworkCameras().observe(viewLifecycleOwner, { camResponse ->
@@ -110,7 +106,11 @@ class FragmentPager : BaseFragment<List<Photo>, GalleryViewModel>(R.layout.fragm
             }
 
             fabDate.setOnClickListener {
-                chooseDate()
+                //определять где менять дату - нетворк или фэйворит
+                getNetworkPhotos(
+                    roverName,
+                    chooseDate(photoDate, minDate, requireContext())
+                )
             }
 
             fabCamera.setOnClickListener {
