@@ -2,6 +2,8 @@ package com.pavellukyanov.themartian.ui.main.favourites
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.pavellukyanov.themartian.R
@@ -16,7 +18,7 @@ import com.pavellukyanov.themartian.utils.Constants.Companion.GRID_COLUMNS
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FragmentFavourites : BaseFragment<List<Photo>>(R.layout.fragment_favourites) {
+class FragmentFavourites : BaseFragment<List<Photo>, FavouritesViewModel>(R.layout.fragment_favourites) {
     private var _binding: FragmentFavouritesBinding? = null
     private val binding get() = _binding!!
     private val favouritesViewModel: FavouritesViewModel by viewModels()

@@ -49,6 +49,7 @@ class FragmentGallery : BaseFragment<List<Photo>, GalleryViewModel>(R.layout.fra
     override fun handleSuccessState(data: List<Photo>) {
         super.handleSuccessState(data)
         adapter.addPhotos(data)
+        viewModel.setupNetworkCameras(data)
     }
 
     override fun handleLoadingState(state: Boolean) {

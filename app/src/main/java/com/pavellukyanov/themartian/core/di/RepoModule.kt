@@ -1,18 +1,20 @@
 package com.pavellukyanov.themartian.core.di
 
-import com.pavellukyanov.themartian.data.api.ApiNASA
 import com.pavellukyanov.themartian.core.networkmonitor.NetworkMonitorImpl
+import com.pavellukyanov.themartian.data.api.ApiNASA
 import com.pavellukyanov.themartian.data.api.repository.NetworkRepo
-import com.pavellukyanov.themartian.data.database.repository.rover_info.RoverInfoDatabaseImpl
 import com.pavellukyanov.themartian.data.api.repository.NetworkRepoImpl
 import com.pavellukyanov.themartian.data.database.MartianDatabase
 import com.pavellukyanov.themartian.data.database.repository.photo.PhotoDatabase
 import com.pavellukyanov.themartian.data.database.repository.photo.PhotoDatabaseImpl
 import com.pavellukyanov.themartian.data.database.repository.rover_info.RoverInfoDatabase
-import com.pavellukyanov.themartian.domain.photo.PhotoRepo
-import com.pavellukyanov.themartian.domain.rover_info.RoverInfoRepo
+import com.pavellukyanov.themartian.data.database.repository.rover_info.RoverInfoDatabaseImpl
+import com.pavellukyanov.themartian.data.repository.favourites.FavouritePhotoRepoImpl
 import com.pavellukyanov.themartian.data.repository.photo.PhotoRepoImpl
 import com.pavellukyanov.themartian.data.repository.rover_info.RoverInfoRepoImpl
+import com.pavellukyanov.themartian.domain.favourites.FavouritePhotoRepo
+import com.pavellukyanov.themartian.domain.photo.PhotoRepo
+import com.pavellukyanov.themartian.domain.rover_info.RoverInfoRepo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -56,4 +58,10 @@ object RepoModule {
     fun provideRoverInfoDatabase(
         database: MartianDatabase
     ): RoverInfoDatabase = RoverInfoDatabaseImpl(database)
+
+    @Singleton
+    @Provides
+    fun provideFavouritePhotoRepo(
+        database: PhotoDatabase
+    ): FavouritePhotoRepo = FavouritePhotoRepoImpl(database)
 }

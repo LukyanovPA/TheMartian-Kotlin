@@ -1,5 +1,7 @@
 package com.pavellukyanov.themartian.ui.base
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pavellukyanov.themartian.domain.ResourceState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -8,29 +10,29 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-@HiltViewModel
+//@HiltViewModel
 open class BaseViewModel<T : Any> : ViewModel() {
-    private val dispose: CompositeDisposable = CompositeDisposable()
-    private lateinit var response: Single<ResourceState<T>>
+    internal val dispose: CompositeDisposable = CompositeDisposable()
+    private var _response = MutableLiveData<ResourceState<T>>()
+    private val response: LiveData<ResourceState<T>> get() = _response
 
     open fun onSetResource(resource: Single<T>) {
-        response = Single.just(ResourceState.Loading)
         dispose.add(resource
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { response = Single.just(ResourceState.Loading) }
+            .doOnSubscribe { _response.postValue(ResourceState.Loading) }
             .subscribe(
                 { listRoverInfo ->
-                    response = Single.just(ResourceState.Success(listRoverInfo))
+                    _response.postValue(ResourceState.Success(listRoverInfo))
                 },
                 { error ->
-                    response = Single.just((ResourceState.Error(error)))
+                    _response.postValue(ResourceState.Error(error))
                 }
             )
         )
     }
 
-    open fun onSubscribeViewModel(): Single<ResourceState<T>> = response
+    open fun onSubscribeViewModel(): LiveData<ResourceState<T>> = response
 
     open fun onDestroy() {
         dispose.dispose()

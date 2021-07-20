@@ -17,12 +17,6 @@
         android:id="@+id/fragmentRoverDetails"
         android:name="com.pavellukyanov.themartian.ui.main.roverdetails.FragmentRoverDetails"
         android:label="FragmentRoverDetails" >
-        <argument
-            android:name="roverInfo"
-            app:argType="string" />
-        <argument
-            android:name="maxDate"
-            app:argType="string" />
         <action
             android:id="@+id/action_fragmentRoverDetails_to_fragmentPhoto"
             app:destination="@id/fragmentPhoto" />

@@ -1,9 +1,7 @@
 package com.pavellukyanov.themartian.ui.main.gallery
 
-import com.pavellukyanov.themartian.domain.ResourceState
 import com.pavellukyanov.themartian.domain.favourites.AddPhotoToFavouriteInteractor
 import com.pavellukyanov.themartian.domain.favourites.DeletePhotoInFavouriteInteractor
-import com.pavellukyanov.themartian.domain.favourites.GetAllFavouritesPhotoInteractor
 import com.pavellukyanov.themartian.domain.photo.LoadPhotoForEarthDateInteractor
 import com.pavellukyanov.themartian.domain.photo.Photo
 import com.pavellukyanov.themartian.ui.base.BaseViewModel
@@ -19,29 +17,22 @@ class GalleryViewModel @Inject constructor(
     private val deletePhotoInFavouriteInteractor: DeletePhotoInFavouriteInteractor
 ) : BaseViewModel<List<Photo>>() {
     private var networkCameras = arrayListOf<String>()
-    private val dispose = CompositeDisposable()
 
     fun doChangePhotoDate(
         roverName: String,
         earthData: String
     ) {
         onSetResource(photoInteractor.invoke(roverName, earthData))
-        dispose.add(
-            onSubscribeViewModel()
-                .subscribe(this::setupNetworkCameras)
-        )
     }
 
-    private fun setupNetworkCameras(listPhoto: ResourceState<List<Photo>>) {
-        if (listPhoto is ResourceState.Success) {
-            val cameras: HashSet<String> = hashSetOf()
-            listPhoto.data.forEach { photo ->
-                cameras.add(photo.camera)
-                networkCameras.clear()
-                cameras.forEach { camera ->
-                    networkCameras.add(camera)
-                }
-            }
+    fun setupNetworkCameras(listPhoto: List<Photo>) {
+        val cameras: HashSet<String> = hashSetOf()
+        listPhoto.forEach { photo ->
+            cameras.add(photo.camera)
+        }
+        networkCameras.clear()
+        cameras.forEach { camera ->
+            networkCameras.add(camera)
         }
     }
 
@@ -80,9 +71,4 @@ class GalleryViewModel @Inject constructor(
     }
 
     fun availableNetworkCameras(): Array<CharSequence> = networkCameras.toTypedArray()
-
-    override fun onDestroy() {
-        super.onDestroy()
-        dispose.dispose()
-    }
 }

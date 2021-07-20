@@ -2,6 +2,9 @@ package com.pavellukyanov.themartian.ui.main.fullphoto
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.domain.photo.Photo
 import com.pavellukyanov.themartian.databinding.FragmentFullPhotoBinding
@@ -12,7 +15,7 @@ import com.pavellukyanov.themartian.utils.loadCircle
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FragmentPhoto : BaseFragment<Boolean>(R.layout.fragment_full_photo) {
+class FragmentPhoto : Fragment(R.layout.fragment_full_photo) {
     private val favouritesViewModel: FavouritesViewModel by viewModels()
     private val args: FragmentPhotoArgs by navArgs()
     private lateinit var binding: FragmentFullPhotoBinding
@@ -21,18 +24,18 @@ class FragmentPhoto : BaseFragment<Boolean>(R.layout.fragment_full_photo) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentFullPhotoBinding.bind(view)
-        checkIsFavourite(args.photo.id)
+//        checkIsFavourite(args.photo.id)
         setupUI()
     }
 
     private fun checkIsFavourite(id: Long) {
-        favouritesViewModel.checkIsFavourite(id).observe(viewLifecycleOwner, { onStateReceive(it) })
+//        favouritesViewModel.checkIsFavourite(id).observe(viewLifecycleOwner, { onStateReceive(it) })
     }
 
-    override fun handleSuccessState(data: Boolean) {
-        super.handleSuccessState(data)
-        isFavourite = data
-    }
+//    override fun handleSuccessState(data: Boolean) {
+//        super.handleSuccessState(data)
+//        isFavourite = data
+//    }
 
     private fun setupUI() {
         binding.photo.loadCircle(

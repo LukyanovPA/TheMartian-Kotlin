@@ -21,106 +21,106 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FragmentRoverDetails :
     BaseFragment<List<Photo>, GalleryViewModel>(R.layout.fragment_rover_details) {
-    private val exchangeViewModel: ExchangeViewModel by activityViewModels()
-    private val detailViewModel: GalleryViewModel by viewModels()
-    private lateinit var binding: FragmentRoverDetailsBinding
-    private val galleryAdapter by lazy {
-        GalleryAdapter(
-            arrayListOf(),
-            addToFavouriteOnClickListener,
-            itemClickListener
-        )
-    }
-    private var photosList = mutableListOf<Photo>()
-
-    //полностью переписать логику, убрать exchangeViewModel
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding = FragmentRoverDetailsBinding.bind(view)
-        initRecycler()
-        subscribeExchangeData()
-        onSubscribeVewModel(detailViewModel)
-    }
-
-    private fun initRecycler() {
-        binding.rvDetails.apply {
-            adapter = galleryAdapter
-            layoutManager = GridLayoutManager(context, GRID_COLUMNS)
-        }
-    }
-
-    private fun subscribeExchangeData() {
-        exchangeViewModel.returnActualDate().observe(viewLifecycleOwner, {
-            subscribeMarsData(it.first, it.second)
-        })
-    }
-
-    private fun subscribeMarsData(roverName: String, date: String) {
-//        detailViewModel.getPhotosForEarthData(roverName, date)
-//            .observe(viewLifecycleOwner, (this::onStateReceive))
-//        detailViewModel.doChangePhotoDate(roverName, Single.just(date))
-    }
-
-    private fun changeRoverCamera() {
-        exchangeViewModel.returnChooseCam().observe(viewLifecycleOwner, { choosedCam ->
-            val filteredList = mutableListOf<Photo>()
-            choosedCam.forEach { choos ->
-                photosList.forEach { photo ->
-                    if (photo.camera == choos) {
-                        filteredList.add(photo)
-                    }
-                }
-            }
-            if (choosedCam.isEmpty()) {
-                retrieveList(photosList)
-            } else {
-                retrieveList(filteredList)
-            }
-        })
-    }
-
-    private fun setRoverCameras(listPhoto: List<Photo>): HashSet<String> {
-        val cameras: HashSet<String> = hashSetOf()
-        listPhoto.forEach {
-            cameras.add(it.camera)
-        }
-        return cameras
-    }
-
-    private val addToFavouriteOnClickListener = object : AddFavouriteOnClickListener {
-        override fun addToFavouriteOnClicked(photo: Photo) {
-            detailViewModel.addPhotoToFavourite(photo)
-            Snackbar.make(
-                binding.scrollLayout,
-                getString(R.string.snack_add_favourite),
-                Snackbar.LENGTH_SHORT
-            ).show()
-        }
-    }
-
-    private val itemClickListener = object : ItemClickListener {
-        override fun onItemClicked(photo: Photo) {
-            //доделать
-        }
-    }
-
-    override fun handleSuccessState(data: List<Photo>) {
-        super.handleSuccessState(data)
-        exchangeViewModel.selectNetworkCameras(setRoverCameras(data))
-        changeRoverCamera()
-        photosList = data.toMutableList()
-        retrieveList(photosList)
-    }
-
-    private fun retrieveList(listPhoto: List<Photo>) {
-        galleryAdapter.apply {
-            addPhotos(listPhoto)
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        detailViewModel.onDestroy()
-    }
+//    private val exchangeViewModel: ExchangeViewModel by activityViewModels()
+//    private val detailViewModel: GalleryViewModel by viewModels()
+//    private lateinit var binding: FragmentRoverDetailsBinding
+//    private val galleryAdapter by lazy {
+//        GalleryAdapter(
+//            arrayListOf(),
+//            addToFavouriteOnClickListener,
+//            itemClickListener
+//        )
+//    }
+//    private var photosList = mutableListOf<Photo>()
+//
+//    //полностью переписать логику, убрать exchangeViewModel
+//
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        binding = FragmentRoverDetailsBinding.bind(view)
+//        initRecycler()
+//        subscribeExchangeData()
+//        onSubscribeVewModel(detailViewModel)
+//    }
+//
+//    private fun initRecycler() {
+//        binding.rvDetails.apply {
+//            adapter = galleryAdapter
+//            layoutManager = GridLayoutManager(context, GRID_COLUMNS)
+//        }
+//    }
+//
+//    private fun subscribeExchangeData() {
+//        exchangeViewModel.returnActualDate().observe(viewLifecycleOwner, {
+//            subscribeMarsData(it.first, it.second)
+//        })
+//    }
+//
+//    private fun subscribeMarsData(roverName: String, date: String) {
+////        detailViewModel.getPhotosForEarthData(roverName, date)
+////            .observe(viewLifecycleOwner, (this::onStateReceive))
+////        detailViewModel.doChangePhotoDate(roverName, Single.just(date))
+//    }
+//
+//    private fun changeRoverCamera() {
+//        exchangeViewModel.returnChooseCam().observe(viewLifecycleOwner, { choosedCam ->
+//            val filteredList = mutableListOf<Photo>()
+//            choosedCam.forEach { choos ->
+//                photosList.forEach { photo ->
+//                    if (photo.camera == choos) {
+//                        filteredList.add(photo)
+//                    }
+//                }
+//            }
+//            if (choosedCam.isEmpty()) {
+//                retrieveList(photosList)
+//            } else {
+//                retrieveList(filteredList)
+//            }
+//        })
+//    }
+//
+//    private fun setRoverCameras(listPhoto: List<Photo>): HashSet<String> {
+//        val cameras: HashSet<String> = hashSetOf()
+//        listPhoto.forEach {
+//            cameras.add(it.camera)
+//        }
+//        return cameras
+//    }
+//
+//    private val addToFavouriteOnClickListener = object : AddFavouriteOnClickListener {
+//        override fun addToFavouriteOnClicked(photo: Photo) {
+//            detailViewModel.addPhotoToFavourite(photo)
+//            Snackbar.make(
+//                binding.scrollLayout,
+//                getString(R.string.snack_add_favourite),
+//                Snackbar.LENGTH_SHORT
+//            ).show()
+//        }
+//    }
+//
+//    private val itemClickListener = object : ItemClickListener {
+//        override fun onItemClicked(photo: Photo) {
+//            //доделать
+//        }
+//    }
+//
+//    override fun handleSuccessState(data: List<Photo>) {
+//        super.handleSuccessState(data)
+//        exchangeViewModel.selectNetworkCameras(setRoverCameras(data))
+//        changeRoverCamera()
+//        photosList = data.toMutableList()
+//        retrieveList(photosList)
+//    }
+//
+//    private fun retrieveList(listPhoto: List<Photo>) {
+//        galleryAdapter.apply {
+//            addPhotos(listPhoto)
+//        }
+//    }
+//
+//    override fun onDetach() {
+//        super.onDetach()
+//        detailViewModel.onDestroy()
+//    }
 }
