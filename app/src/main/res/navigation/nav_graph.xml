@@ -14,31 +14,12 @@
             app:destination="@id/fragmentPager" />
     </fragment>
     <fragment
-        android:id="@+id/fragmentRoverDetails"
-        android:name="com.pavellukyanov.themartian.ui.main.roverdetails.FragmentRoverDetails"
-        android:label="FragmentRoverDetails" >
-        <action
-            android:id="@+id/action_fragmentRoverDetails_to_fragmentPhoto"
-            app:destination="@id/fragmentPhoto" />
-    </fragment>
-    <fragment
         android:id="@+id/fragmentPager"
         android:name="com.pavellukyanov.themartian.ui.main.gallery.FragmentGallery"
         android:label="fragment_pager"
         tools:layout="@layout/fragment_gallery" >
-        <action
-            android:id="@+id/action_fragmentPager_to_fragmentPhoto"
-            app:destination="@id/fragmentPhoto" />
         <argument
             android:name="roverInfo"
             app:argType="com.pavellukyanov.themartian.domain.rover_info.RoverInfo" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentPhoto"
-        android:name="com.pavellukyanov.themartian.ui.main.fullphoto.FragmentPhoto"
-        android:label="FragmentPhoto" >
-        <argument
-            android:name="photo"
-            app:argType="com.pavellukyanov.themartian.domain.photo.Photo" />
     </fragment>
 </navigation>

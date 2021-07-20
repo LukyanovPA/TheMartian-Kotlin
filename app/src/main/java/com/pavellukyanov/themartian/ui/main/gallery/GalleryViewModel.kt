@@ -1,12 +1,12 @@
 package com.pavellukyanov.themartian.ui.main.gallery
 
 import com.pavellukyanov.themartian.domain.favourites.AddPhotoToFavouriteInteractor
+import com.pavellukyanov.themartian.domain.favourites.CheckFavouritesInteractor
 import com.pavellukyanov.themartian.domain.favourites.DeletePhotoInFavouriteInteractor
 import com.pavellukyanov.themartian.domain.photo.LoadPhotoForEarthDateInteractor
 import com.pavellukyanov.themartian.domain.photo.Photo
 import com.pavellukyanov.themartian.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableCompletableObserver
 import javax.inject.Inject
 
@@ -14,7 +14,8 @@ import javax.inject.Inject
 class GalleryViewModel @Inject constructor(
     private val photoInteractor: LoadPhotoForEarthDateInteractor,
     private val addFavouriteInteractor: AddPhotoToFavouriteInteractor,
-    private val deletePhotoInFavouriteInteractor: DeletePhotoInFavouriteInteractor
+    private val deletePhotoInFavouriteInteractor: DeletePhotoInFavouriteInteractor,
+    private val checkFavouritesInteractor: CheckFavouritesInteractor
 ) : BaseViewModel<List<Photo>>() {
     private var networkCameras = arrayListOf<String>()
 

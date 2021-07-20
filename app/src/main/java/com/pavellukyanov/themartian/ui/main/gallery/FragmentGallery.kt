@@ -5,16 +5,15 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.GridLayoutManager
 import com.pavellukyanov.themartian.R
 import com.pavellukyanov.themartian.databinding.FragmentGalleryBinding
 import com.pavellukyanov.themartian.domain.photo.Photo
+import com.pavellukyanov.themartian.ui.base.AddFavouriteOnClickListener
 import com.pavellukyanov.themartian.ui.base.BaseFragment
 import com.pavellukyanov.themartian.ui.base.DeleteFavouriteOnClickListener
-import com.pavellukyanov.themartian.ui.main.gallery.adapter.GalleryAdapter
-import com.pavellukyanov.themartian.ui.base.AddFavouriteOnClickListener
 import com.pavellukyanov.themartian.ui.base.ItemClickListener
-import com.pavellukyanov.themartian.utils.Constants
+import com.pavellukyanov.themartian.ui.main.gallery.adapter.GalleryAdapter
+import com.pavellukyanov.themartian.utils.bindGalleryPager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,6 +37,7 @@ class FragmentGallery : BaseFragment<List<Photo>, GalleryViewModel>(R.layout.fra
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentGalleryBinding.bind(view)
+        onSubscribeVewModel(viewModel)
         setupUI()
         getPhotos(roverName, photoDate)
     }
@@ -48,6 +48,10 @@ class FragmentGallery : BaseFragment<List<Photo>, GalleryViewModel>(R.layout.fra
 
     override fun handleSuccessState(data: List<Photo>) {
         super.handleSuccessState(data)
+        binding.galleryPager.bindGalleryPager(
+            data.size,
+            adapter
+        )
         adapter.addPhotos(data)
         viewModel.setupNetworkCameras(data)
     }
@@ -62,11 +66,6 @@ class FragmentGallery : BaseFragment<List<Photo>, GalleryViewModel>(R.layout.fra
 
     private fun setupUI() {
         with(binding) {
-            recyclerGallery.apply {
-                adapter = adapter
-                layoutManager = GridLayoutManager(context, Constants.GRID_COLUMNS)
-            }
-
             buttonBack.setOnClickListener {
                 activity?.onBackPressed()
             }

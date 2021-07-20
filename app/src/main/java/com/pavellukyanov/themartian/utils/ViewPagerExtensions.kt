@@ -16,7 +16,7 @@ fun ViewPager2.bindRoverInfo(
     pagerAdapter: MainAdapter
 ) {
     adapter = pagerAdapter
-    setPageTransformer()
+    setPageTransformer(DepthPageTransformer())
     offscreenPageLimit = itemListSize
     tabLayout.onTableSelected(onUnselected = { tab ->
         (tab?.customView?.findViewById(R.id.tab_layout_item) as ImageView)
@@ -36,15 +36,6 @@ fun ViewPager2.bindRoverInfo(
             )
     })
     overScrollMode = ViewPager2.OVER_SCROLL_NEVER
-}
-
-private fun ViewPager2.setPageTransformer() {
-    val nextCardVisibleWidth = resources.getDimensionPixelSize(R.dimen.rover_info_next_visible)
-    val cardInnerMargin =
-        (resources.displayMetrics.widthPixels -
-                resources.getDimensionPixelSize(R.dimen.rover_info_size)) / 2
-    val pageTranslation = nextCardVisibleWidth + cardInnerMargin
-    setPageTransformer(ZoomOutFadePageTransformer(pageTranslation))
 }
 
 fun TabLayout.onTableSelected(
@@ -69,11 +60,10 @@ fun TabLayout.onTableSelected(
 
 fun ViewPager2.bindGalleryPager(
     itemListSize: Int,
-    context: Context,
     pagerAdapter: GalleryAdapter
 ) {
     adapter = pagerAdapter
-    setPageTransformer()
+    setPageTransformer(DepthPageTransformer())
     offscreenPageLimit = itemListSize
     overScrollMode = ViewPager2.OVER_SCROLL_NEVER
 }

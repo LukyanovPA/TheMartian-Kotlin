@@ -17,7 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FragmentPhoto : Fragment(R.layout.fragment_full_photo) {
     private val favouritesViewModel: FavouritesViewModel by viewModels()
-    private val args: FragmentPhotoArgs by navArgs()
     private lateinit var binding: FragmentFullPhotoBinding
     private var isFavourite = false
 
@@ -25,7 +24,7 @@ class FragmentPhoto : Fragment(R.layout.fragment_full_photo) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentFullPhotoBinding.bind(view)
 //        checkIsFavourite(args.photo.id)
-        setupUI()
+//        setupUI()
     }
 
     private fun checkIsFavourite(id: Long) {
@@ -38,9 +37,9 @@ class FragmentPhoto : Fragment(R.layout.fragment_full_photo) {
 //    }
 
     private fun setupUI() {
-        binding.photo.loadCircle(
-            args.photo.srcPhoto
-        )
+//        binding.photo.loadCircle(
+//            args.photo.srcPhoto
+//        )
     }
 
     private val addFavouriteOnClickListener = object : AddFavouriteOnClickListener {

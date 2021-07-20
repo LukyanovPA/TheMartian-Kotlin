@@ -50,4 +50,10 @@ object InteractorModule {
     fun provideDeletePhotoInFavouriteInteractor(
         photoDatabase: PhotoDatabase
     ): DeletePhotoInFavouriteInteractor = DeletePhotoInFavouriteInteractorImpl(photoDatabase)
+
+    @Singleton
+    @Provides
+    fun provideCheckFavouritesInteractor(
+        favouritePhotoRepo: FavouritePhotoRepo
+    ): CheckFavouritesInteractor = CheckFavouritesInteractorImpl(favouritePhotoRepo)
 }

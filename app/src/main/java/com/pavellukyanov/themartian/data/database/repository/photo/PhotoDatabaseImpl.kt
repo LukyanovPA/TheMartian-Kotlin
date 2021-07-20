@@ -73,6 +73,9 @@ class PhotoDatabaseImpl @Inject constructor(
     override fun chekFavourite(id: Long): Observable<Boolean> =
         database.favouritesDao().getFavouritePhoto(id)
             .map {
-                return@map it != null
+                isFavourites(id, it)
             }
+
+    private fun isFavourites(id: Long, favouriteEntity: FavouriteEntity): Boolean =
+        id == favouriteEntity.id
 }

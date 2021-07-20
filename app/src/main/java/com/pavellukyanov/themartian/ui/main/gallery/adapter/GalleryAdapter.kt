@@ -74,6 +74,7 @@ class GalleryAdapter(
     class DataViewHolder(private val binding: RvGalleryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        //добавить отображение общего количества фото за выбранную дату
         fun bind(photo: Photo) {
             with(binding) {
                 Glide.with(itemView.context)

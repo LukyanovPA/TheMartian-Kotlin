@@ -4,13 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pavellukyanov.themartian.domain.ResourceState
-import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-//@HiltViewModel
 open class BaseViewModel<T : Any> : ViewModel() {
     internal val dispose: CompositeDisposable = CompositeDisposable()
     private var _response = MutableLiveData<ResourceState<T>>()
